@@ -1,0 +1,78 @@
+{% extends "facebook/settings/_layout" %}
+
+{% import "_includes/forms" as forms %}
+
+
+{% macro configWarning(setting, file) -%}
+    {{ "This is being overridden by the {setting} config setting."|t({
+        setting: '<strong>'~setting~'</strong>'
+    })|raw }}
+{%- endmacro %}
+
+{% from _self import configWarning %}
+
+
+{% set content %}
+
+    {% if not error %}
+        {% if provider %}
+            {% if account %}
+
+                <form method="post" accept-charset="UTF-8" data-saveshortcut>
+
+                    {{ getCsrfInput() }}
+
+                    <input type="hidden" name="action" value="plugins/savePluginSettings">
+                    <input type="hidden" name="pluginClass" value="Facebook">
+                    <input type="hidden" name="redirect" value="facebook/settings">
+
+                    <h2 class="first">{{'Facebook Account'|t}}</h2>
+                    <p>{{'You are authenticated to Facebook with the following account'|t}} :</p>
+
+                    <ul>
+                        <li><strong>{{ 'UID'|t }} : </strong> {{ account.uid }}</li>
+                        <li><strong>{{ 'Name'|t }} : </strong> {{ account.name }}</li>
+                    </ul>
+
+                    <p><a class="btn small" href="{{ actionUrl('facebook/disconnect') }}">{{'Disconnect'|t}}</a></p>
+
+                    <hr />
+
+                    <h2 class="first">{{'Plugin Settings'|t}}</h2>
+
+                    <div class="buttons">
+                        <input type="submit" class="btn submit force" value="{{'Save'|t}}">
+                    </div>
+
+                </form>
+
+            {% else %}
+
+                <h2 class="first">{{'Facebook Account'|t}}</h2>
+                <p>{{'You need to connect Craft to a Facebook account in order to get started.'|t}}</p>
+                <p>{{"Getting errors trying to connect ?"|t}} <a href="{{url('oauth/facebook')}}">{{"Check Facebook API key & secret in OAuth settings"|t}}</a>.</p>
+                <p><a class="btn submit" href="{{ actionUrl('facebook/connect') }}">{{"Connect to Facebook"|t}}</a></p>
+
+            {% endif %}
+
+        {% else %}
+
+            <h2 class="first">{{'Facebook provider not configured'|t}}</h2>
+            <p>{{'Please fill API client id & secret for Facebook provider.'|t}}</p>
+            <p><a class="btn" href="{{url('oauth/facebook')}}">{{'Facebook OAuth settings'|t}}</a></p>
+
+        {% endif %}
+    {% else %}
+
+        <h2 class="first">{{'Facebook Account'|t}}</h2>
+
+        <p class="error">{{ error }}</p>
+
+        {% if token %}
+            <p><a class="btn small" href="{{ actionUrl('facebook/disconnect') }}">{{'Disconnect'|t}}</a></p>
+        {% endif %}
+
+    {% endif %}
+
+{% endset %}
+

@@ -1,0 +1,22 @@
+{% includeCssResource 'facebook/css/stats-widget.css' %}
+
+{% for account in accounts %}
+
+    {% set insight = insights[account.id] %}
+
+    <hr>
+
+    <div class="wrapper">
+        <div class="infos">
+            <h3>{{ account.name }}</h3>
+            <ul>
+                <li class="light">{{ account.id }}</li>
+            </ul>
+        </div>
+
+        <div class="count">
+            <p>{{ insight.values|last.value }}</p>
+        </div>
+
+    </div>
+{% endfor %}

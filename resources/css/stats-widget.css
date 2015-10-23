@@ -1,0 +1,6 @@
+.widget.facebook_stats .wrapper { display: flex; width: 100%;  }
+.widget.facebook_stats .wrapper .infos { flex: 1; }
+.widget.facebook_stats .wrapper .count { font-size: 2em; margin: auto; padding-left: 14px; }
+.widget.facebook_stats .wrapper .count p:before { display: inline-block; width: 20px; height: 20px; margin-right: 7px; background: url("../svg/like.svg") no-repeat; background-size: contain; content: ''; }
+
+
