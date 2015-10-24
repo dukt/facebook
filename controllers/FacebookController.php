@@ -31,23 +31,9 @@ class FacebookController extends BaseController
     // Public Methods
     // =========================================================================
 
-
-    public function actionPerformRequest()
-    {
-        $response = craft()->facebook_api->get('/me', ['fields' => 'id,name']);
-
-        var_dump($response);
-
-        die();
-    }
-
     public function actionIndex()
     {
-        $variables = [
-            // 'products' => craft()->facebook->getProducts(),
-        ];
-
-        $this->renderTemplate('facebook/index', $variables);
+        $this->renderTemplate('facebook/index');
     }
 
     /**
