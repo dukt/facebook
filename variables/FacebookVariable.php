@@ -12,11 +12,8 @@ class FacebookVariable
     // Public Methods
     // =========================================================================
 
-    /**
-     * Request the API.
-     */
-    public function get($uri, $queryParams = null, $accessToken = null)
+    public function api()
     {
-        return craft()->facebook_api->get($uri, $queryParams, $accessToken);
+        return craft()->facebook_api;
     }
 }

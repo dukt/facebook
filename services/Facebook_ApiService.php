@@ -16,9 +16,8 @@ class Facebook_ApiService extends BaseApplicationComponent
 {
     private $apiUrl = 'https://graph.facebook.com/v2.5/';
 
-    public function get($uri = null, $query = null)
+    public function get($uri = null, $query = null, $headers = null)
     {
-        $headers = null;
         $options['query'] = ($query ? $query : []);
 
         return $this->request('get', $uri, $headers, $options);

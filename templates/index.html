@@ -5,17 +5,18 @@
 {% set content %}
 
 
-    {% set response = craft.facebook.get('/me/accounts') %}
+    {% set response = craft.facebook.api.get('/me/accounts') %}
 
-    {% set accounts = response.getGraphEdge() %}
+    {% set accounts = response.data.data %}
 
     {% for account in accounts %}
         <h2>{{ account.name }}</h2>
 
-        {% set conversationsResponse = craft.facebook.get('/'~account.id~'/conversations', null, account.access_token) %}
+        {% set conversationsResponse = craft.facebook.api.get('/'~account.id~'/conversations', null, {
+            'Authorization' : 'Bearer '~account.access_token
+        }) %}
 
-        {% set conversations = conversationsResponse.getGraphEdge() %}
-
+        {% set conversations = conversationsResponse.data.data %}
 
         <table class="data fullwidth">
             <thead>
@@ -27,8 +28,15 @@
             <tbody>
                 {% for conversation in conversations %}
                     <tr>
-                        <td>{{ conversation.property('updated_time')|date }}</td>
-                        <td>{{ conversation.property('snippet') }}</td>
+                        <td>{{ conversation.updated_time }}</td>
+                        <td>
+                            {% if conversation.snippet is defined %}
+                                {{ conversation.snippet }}
+                            {% else %}
+                                No snippet
+                            {% endif %}
+
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
