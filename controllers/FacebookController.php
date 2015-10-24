@@ -15,18 +15,8 @@ class FacebookController extends BaseController
     /**
      * @var string
      */
-    private $handle = 'facebook';
+    private $oauthProvider = 'facebook';
 
-    /**
-     * @var array
-     */
-    private $scopes = array('manage_pages', 'read_insights', 'read_mailbox', 'read_page_mailboxes');
-
-    /**
-     * @var array
-     */
-    private $params = array(
-    );
 
     // Public Methods
     // =========================================================================
@@ -63,9 +53,9 @@ class FacebookController extends BaseController
 
         if ($response = craft()->oauth->connect(array(
             'plugin'   => 'facebook',
-            'provider' => $this->handle,
-            'scopes'   => $this->scopes,
-            'params'   => $this->params
+            'provider' => $this->oauthProvider,
+            'scopes'   => craft()->config->get('oauthScope', 'facebook'),
+            'params'   => craft()->config->get('oauthParams', 'facebook')
         )))
         {
             if ($response['success'])
