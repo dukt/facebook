@@ -16,6 +16,16 @@ class Facebook_StatsWidget extends BaseWidget
         return Craft::t('Facebook Stats');
     }
 
+    /**
+     * @inheritDoc IWidget::getIconPath()
+     *
+     * @return string
+     */
+    public function getIconPath()
+    {
+        return craft()->resources->getResourcePath('facebook/images/widgets/like.svg');
+    }
+
     public function getBodyHtml()
     {
         $response = craft()->facebook_api->get('/me/accounts');
