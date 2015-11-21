@@ -51,6 +51,8 @@ class Facebook_StatsWidget extends BaseWidget
         $variables['account'] = $facebookAccount;
         $variables['insight'] = $insight;
 
+        craft()->templates->includeCssResource('facebook/css/stats-widget.css');
+
         return craft()->templates->render('facebook/_components/widgets/stats/body', $variables);
     }
 }
