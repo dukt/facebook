@@ -54,11 +54,6 @@ class FacebookPlugin extends BasePlugin
         return 'https://dukt.net/';
     }
 
-    public function hasCpSection()
-    {
-        return true;
-    }
-
     /**
      * Get Settings URL
      */
