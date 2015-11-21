@@ -28,20 +28,28 @@ class Facebook_StatsWidget extends BaseWidget
 
     public function getBodyHtml()
     {
+        $pluginSettings = craft()->plugins->getPlugin('facebook')->getSettings();
+
+        $facebookAccountId = $pluginSettings['facebookAccountId'];
+
         $response = craft()->facebook_api->get('/me/accounts');
         $accounts = $response['data']['data'];
 
-        $insights = [];
+        $facebookAccount = null;
+        $insight = [];
 
         foreach($accounts as $k => $account)
         {
-            $response = craft()->facebook_api->get('/'.$account['id'].'/insights/page_fans');
-            $insights[$account['id']] = $response['data']['data'][0];
+            if($account['id'] == $facebookAccountId)
+            {
+                $facebookAccount = $account;
+                $response = craft()->facebook_api->get('/'.$account['id'].'/insights/page_fans');
+                $insight = $response['data']['data'][0];
+            }
         }
 
-        $variables['accounts'] = $accounts;
-        $variables['insights'] = $insights;
-
+        $variables['account'] = $facebookAccount;
+        $variables['insight'] = $insight;
 
         return craft()->templates->render('facebook/_components/widgets/stats/body', $variables);
     }
