@@ -145,19 +145,18 @@ class FacebookController extends BaseController
 
                 if ($provider && $provider->isConfigured())
                 {
+
                     $token = craft()->facebook_oauth->getToken();
 
                     if ($token)
                     {
-                        $provider->setToken($token);
-
                         try
                         {
                             $account = craft()->facebook_cache->get(['getAccount', $token]);
 
                             if(!$account)
                             {
-                                $account = $provider->getAccount();
+                                $account = $provider->getAccount($token);
                                 craft()->facebook_cache->set(['getAccount', $token], $account);
                             }
 
@@ -175,7 +174,7 @@ class FacebookController extends BaseController
 
                             if(method_exists($e, 'getResponse'))
                             {
-                                    Craft::log("Videos.Debug.GuzzleErrorResponse\r\n".$e->getResponse(), LogLevel::Info, true);
+                                    Craft::log("Facebook.Debug.GuzzleErrorResponse\r\n".$e->getResponse(), LogLevel::Info, true);
                             }
 
                             // Craft::log('Couldn’t get account. '.$e->getMessage(), LogLevel::Error);
