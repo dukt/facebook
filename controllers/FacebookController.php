@@ -23,7 +23,15 @@ class FacebookController extends BaseController
 
     public function actionIndex()
     {
-        $this->renderTemplate('facebook/index');
+        $pluginSettings = craft()->plugins->getPlugin('facebook')->getSettings();
+
+        $facebookAccountId = $pluginSettings['facebookAccountId'];
+
+        $response = craft()->facebook_api->get($facebookAccountId.'/feed');
+
+        $variables['posts'] = $response['data']['data'];
+
+        $this->renderTemplate('facebook/_index', $variables);
     }
 
     /**
@@ -137,6 +145,7 @@ class FacebookController extends BaseController
                 $variables = array(
                     'provider' => false,
                     'account' => false,
+                    'accounts' => [],
                     'token' => false,
                     'error' => false
                 );
@@ -145,7 +154,6 @@ class FacebookController extends BaseController
 
                 if ($provider && $provider->isConfigured())
                 {
-
                     $token = craft()->facebook_oauth->getToken();
 
                     if ($token)
@@ -164,7 +172,7 @@ class FacebookController extends BaseController
                             {
 
                                 $variables['account'] = $account;
-                                // $variables['propertiesOpts'] = $propertiesOpts;
+
                                 $variables['settings'] = $plugin->getSettings();
                             }
                         }
@@ -174,17 +182,24 @@ class FacebookController extends BaseController
 
                             if(method_exists($e, 'getResponse'))
                             {
-                                    Craft::log("Facebook.Debug.GuzzleErrorResponse\r\n".$e->getResponse(), LogLevel::Info, true);
+                                Craft::log("Facebook.Debug.GuzzleErrorResponse\r\n".$e->getResponse(), LogLevel::Info, true);
                             }
 
-                            // Craft::log('Couldn’t get account. '.$e->getMessage(), LogLevel::Error);
-
                             $variables['error'] = $e->getMessage();
+                        }
+
+                        try
+                        {
+                            $response = craft()->facebook_api->get('/me/accounts');
+                            $variables['accounts'] = $response['data']['data'];
+                        }
+                        catch(\Exception $e)
+                        {
+                            $variables['accounts'] = [];
                         }
                     }
 
                     $variables['token'] = $token;
-
                     $variables['provider'] = $provider;
                 }
 
