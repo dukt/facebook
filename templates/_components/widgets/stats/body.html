@@ -1,15 +1,20 @@
+{% if account %}
 
-<div class="wrapper">
+    <div class="wrapper">
 
-    <div class="infos">
-        <h2>{{ account.name }}</h2>
-        <ul>
-            <li class="light"><a target="_blank" href="https://www.facebook.com/{{ account.id }}/">{{ account.id }}</a></li>
-        </ul>
+        <div class="infos">
+            <h2>{{ account.name }}</h2>
+            <ul>
+                <li class="light"><a target="_blank" href="https://www.facebook.com/{{ account.id }}/">{{ account.id }}</a></li>
+            </ul>
+        </div>
+
+        <div class="count">
+            <p>{{ insight.values|last.value }} likes</p>
+        </div>
+
     </div>
 
-    <div class="count">
-        <p>{{ insight.values|last.value }} likes</p>
-    </div>
-
-</div>
+{% else %}
+    <p class="light">{{ "Facebook is not configured."|t }} <a href="{{ url('facebook/settings') }}">{{ "Edit plugin settings"|t }}</a>.</p>
+{% endif %}
