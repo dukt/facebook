@@ -44,9 +44,9 @@
                     {% for account in accounts %}
                         {% set accountOptions = accountOptions|merge([{ label: account.name|t, value: account.id }]) %}
                     {% endfor %}
+
                     {{ forms.selectField({
                         label: "Account"|t,
-                        instructions: "Which account do you want to use?"|t,
                         id: 'facebook-account-id',
                         name: 'settings[facebookAccountId]',
                         options: accountOptions,
