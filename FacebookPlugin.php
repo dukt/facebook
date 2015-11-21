@@ -17,7 +17,7 @@ class FacebookPlugin extends BasePlugin
                 'name' => "OAuth",
                 'handle' => 'oauth',
                 'url' => 'https://dukt.net/craft/oauth',
-                'version' => '0.9.70'
+                'version' => '1.0.0'
             )
         );
     }
