@@ -25,12 +25,12 @@ class Facebook_ApiService extends BaseApplicationComponent
 
     private function request($method='get', $uri = null, $headers = null, $options = [])
     {
-        $client = $this->getClient();
-
-        $request = $client->{$method}($uri, $headers, $options);
-
         try
         {
+            $client = $this->getClient();
+
+            $request = $client->{$method}($uri, $headers, $options);
+
             $response = $request->send();
 
             try
