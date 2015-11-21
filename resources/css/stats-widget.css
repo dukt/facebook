@@ -1,6 +1,9 @@
+.widget.facebook_stats .pane > h2 { display: none; }
 .widget.facebook_stats .wrapper { display: flex; width: 100%;  }
-.widget.facebook_stats .wrapper .infos { flex: 1; }
-.widget.facebook_stats .wrapper .count { font-size: 2em; margin: auto; padding-left: 14px; }
-.widget.facebook_stats .wrapper .count p:before { display: inline-block; width: 20px; height: 20px; margin-right: 7px; background: url("../svg/like.svg") no-repeat; background-size: contain; content: ''; }
+.widget.facebook_stats .infos { flex: 1; }
+.widget.facebook_stats .infos h2 { margin-bottom: 7px; }
+.widget.facebook_stats .infos a { color: #8f98a3; }
+.widget.facebook_stats .count { font-size: 1.8em; color: #3B5998; margin: auto; padding-left: 14px; }
+.widget.facebook_stats .count p:before { display: inline-block; width: 20px; height: 20px; margin-right: 7px; background: url("../images/widgets/like.svg") no-repeat; background-size: contain; content: ''; }
 
 
