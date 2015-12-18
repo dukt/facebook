@@ -68,9 +68,17 @@ class Facebook_ApiService extends BaseApplicationComponent
     {
         $token = craft()->facebook_oauth->getToken();
 
+        $headers = array();
+
+        if($token)
+        {
+
+            $headers['Authorization'] = 'Bearer '.$token->accessToken;
+        }
+
         $client = new Client($this->apiUrl, [
             'request.options' => [
-                'headers' => ['Authorization' => 'Bearer '.$token->accessToken]
+                'headers' => $headers
             ]
         ]);
 
