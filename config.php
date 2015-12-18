@@ -5,10 +5,10 @@ return [
     /**
      * OAuth Scope
      */
-    'oauthScope' => ['manage_pages', 'read_insights', 'read_mailbox', 'read_page_mailboxes'],
+    'oauthScope' => ['public_profile', 'manage_pages', 'read_insights'],
 
     /**
      * OAuth Params
      */
-    'oauthParams' => []
+    'oauthAuthorizationOptions' => []
 ];

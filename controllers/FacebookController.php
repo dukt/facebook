@@ -62,8 +62,8 @@ class FacebookController extends BaseController
         if ($response = craft()->oauth->connect(array(
             'plugin'   => 'facebook',
             'provider' => $this->oauthProvider,
-            'scopes'   => craft()->config->get('oauthScope', 'facebook'),
-            'params'   => craft()->config->get('oauthParams', 'facebook')
+            'scope'   => craft()->config->get('oauthScope', 'facebook'),
+            'authorizationOptions'   => craft()->config->get('oauthAuthorizationOptions', 'facebook')
         )))
         {
             if ($response['success'])
@@ -191,6 +191,7 @@ class FacebookController extends BaseController
                         try
                         {
                             $response = craft()->facebook_api->get('/me/accounts');
+
                             $variables['accounts'] = $response['data']['data'];
                         }
                         catch(\Exception $e)
