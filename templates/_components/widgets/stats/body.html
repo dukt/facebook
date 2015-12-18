@@ -1,6 +1,6 @@
 {% if account %}
 
-    <div class="wrapper">
+<div class="wrapper">
 
         <div class="infos">
             <h2>{{ account.name }}</h2>
@@ -15,6 +15,12 @@
 
     </div>
 
+    <hr>
+
+    <ul>
+        <li><strong>Total Likes:</strong> {{ insight.values|last.value }} {# + progression on past week #}</li>
+        <li><strong>Likes this week:</strong> {{ weekTotal }} {# + last week #}</li>
+    </ul>
 {% else %}
     <p class="light">{{ "Facebook is not configured."|t }} <a href="{{ url('facebook/settings') }}">{{ "Edit plugin settings"|t }}</a>.</p>
 {% endif %}

@@ -37,6 +37,7 @@ class Facebook_StatsWidget extends BaseWidget
 
         $facebookAccount = null;
         $insight = [];
+        $weekTotal = 0;
 
         foreach($accounts as $k => $account)
         {
@@ -45,11 +46,24 @@ class Facebook_StatsWidget extends BaseWidget
                 $facebookAccount = $account;
                 $response = craft()->facebook_api->get('/'.$account['id'].'/insights/page_fans');
                 $insight = $response['data']['data'][0];
+
+                $weekResponse = craft()->facebook_api->get('/'.$account['id'].'/insights/page_fans', array(
+                    'since' => '2015-12-11',
+                    'until' => '2015-12-21',
+                ));
+                $weekInsight = $weekResponse['data']['data'][0];
+
+                $weekTotalStart = $weekInsight['values'][0]['value'];
+                $weekTotalEnd = end($weekInsight['values'])['value'];
+
+                $weekTotal = $weekTotalEnd - $weekTotalStart;
             }
         }
 
         $variables['account'] = $facebookAccount;
         $variables['insight'] = $insight;
+        $variables['weekInsight'] = $weekInsight;
+        $variables['weekTotal'] = $weekTotal;
 
         craft()->templates->includeCssResource('facebook/css/stats-widget.css');
 
