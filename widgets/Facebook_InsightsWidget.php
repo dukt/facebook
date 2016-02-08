@@ -1,7 +1,7 @@
 <?php
 namespace Craft;
 
-class Facebook_StatsWidget extends BaseWidget
+class Facebook_InsightsWidget extends BaseWidget
 {
     // Public Methods
     // =========================================================================
@@ -13,7 +13,7 @@ class Facebook_StatsWidget extends BaseWidget
      */
     public function getName()
     {
-        return Craft::t('Facebook Stats');
+        return Craft::t('Facebook Insights');
     }
 
     /**
@@ -77,11 +77,11 @@ class Facebook_StatsWidget extends BaseWidget
 
             craft()->templates->includeCssResource('facebook/css/stats-widget.css');
 
-            return craft()->templates->render('facebook/_components/widgets/stats/body', $variables);
+            return craft()->templates->render('facebook/_components/widgets/Insights/body', $variables);
         }
         else
         {
-            return craft()->templates->render('facebook/_components/widgets/stats/disabled');
+            return craft()->templates->render('facebook/_components/widgets/Insights/disabled');
         }
     }
 
