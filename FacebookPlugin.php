@@ -123,7 +123,7 @@ class FacebookPlugin extends BasePlugin
     {
         return array(
             'tokenId' => array(AttributeType::Number),
-            'facebookAccountId' => array(AttributeType::String),
+            'facebookInsightsObjectId' => array(AttributeType::String),
         );
     }
 

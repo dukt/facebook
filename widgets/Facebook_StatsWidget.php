@@ -30,41 +30,50 @@ class Facebook_StatsWidget extends BaseWidget
     {
         $pluginSettings = craft()->plugins->getPlugin('facebook')->getSettings();
 
-        $facebookAccountId = $pluginSettings['facebookAccountId'];
+        $facebookInsightsObjectId = $pluginSettings['facebookInsightsObjectId'];
 
         $token = craft()->facebook_oauth->getToken();
 
         if($token)
         {
-            $response = craft()->facebook_api->get('/me/accounts');
-            $accounts = $response['data']['data'];
+            // object
+            $response = craft()->facebook_api->get('/'.$facebookInsightsObjectId, ['metadata' => 1, 'fields' => 'name']);
 
-            $facebookAccount = null;
-            $insight = [];
-            $weekTotal = 0;
+            $object = $response['data'];
+            $objectType = $object['metadata']['type'];
+            $error = false;
 
-            foreach($accounts as $k => $account)
+            switch ($objectType)
             {
-                if($account['id'] == $facebookAccountId)
-                {
-                    $facebookAccount = $account;
-                    $response = craft()->facebook_api->get('/'.$account['id'].'/insights/page_fans', array(
+                case 'page':
+
+                    $response = craft()->facebook_api->get('/'.$facebookInsightsObjectId.'/insights/page_fans', array(
                         'since' => date('Y-m-d', strtotime('-6 day')),
                         'until' => date('Y-m-d', strtotime('+1 day')),
                     ));
 
-                    $insight = $response['data']['data'][0];
+                    $insights = $response['data']['data'][0];
 
-                    $weekTotalStart = $insight['values'][0]['value'];
-                    $weekTotalEnd = end($insight['values'])['value'];
+                    $weekTotalStart = $insights['values'][0]['value'];
+                    $weekTotalEnd = end($insights['values'])['value'];
 
                     $weekTotal = $weekTotalEnd - $weekTotalStart;
-                }
+
+                    $variables['weekTotal'] = $weekTotal;
+                    $variables['insights'] = $insights;
+
+                    break;
+
+                default:
+                    // throw new \Exception("Insights not available for object type `".$objectType."`");
+
+                    $error = "Insights not available for object type `".$objectType."`";
+
             }
 
-            $variables['account'] = $facebookAccount;
-            $variables['insight'] = $insight;
-            $variables['weekTotal'] = $weekTotal;
+            $variables['error'] = $error;
+            $variables['object'] = $object;
+            $variables['objectType'] = $objectType;
 
             craft()->templates->includeCssResource('facebook/css/stats-widget.css');
 
@@ -74,5 +83,15 @@ class Facebook_StatsWidget extends BaseWidget
         {
             return craft()->templates->render('facebook/_components/widgets/stats/disabled');
         }
+    }
+
+    private function pageInsights()
+    {
+
+    }
+
+    private function domainInsights()
+    {
+
     }
 }

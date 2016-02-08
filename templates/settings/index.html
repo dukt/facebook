@@ -38,20 +38,13 @@
 
                     <hr>
 
-                    <h2 class="first">{{'Choose a Facebook account'|t}}</h2>
+                    <h2 class="first">{{'Facebook Insights Settings'|t}}</h2>
 
-                    {% set accountOptions = [{label: "Choose..."|t}] %}
-                    {% for account in accounts %}
-                        {% set accountOptions = accountOptions|merge([{ label: account.name|t, value: account.id }]) %}
-                    {% endfor %}
-
-                    {{ forms.selectField({
-                        label: "Account"|t,
-                        id: 'facebook-account-id',
-                        name: 'settings[facebookAccountId]',
-                        options: accountOptions,
-                        value: settings.facebookAccountId,
-                        toggle: true
+                    {{ forms.textField({
+                        label: "Account, domain or page"|t,
+                        name: 'settings[facebookInsightsObjectId]',
+                        value: settings.facebookInsightsObjectId,
+                        size: 16,
                     }) }}
 
                     <div class="buttons">

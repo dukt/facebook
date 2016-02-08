@@ -25,9 +25,9 @@ class FacebookController extends BaseController
     {
         $pluginSettings = craft()->plugins->getPlugin('facebook')->getSettings();
 
-        $facebookAccountId = $pluginSettings['facebookAccountId'];
+        $facebookInsightsObjectId = $pluginSettings['facebookInsightsObjectId'];
 
-        $response = craft()->facebook_api->get($facebookAccountId.'/feed');
+        $response = craft()->facebook_api->get($facebookInsightsObjectId.'/feed');
 
         $variables['posts'] = $response['data']['data'];
 
@@ -145,7 +145,6 @@ class FacebookController extends BaseController
                 $variables = array(
                     'provider' => false,
                     'account' => false,
-                    'accounts' => [],
                     'token' => false,
                     'error' => false
                 );
@@ -186,17 +185,6 @@ class FacebookController extends BaseController
                             }
 
                             $variables['error'] = $e->getMessage();
-                        }
-
-                        try
-                        {
-                            $response = craft()->facebook_api->get('/me/accounts');
-
-                            $variables['accounts'] = $response['data']['data'];
-                        }
-                        catch(\Exception $e)
-                        {
-                            $variables['accounts'] = [];
                         }
                     }
 
