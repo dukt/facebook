@@ -28,12 +28,7 @@ class Facebook_InsightsWidget extends BaseWidget
 
     public function getBodyHtml()
     {
-        $pluginSettings = craft()->plugins->getPlugin('facebook')->getSettings();
-        $facebookInsightsObjectId = $pluginSettings['facebookInsightsObjectId'];
-
-        $token = craft()->facebook_oauth->getToken();
-
-        if($token)
+        if(craft()->facebook_plugin->checkRequirements())
         {
             $widgetId = $this->model->id;
 

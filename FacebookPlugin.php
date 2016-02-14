@@ -69,7 +69,7 @@ class FacebookPlugin extends BasePlugin
     {
         return array(
             'facebook' => array('action' => "facebook/index"),
-            'facebook\/settings' => array('action' => "facebook/settings"),
+            'facebook\/settings' => array('action' => "facebook/settings/index"),
         );
     }
 
