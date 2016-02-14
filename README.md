@@ -1,44 +1,23 @@
-# Facebook for Craft CMS
+# Craft Facebook
 
-A simple plugin to connect to Facebook's API.
+Facebook Insights widget for the dashboard.
 
 -------------------------------------------
 
 ## Requirements
 
-- [Craft](http://buildwithcraft.com/) 2.4+
-- [OAuth](https://dukt.net/craft/oauth) plugin for Craft
+- [Craft 2.5+](http://buildwithcraft.com/)
+- [Craft OAuth 1.0+](https://dukt.net/craft/oauth)
 
 ## Installation
 
 1. Download the latest release of the plugin
 2. Drop the `facebook` plugin folder to `craft/plugins`
-3. Install Facebook from the control panel in `Settings > Plugins`
+3. Install Facebook plugin from the control panel in `Settings > Plugins`
 
-## Templating
+## Links
 
-    {% set response = craft.facebook.api.get('/me/accounts') %}
+- [Facebook Plugin Overview](https://dukt.net/craft/facebook/)
+- [Facebook Documentation](https://dukt.net/craft/facebook/docs)
 
-    {% if response.success %}
-
-        {# Success #}
-        <pre>{{ dump(response) }}</pre>
-
-    {% else %}
-
-        {# Error #}
-        <pre>{{ response.exception }}</pre>
-
-    {% endif %}
-
-## API
-
-### FacebookVariable
-
-- api() : Returns Facebook_ApiService
-
-### Facebook_ApiService
-
-- get($uri = null, $query = null)
-
-[Dukt.net](https://dukt.net/) © 2016 - All rights reserved
+[Dukt.net](https://dukt.net/) 2016 - All rights reserved
