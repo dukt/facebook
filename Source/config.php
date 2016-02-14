@@ -22,5 +22,5 @@ return [
     /**
      * OAuth Params
      */
-    'oauthAuthorizationOptions' => []
+    'oauthAuthorizationOptions' => [],
 ];
