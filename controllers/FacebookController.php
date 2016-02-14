@@ -39,7 +39,7 @@ class FacebookController extends BaseController
             craft()->httpSession->add('facebook.referer', $referer);
         }
 
-        Craft::log('Facebook Connect - Step 1'."\r\n".print_r([
+        FacebookPlugin::log('Connect - Step 1'."\r\n".print_r([
                 'referer' => $referer,
             ], true), LogLevel::Info, true);
 
@@ -61,7 +61,7 @@ class FacebookController extends BaseController
                 // save token
                 craft()->facebook_oauth->saveToken($token);
 
-                Craft::log('Facebook Connect - Step 2'."\r\n".print_r([
+                FacebookPlugin::log('Connect - Step 2'."\r\n".print_r([
                         'token' => $token,
                     ], true), LogLevel::Info, true);
 

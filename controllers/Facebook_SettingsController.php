@@ -65,11 +65,11 @@ class Facebook_SettingsController extends BaseController
                         }
                         catch(\Exception $e)
                         {
-                            Craft::log("Facebook.Debug - Couldn't get account\r\n".$e->getMessage().'\r\n'.$e->getTraceAsString(), LogLevel::Info, true);
+                            FacebookPlugin::log("Couldn't get account\r\n".$e->getMessage().'\r\n'.$e->getTraceAsString(), LogLevel::Error);
 
                             if(method_exists($e, 'getResponse'))
                             {
-                                Craft::log("Facebook.Debug.GuzzleErrorResponse\r\n".$e->getResponse(), LogLevel::Info, true);
+                                FacebookPlugin::log("GuzzleErrorResponse\r\n".$e->getResponse(), LogLevel::Error);
                             }
 
                             $variables['error'] = $e->getMessage();

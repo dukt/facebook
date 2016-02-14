@@ -28,6 +28,8 @@ class Facebook_ReportsService extends BaseApplicationComponent
 
                 $object = $response['data'];
                 $objectType = $object['metadata']['type'];
+                $supportedObject = false;
+                $message = false;
 
                 $counts = [];
 
@@ -93,11 +95,15 @@ class Facebook_ReportsService extends BaseApplicationComponent
                         break;
 
                     default:
-                        throw new Exception("Insights not available for object type `".$objectType."`");
+                        $supportedObject = false;
+                        $message = 'Insights only supports pages, please choose a different Facebook Page ID in <a href="'.UrlHelper::getUrl('facebook/settings').'">Facebook’s settings</a>.';
+                        FacebookPlugin::log("Insights not available for object type `".$objectType."`, only pages are supported.", LogLevel::Error);
 
                 }
 
                 $report = [
+                    'supportedObject' => $supportedObject,
+                    'message' => $message,
                     'object' => $object,
                     'objectType' => $objectType,
                     'counts' => $counts,

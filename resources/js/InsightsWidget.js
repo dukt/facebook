@@ -1,5 +1,5 @@
 /**
- * Chart Widget
+ * Insights Widget
  */
 
 (function($) {
@@ -42,27 +42,35 @@ Craft.FacebookInsightsWidget = Garnish.Base.extend(
             {
                 // infos
 
-                var object = response.object;
-
-                var $infoLink = $('<a target="_blank" href="https://www.facebook.com/'+object.id+'/">'+object.name+'</a>');
-
-                $infoLink.appendTo(this.$infos);
-
-
-                // counts
-
-                $.each(response.counts, $.proxy(function(key, count)
+                if(response.supportedObject)
                 {
-                    var $count = $('<div class="count" />'),
-                        $label = $('<div class="label light" />').appendTo($count),
-                        $value = $('<div class="value" />').appendTo($count);
+                    var object = response.object;
 
-                    $label.html(count.label);
-                    $value.html(count.value);
+                    var $infoLink = $('<a target="_blank" href="https://www.facebook.com/'+object.id+'/">'+object.name+'</a>');
 
-                    $count.appendTo(this.$counts);
+                    $infoLink.appendTo(this.$infos);
 
-                }, this));
+
+                    // counts
+
+                    $.each(response.counts, $.proxy(function(key, count)
+                    {
+                        var $count = $('<div class="count" />'),
+                            $label = $('<div class="label light" />').appendTo($count),
+                            $value = $('<div class="value" />').appendTo($count);
+
+                        $label.html(count.label);
+                        $value.html(count.value);
+
+                        $count.appendTo(this.$counts);
+
+                    }, this));
+                }
+                else
+                {
+                    var $message = $('<p class="light">'+response.message+'</p>');
+                    $message.appendTo(this.$infos);
+                }
             }
             else
             {
