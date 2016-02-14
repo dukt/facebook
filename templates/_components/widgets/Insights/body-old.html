@@ -1,0 +1,31 @@
+{% if not error %}
+
+    {% if object %}
+
+        <div class="infos">
+            <p><a target="_blank" href="https://www.facebook.com/{{ object.id }}/">{{ object.name }}</a></p>
+        </div>
+
+
+        {% spaceless %}
+
+            <div class="counts">
+                {% for count in counts %}
+
+                    <div class="count">
+                        <div class="label light">{{ count.label }}</div>
+                        <div class="value">{{ count.value }}</div>
+                    </div>
+
+                {% endfor %}
+            </div>
+
+        {% endspaceless %}
+
+    {% else %}
+        <p class="light">{{ "Facebook is not configured."|t }} <a href="{{ url('facebook/settings') }}">{{ "Edit plugin settings"|t }}</a>.</p>
+    {% endif %}
+
+{% else %}
+    <p class="light">{{ "Only Facebook pages are supported, please provide a different ID."|t }}</p>
+{% endif %}

@@ -41,10 +41,11 @@
                     <h2 class="first">{{'Facebook Insights Settings'|t}}</h2>
 
                     {{ forms.textField({
-                        label: "Account, domain or page"|t,
+                        label: "Facebook Page ID"|t,
+                        placeholder: "123456789012345",
                         name: 'settings[facebookInsightsObjectId]',
                         value: settings.facebookInsightsObjectId,
-                        size: 16,
+                        size: 20,
                     }) }}
 
                     <div class="buttons">

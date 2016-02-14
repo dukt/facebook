@@ -29,69 +29,24 @@ class Facebook_InsightsWidget extends BaseWidget
     public function getBodyHtml()
     {
         $pluginSettings = craft()->plugins->getPlugin('facebook')->getSettings();
-
         $facebookInsightsObjectId = $pluginSettings['facebookInsightsObjectId'];
 
         $token = craft()->facebook_oauth->getToken();
 
         if($token)
         {
-            // object
-            $response = craft()->facebook_api->get('/'.$facebookInsightsObjectId, ['metadata' => 1, 'fields' => 'name']);
+            $widgetId = $this->model->id;
 
-            $object = $response['data'];
-            $objectType = $object['metadata']['type'];
-            $error = false;
+            craft()->templates->includeJsResource('facebook/js/InsightsWidget.js');
+            craft()->templates->includeJs('new Craft.FacebookInsightsWidget("widget'.$widgetId.'");');
 
-            switch ($objectType)
-            {
-                case 'page':
+            craft()->templates->includeCssResource('facebook/css/insights-widget.css');
 
-                    $response = craft()->facebook_api->get('/'.$facebookInsightsObjectId.'/insights/page_fans', array(
-                        'since' => date('Y-m-d', strtotime('-6 day')),
-                        'until' => date('Y-m-d', strtotime('+1 day')),
-                    ));
-
-                    $insights = $response['data']['data'][0];
-
-                    $weekTotalStart = $insights['values'][0]['value'];
-                    $weekTotalEnd = end($insights['values'])['value'];
-
-                    $weekTotal = $weekTotalEnd - $weekTotalStart;
-
-                    $variables['weekTotal'] = $weekTotal;
-                    $variables['insights'] = $insights;
-
-                    break;
-
-                default:
-                    // throw new \Exception("Insights not available for object type `".$objectType."`");
-
-                    $error = "Insights not available for object type `".$objectType."`";
-
-            }
-
-            $variables['error'] = $error;
-            $variables['object'] = $object;
-            $variables['objectType'] = $objectType;
-
-            craft()->templates->includeCssResource('facebook/css/stats-widget.css');
-
-            return craft()->templates->render('facebook/_components/widgets/Insights/body', $variables);
+            return craft()->templates->render('facebook/_components/widgets/Insights/body');
         }
         else
         {
             return craft()->templates->render('facebook/_components/widgets/Insights/disabled');
         }
-    }
-
-    private function pageInsights()
-    {
-
-    }
-
-    private function domainInsights()
-    {
-
     }
 }

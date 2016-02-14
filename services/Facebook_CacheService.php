@@ -33,11 +33,19 @@ class Facebook_CacheService extends BaseApplicationComponent
             if(!$expire)
             {
                 $expire = craft()->config->get('cacheDuration', 'facebook');
-                $expire = FacebookHelper::formatDuration($expire);
+                $expire = $this->_formatDuration($expire);
             }
 
             return craft()->cache->set($cacheKey, $value, $expire, $dependency);
         }
+    }
+
+    private function _formatDuration($cacheDuration, $format='%s')
+    {
+        $cacheDuration = new DateInterval($cacheDuration);
+        $cacheDurationSeconds = $cacheDuration->format('%s');
+
+        return $cacheDurationSeconds;
     }
 
     private function getCacheKey(array $request)
