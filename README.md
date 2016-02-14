@@ -41,4 +41,4 @@ A simple plugin to connect to Facebook's API.
 
 - get($uri = null, $query = null)
 
-[Dukt.net](https://dukt.net/) © 2015 - All rights reserved
+[Dukt.net](https://dukt.net/) © 2016 - All rights reserved
