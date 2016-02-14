@@ -31,6 +31,14 @@ class FacebookPlugin extends BasePlugin
     }
 
     /**
+     * Get Description
+     */
+    public function getDescription()
+    {
+        return Craft::t('Facebook Insights widget for the dashboard.');
+    }
+
+    /**
      * Get Version
      */
     public function getVersion()
