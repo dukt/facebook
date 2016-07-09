@@ -14,7 +14,7 @@ use Guzzle\Http\Exception\RequestException;
 
 class Facebook_ApiService extends BaseApplicationComponent
 {
-    private $apiUrl = 'https://graph.facebook.com/v2.5/';
+    private $apiUrl = 'https://graph.facebook.com/';
 
     public function get($uri = null, $query = null, $headers = null)
     {
