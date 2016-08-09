@@ -14,6 +14,9 @@ class Facebook_OauthService extends BaseApplicationComponent
 
     private $token;
 
+	// Public Methods
+	// =========================================================================
+
     /**
      * Save Token
      *

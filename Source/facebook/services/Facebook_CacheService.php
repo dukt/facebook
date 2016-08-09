@@ -9,6 +9,9 @@ namespace Craft;
 
 class Facebook_CacheService extends BaseApplicationComponent
 {
+	// Public Methods
+	// =========================================================================
+
     public function get($id)
     {
         if(craft()->config->get('enableCache', 'facebook') == true)
@@ -39,6 +42,9 @@ class Facebook_CacheService extends BaseApplicationComponent
             return craft()->cache->set($cacheKey, $value, $expire, $dependency);
         }
     }
+
+	// Private Methods
+	// =========================================================================
 
     private function _formatDuration($cacheDuration, $format='%s')
     {

@@ -14,7 +14,13 @@ use Guzzle\Http\Exception\RequestException;
 
 class Facebook_ApiService extends BaseApplicationComponent
 {
-    private $baseApiUrl = 'https://graph.facebook.com/';
+	// Properties
+	// =========================================================================
+
+	private $baseApiUrl = 'https://graph.facebook.com/';
+	
+	// Public Methods
+	// =========================================================================
 
     public function get($uri = null, $query = null, $headers = null)
     {
@@ -23,7 +29,10 @@ class Facebook_ApiService extends BaseApplicationComponent
         return $this->request('get', $uri, $headers, $options);
     }
 
-    private function request($method='get', $uri = null, $headers = null, $options = [])
+	// Private Methods
+	// =========================================================================
+
+	private function request($method='get', $uri = null, $headers = null, $options = [])
     {
         try
         {

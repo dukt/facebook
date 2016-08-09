@@ -9,7 +9,10 @@ namespace Craft;
 
 class Facebook_ReportsService extends BaseApplicationComponent
 {
-    public function getInsightsReport()
+	// Public Methods
+	// =========================================================================
+
+	public function getInsightsReport()
     {
         $pluginSettings = craft()->plugins->getPlugin('facebook')->getSettings();
 

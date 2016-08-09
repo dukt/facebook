@@ -9,7 +9,10 @@ namespace Craft;
 
 class Facebook_PluginService extends BaseApplicationComponent
 {
-    /**
+	// Public Methods
+	// =========================================================================
+
+	/**
      * Require dependencies
      *
      * @return bool
