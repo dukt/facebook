@@ -40,6 +40,7 @@ class Facebook_ReportsService extends BaseApplicationComponent
                         $supportedObject = true;
 
                         $response = craft()->facebook_api->get('/'.$facebookInsightsObjectId.'/insights', array(
+                            'metric' => 'page_fans,page_impressions_unique',
                             'since' => date('Y-m-d', strtotime('-6 day')),
                             'until' => date('Y-m-d', strtotime('+1 day')),
                         ));

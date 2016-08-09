@@ -14,7 +14,8 @@ use Guzzle\Http\Exception\RequestException;
 
 class Facebook_ApiService extends BaseApplicationComponent
 {
-    private $apiUrl = 'https://graph.facebook.com/';
+    private $baseApiUrl = 'https://graph.facebook.com/';
+	private $apiVersion = 'v2.7';
 
     public function get($uri = null, $query = null, $headers = null)
     {
@@ -64,6 +65,11 @@ class Facebook_ApiService extends BaseApplicationComponent
         }
     }
 
+	private function getApiUrl()
+	{
+		return $this->baseApiUrl.$this->apiVersion.'/';
+	}
+
     private function getClient()
     {
         $token = craft()->facebook_oauth->getToken();
@@ -76,7 +82,7 @@ class Facebook_ApiService extends BaseApplicationComponent
             $headers['Authorization'] = 'Bearer '.$token->accessToken;
         }
 
-        $client = new Client($this->apiUrl, [
+        $client = new Client($this->getApiUrl(), [
             'request.options' => [
                 'headers' => $headers
             ]
