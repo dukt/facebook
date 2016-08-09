@@ -9,7 +9,15 @@ namespace Craft;
 
 class Facebook_ReportsController extends BaseController
 {
-    public function actionGetInsightsReport()
+	// Public Methods
+	// =========================================================================
+
+	/**
+	 * Returns the insights report
+	 *
+	 * @return null
+	 */
+	public function actionGetInsightsReport()
     {
         try
         {
