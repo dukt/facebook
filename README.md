@@ -7,7 +7,7 @@ Facebook Insights widget for the dashboard.
 ## Requirements
 
 - [Craft 2.5+](http://buildwithcraft.com/)
-- [Craft OAuth 1.0+](https://dukt.net/craft/oauth)
+- [Craft OAuth 2.0+](https://dukt.net/craft/oauth)
 
 ## Installation
 
