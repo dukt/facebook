@@ -15,7 +15,6 @@ use Guzzle\Http\Exception\RequestException;
 class Facebook_ApiService extends BaseApplicationComponent
 {
     private $baseApiUrl = 'https://graph.facebook.com/';
-	private $apiVersion = 'v2.7';
 
     public function get($uri = null, $query = null, $headers = null)
     {
@@ -67,7 +66,9 @@ class Facebook_ApiService extends BaseApplicationComponent
 
 	private function getApiUrl()
 	{
-		return $this->baseApiUrl.$this->apiVersion.'/';
+		$apiVersion = craft()->config->get('apiVersion', 'facebook');
+
+		return $this->baseApiUrl.$apiVersion.'/';
 	}
 
     private function getClient()

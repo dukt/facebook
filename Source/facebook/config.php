@@ -3,6 +3,11 @@
 return [
 
     /**
+     * Graph API version used to request the Facebook API
+     */
+    'apiVersion' => 'v2.7',
+
+    /**
      * Whether request to APIs should be cached or not
      */
     'enableCache' => true,
