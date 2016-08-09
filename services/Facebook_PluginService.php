@@ -58,7 +58,7 @@ class Facebook_PluginService extends BaseApplicationComponent
         else
         {
             // oauth
-            $provider = craft()->oauth->getProvider('google');
+            $provider = craft()->oauth->getProvider('facebook');
 
             if ($provider && $provider->isConfigured())
             {
