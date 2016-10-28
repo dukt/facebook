@@ -34,43 +34,27 @@ class Facebook_ApiService extends BaseApplicationComponent
 
 	private function request($method='get', $uri = null, $headers = null, $options = [])
     {
+        $client = $this->getClient();
+
+        $request = $client->{$method}($uri, $headers, $options);
+
+        $response = $request->send();
+
         try
         {
-            $client = $this->getClient();
-
-            $request = $client->{$method}($uri, $headers, $options);
-
-            $response = $request->send();
-
-            try
-            {
-                $data = json_decode($response->getBody(), true);
-            }
-            catch(\Exception $e)
-            {
-                $data = null;
-            }
-
-            return [
-                'success' => true,
-                'error' => false,
-                'data' => $data,
-                'response' => $response
-            ];
+            $data = json_decode($response->getBody(), true);
         }
-        catch (RequestException $e)
+        catch(\Exception $e)
         {
-            $exceptionResponse = $e->getResponse();
-
-            $data = json_decode($exceptionResponse->getBody(), true);
-
-            return [
-                'success' => false,
-                'error' => true,
-                'data' => $data,
-                'exception' => $e,
-            ];
+            $data = null;
         }
+
+        return [
+            'success' => true,
+            'error' => false,
+            'data' => $data,
+            'response' => $response
+        ];
     }
 
 	private function getApiUrl()

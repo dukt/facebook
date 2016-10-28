@@ -24,6 +24,20 @@ class Facebook_ReportsController extends BaseController
             $report = craft()->facebook_reports->getInsightsReport();
             $this->returnJson($report);
         }
+        catch(\Guzzle\Http\Exception\ClientErrorResponseException $e)
+        {
+            $errorMsg = $e->getMessage();
+
+            $response = $e->getResponse();
+            $data = json_decode($response->getBody(), true);
+
+            if(!empty($data['error']['message']))
+            {
+                $errorMsg = $data['error']['message'];
+            }
+
+            $this->returnErrorJson($errorMsg);
+        }
         catch(\Exception $e)
         {
             if(method_exists($e, 'getErrors'))
