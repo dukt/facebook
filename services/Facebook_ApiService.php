@@ -32,21 +32,9 @@ class Facebook_ApiService extends BaseApplicationComponent
 
         $response = $request->send();
 
-        try
-        {
-            $data = json_decode($response->getBody(), true);
-        }
-        catch(\Exception $e)
-        {
-            $data = null;
-        }
+        $data = $response->json();
 
-        return [
-            'success' => true,
-            'error' => false,
-            'data' => $data,
-            'response' => $response
-        ];
+        return $data;
     }
 
 	// Private Methods

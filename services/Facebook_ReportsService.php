@@ -26,12 +26,10 @@ class Facebook_ReportsService extends BaseApplicationComponent
 
             if($token)
             {
-                // object
-                $response = craft()->facebook_api->get('/'.$facebookInsightsObjectId, ['metadata' => 1, 'fields' => 'name']);
+                // Object
 
-                $object = $response['data'];
+                $object = craft()->facebook_api->get('/'.$facebookInsightsObjectId, ['metadata' => 1, 'fields' => 'name']);;
                 $objectType = $object['metadata']['type'];
-                $supportedObject = false;
                 $message = false;
 
                 $counts = [];
@@ -40,17 +38,17 @@ class Facebook_ReportsService extends BaseApplicationComponent
                 {
                     case 'page':
 
+                        // Insights for objects of type `page`
+
                         $supportedObject = true;
 
-                        $response = craft()->facebook_api->get('/'.$facebookInsightsObjectId.'/insights', array(
+                        $insights = craft()->facebook_api->get('/'.$facebookInsightsObjectId.'/insights', array(
                             'metric' => 'page_fans,page_impressions_unique',
                             'since' => date('Y-m-d', strtotime('-6 day')),
                             'until' => date('Y-m-d', strtotime('+1 day')),
                         ));
 
-                        $insights = $response['data']['data'];
-
-                        foreach($insights as $insight)
+                        foreach($insights['data'] as $insight)
                         {
                             switch ($insight['name'])
                             {
