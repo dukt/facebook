@@ -26,17 +26,9 @@ class Facebook_ApiService extends BaseApplicationComponent
     {
         $options['query'] = ($query ? $query : []);
 
-        return $this->request('get', $uri, $headers, $options);
-    }
-
-	// Private Methods
-	// =========================================================================
-
-	private function request($method='get', $uri = null, $headers = null, $options = [])
-    {
         $client = $this->getClient();
 
-        $request = $client->{$method}($uri, $headers, $options);
+        $request = $client->get($uri, $headers, $options);
 
         $response = $request->send();
 
@@ -56,6 +48,9 @@ class Facebook_ApiService extends BaseApplicationComponent
             'response' => $response
         ];
     }
+
+	// Private Methods
+	// =========================================================================
 
 	private function getApiUrl()
 	{
