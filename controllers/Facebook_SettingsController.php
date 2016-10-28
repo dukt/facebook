@@ -19,73 +19,58 @@ class Facebook_SettingsController extends BaseController
      */
     public function actionIndex()
     {
+        craft()->facebook->requireDependencies();
+
         $plugin = craft()->plugins->getPlugin('facebook');
-        $pluginDependencies = $plugin->getPluginDependencies();
 
-        if (count($pluginDependencies) > 0)
+        $variables = array(
+            'provider' => false,
+            'account' => false,
+            'token' => false,
+            'error' => false
+        );
+
+        $provider = craft()->oauth->getProvider('facebook');
+
+        if ($provider && $provider->isConfigured())
         {
-            $this->renderTemplate('facebook/settings/_dependencies', ['pluginDependencies' => $pluginDependencies]);
-        }
-        else
-        {
-            if (isset(craft()->oauth))
+            $token = craft()->facebook_oauth->getToken();
+
+            if ($token)
             {
-                $variables = array(
-                    'provider' => false,
-                    'account' => false,
-                    'token' => false,
-                    'error' => false
-                );
-
-                $provider = craft()->oauth->getProvider('facebook');
-
-                if ($provider && $provider->isConfigured())
+                try
                 {
-                    $token = craft()->facebook_oauth->getToken();
+                    $account = craft()->facebook_cache->get(['getResourceOwner', $token]);
 
-                    if ($token)
+                    if(!$account)
                     {
-                        try
-                        {
-                            $account = craft()->facebook_cache->get(['getAccount', $token]);
-
-                            if(!$account)
-                            {
-                                $account = $provider->getAccount($token);
-                                craft()->facebook_cache->set(['getAccount', $token], $account);
-                            }
-
-                            if ($account)
-                            {
-
-                                $variables['account'] = $account;
-
-                                $variables['settings'] = $plugin->getSettings();
-                            }
-                        }
-                        catch(\Exception $e)
-                        {
-                            FacebookPlugin::log("Couldn't get account\r\n".$e->getMessage().'\r\n'.$e->getTraceAsString(), LogLevel::Error);
-
-                            if(method_exists($e, 'getResponse'))
-                            {
-                                FacebookPlugin::log("GuzzleErrorResponse\r\n".$e->getResponse(), LogLevel::Error);
-                            }
-
-                            $variables['error'] = $e->getMessage();
-                        }
+                        $account = $provider->getResourceOwner($token);
+                        craft()->facebook_cache->set(['getResourceOwner', $token], $account);
                     }
 
-                    $variables['token'] = $token;
-                    $variables['provider'] = $provider;
+                    if ($account)
+                    {
+                        $variables['account'] = $account;
+                        $variables['settings'] = $plugin->getSettings();
+                    }
                 }
+                catch(\Exception $e)
+                {
+                    FacebookPlugin::log("Couldn't get account\r\n".$e->getMessage().'\r\n'.$e->getTraceAsString(), LogLevel::Error);
 
-                $this->renderTemplate('facebook/settings', $variables);
+                    if(method_exists($e, 'getResponse'))
+                    {
+                        FacebookPlugin::log("GuzzleErrorResponse\r\n".$e->getResponse(), LogLevel::Error);
+                    }
+
+                    $variables['error'] = $e->getMessage();
+                }
             }
-            else
-            {
-                $this->renderTemplate('facebook/settings/_oauthNotInstalled');
-            }
+
+            $variables['token'] = $token;
+            $variables['provider'] = $provider;
         }
+
+        $this->renderTemplate('facebook/settings', $variables);
     }
 }

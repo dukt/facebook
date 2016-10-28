@@ -33,7 +33,7 @@ class Facebook_InsightsWidget extends BaseWidget
 	 */
     public function getBodyHtml()
     {
-        if(craft()->facebook_plugin->checkRequirements())
+        if(craft()->facebook->checkPluginRequirements())
         {
             $widgetId = $this->model->id;
 
@@ -46,7 +46,7 @@ class Facebook_InsightsWidget extends BaseWidget
         }
         else
         {
-            return craft()->templates->render('facebook/_components/widgets/Insights/disabled');
+            return craft()->templates->render('facebook/_special/plugin-not-configured');
         }
     }
 }
