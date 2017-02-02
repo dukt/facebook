@@ -7,6 +7,7 @@
 
 namespace dukt\facebook\services;
 
+use Craft;
 use craft\base\Component;
 
 class Reports extends Component
@@ -16,21 +17,21 @@ class Reports extends Component
 
 	public function getInsightsReport()
     {
-        $pluginSettings = craft()->plugins->getPlugin('facebook')->getSettings();
+        $pluginSettings = Craft::$app->plugins->getPlugin('facebook')->getSettings();
 
         $facebookInsightsObjectId = $pluginSettings['facebookInsightsObjectId'];
 
-        $report = craft()->facebook_cache->get(['insightsReport', $facebookInsightsObjectId]);
+        $report = \dukt\facebook\Plugin::getInstance()->facebook_cache->get(['insightsReport', $facebookInsightsObjectId]);
 
         if(!$report)
         {
-            $token = craft()->facebook_oauth->getToken();
+            $token = \dukt\facebook\Plugin::getInstance()->facebook_oauth->getToken();
 
             if($token)
             {
                 // Object
 
-                $object = craft()->facebook_api->get('/'.$facebookInsightsObjectId, ['metadata' => 1, 'fields' => 'name']);;
+                $object = \dukt\facebook\Plugin::getInstance()->facebook_api->get('/'.$facebookInsightsObjectId, ['metadata' => 1, 'fields' => 'name']);;
                 $objectType = $object['metadata']['type'];
                 $message = false;
 
@@ -44,7 +45,7 @@ class Reports extends Component
 
                         $supportedObject = true;
 
-                        $insights = craft()->facebook_api->get('/'.$facebookInsightsObjectId.'/insights', array(
+                        $insights = \dukt\facebook\Plugin::getInstance()->facebook_api->get('/'.$facebookInsightsObjectId.'/insights', array(
                             'metric' => 'page_fans,page_impressions_unique',
                             'since' => date('Y-m-d', strtotime('-6 day')),
                             'until' => date('Y-m-d', strtotime('+1 day')),
@@ -115,7 +116,7 @@ class Reports extends Component
                     'counts' => $counts,
                 ];
 
-                craft()->facebook_cache->set(['insightsReport', $facebookInsightsObjectId], $report);
+                \dukt\facebook\Plugin::getInstance()->facebook_cache->set(['insightsReport', $facebookInsightsObjectId], $report);
             }
             else
             {

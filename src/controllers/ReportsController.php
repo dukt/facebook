@@ -23,8 +23,9 @@ class ReportsController extends Controller
     {
         try
         {
-            $report = craft()->facebook_reports->getInsightsReport();
-            $this->returnJson($report);
+            $report = \dukt\facebook\Plugin::getInstance()->facebook_reports->getInsightsReport();
+
+            return $this->asJson($report);
         }
         catch(\Guzzle\Http\Exception\ClientErrorResponseException $e)
         {
@@ -38,7 +39,7 @@ class ReportsController extends Controller
                 $errorMsg = $data['error']['message'];
             }
 
-            $this->returnErrorJson($errorMsg);
+            return $this->asErrorJson($errorMsg);
         }
         catch(\Exception $e)
         {
@@ -48,11 +49,11 @@ class ReportsController extends Controller
 
                 if(isset($errors[0]['message']))
                 {
-                    $this->returnErrorJson(Craft::t($errors[0]['message']));
+                    return $this->asErrorJson(Craft::t($errors[0]['message']));
                 }
             }
 
-            $this->returnErrorJson($e->getMessage());
+            return $this->asErrorJson($e->getMessage());
         }
     }
 }

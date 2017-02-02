@@ -34,7 +34,7 @@ Craft.FacebookInsightsWidget = Garnish.Base.extend(
     {
         this.$spinner.removeClass('hidden');
 
-        Craft.postActionRequest('facebook/reports/getInsightsReport', {}, $.proxy(function(response, textStatus)
+        Craft.postActionRequest('facebook/reports/get-insights-report', {}, $.proxy(function(response, textStatus)
         {
             this.$spinner.addClass('hidden');
 

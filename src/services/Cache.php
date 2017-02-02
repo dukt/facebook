@@ -21,7 +21,7 @@ class Cache extends Component
         {
             $cacheKey = $this->getCacheKey($id);
 
-            return craft()->cache->get($cacheKey);
+            return Craft::$app->cache->get($cacheKey);
         }
     }
 

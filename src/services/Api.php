@@ -8,8 +8,8 @@
 namespace dukt\facebook\services;
 
 use Facebook;
-
-use Guzzle\Http\Client;
+use Craft;
+use GuzzleHttp\Client;
 use Guzzle\Http\Exception\RequestException;
 use yii\base\Component;
 
@@ -25,17 +25,20 @@ class Api extends Component
 
     public function get($uri = null, $query = null, $headers = null)
     {
-        $options['query'] = ($query ? $query : []);
-
         $client = $this->getClient();
 
-        $request = $client->get($uri, $headers, $options);
+        $options['query'] = ($query ? $query : []);
 
-        $response = $request->send();
+        if($headers)
+        {
+            $options['headers'] = $headers;
+        }
 
-        $data = $response->json();
+        $response = $client->request('GET', $uri, $options);
 
-        return $data;
+        $jsonResponse = json_decode($response->getBody(), true);
+
+        return $jsonResponse;
     }
 
 	// Private Methods
@@ -43,14 +46,14 @@ class Api extends Component
 
 	private function getApiUrl()
 	{
-		$apiVersion = craft()->config->get('apiVersion', 'facebook');
+		$apiVersion = Craft::$app->config->get('apiVersion', 'facebook');
 
 		return $this->baseApiUrl.$apiVersion.'/';
 	}
 
     private function getClient()
     {
-        $token = craft()->facebook_oauth->getToken();
+        $token = \dukt\facebook\Plugin::getInstance()->facebook_oauth->getToken();
 
         $headers = array();
 
@@ -60,12 +63,17 @@ class Api extends Component
             $headers['Authorization'] = 'Bearer '.$token->accessToken;
         }
 
-        $client = new Client($this->getApiUrl(), [
+/*        $client = new Client($this->getApiUrl(), [
             'request.options' => [
                 'headers' => $headers
             ]
         ]);
+        */
+        $options = [
+            'base_uri' => $this->getApiUrl(),
+            'headers' => $headers
+        ];
 
-        return $client;
+        return new Client($options);
     }
 }

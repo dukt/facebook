@@ -6,6 +6,9 @@ use craft\web\UrlManager;
 use yii\base\Event;
 use craft\events\RegisterUrlRulesEvent;
 use dukt\facebook\models\Settings;
+use craft\services\Dashboard;
+use craft\events\RegisterComponentTypesEvent;
+use dukt\facebook\widgets\InsightsWidget;
 
 class Plugin extends \craft\base\Plugin
 {
@@ -22,7 +25,12 @@ class Plugin extends \craft\base\Plugin
             'facebook_api' => \dukt\facebook\services\Api::class,
             'facebook_cache' => \dukt\facebook\services\Cache::class,
             'facebook_oauth' => \dukt\facebook\services\Oauth::class,
+            'facebook_reports' => \dukt\facebook\services\Reports::class,
         ]);
+
+        Event::on(Dashboard::class, Dashboard::EVENT_REGISTER_WIDGET_TYPES, function(RegisterComponentTypesEvent $event) {
+            $event->types[] = InsightsWidget::class;
+        });
 
         Event::on(UrlManager::class, UrlManager::EVENT_REGISTER_CP_URL_RULES, [$this, 'registerCpUrlRules']);
     }
@@ -65,9 +73,9 @@ class Plugin extends \craft\base\Plugin
      */
     public function onBeforeUninstall()
     {
-        if(isset(craft()->oauth))
+        if(isset(\dukt\oauth\Plugin::getInstance()->oauth))
         {
-            craft()->oauth->deleteTokensByPlugin('facebook');
+            \dukt\oauth\Plugin::getInstance()->oauth->deleteTokensByPlugin('facebook');
         }
     }
 
