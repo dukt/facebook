@@ -5,9 +5,11 @@
  * @license   https://dukt.net/craft/facebook/docs/license
  */
 
-namespace Craft;
+namespace dukt\facebook\services;
 
-class Facebook_CacheService extends BaseApplicationComponent
+use yii\base\Component;
+
+class Cache extends Component
 {
 	// Public Methods
 	// =========================================================================

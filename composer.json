@@ -1,0 +1,21 @@
+{
+  "name": "dukt/craft-facebook",
+  "description": "Facebook Insights widget for the dashboard.",
+  "type": "craft-plugin",
+  "extra": {
+    "name": "Facebook",
+    "handle": "facebook",
+    "developer": "Dukt",
+    "developerUrl": "https://dukt.net/",
+    "documentationUrl": "https://dukt.net/craft/facebook/docs",
+    "class": "dukt\\facebook\\Plugin",
+    "version": "2.0.0",
+    "schemaVersion": "1.0.0",
+    "changelogUrl": "https://dukt.net/craft/facebook/updates.json"
+  },
+  "autoload": {
+    "psr-4": {
+      "dukt\\facebook\\": "src/"
+    }
+  }
+}

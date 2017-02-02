@@ -5,9 +5,12 @@
  * @license   https://dukt.net/craft/facebook/docs/license
  */
 
-namespace Craft;
+namespace dukt\facebook\services;
 
-class Facebook_OauthService extends BaseApplicationComponent
+use Craft;
+use yii\base\Component;
+
+class Oauth extends Component
 {
     // Properties
     // =========================================================================
@@ -25,7 +28,7 @@ class Facebook_OauthService extends BaseApplicationComponent
     public function saveToken(Oauth_TokenModel $token)
     {
         // get plugin
-        $plugin = craft()->plugins->getPlugin('facebook');
+        $plugin = Craft::$app->plugins->getPlugin('facebook');
 
         // get settings
         $settings = $plugin->getSettings();
@@ -33,7 +36,7 @@ class Facebook_OauthService extends BaseApplicationComponent
 
         // do we have an existing token ?
 
-        $existingToken = craft()->oauth->getTokenById($settings->tokenId);
+        $existingToken = \dukt\oauth\Plugin::getInstance()->oauth->getTokenById($settings->tokenId);
 
         if($existingToken)
         {
@@ -41,13 +44,13 @@ class Facebook_OauthService extends BaseApplicationComponent
         }
 
         // save token
-        craft()->oauth->saveToken($token);
+        \dukt\oauth\Plugin::getInstance()->oauth->saveToken($token);
 
         // set token ID
         $settings->tokenId = $token->id;
 
         // save plugin settings
-        craft()->plugins->savePluginSettings($plugin, $settings);
+        Craft::$app->plugins->savePluginSettings($plugin, $settings);
     }
 
     /**
@@ -62,7 +65,7 @@ class Facebook_OauthService extends BaseApplicationComponent
         else
         {
             // get plugin
-            $plugin = craft()->plugins->getPlugin('facebook');
+            $plugin = Craft::$app->plugins->getPlugin('facebook');
 
             // get settings
             $settings = $plugin->getSettings();
@@ -71,7 +74,7 @@ class Facebook_OauthService extends BaseApplicationComponent
             $tokenId = $settings->tokenId;
 
             // get token
-            $token = craft()->oauth->getTokenById($tokenId);
+            $token = \dukt\oauth\Plugin::getInstance()->oauth->getTokenById($tokenId);
 
             return $token;
         }
@@ -83,22 +86,22 @@ class Facebook_OauthService extends BaseApplicationComponent
     public function deleteToken()
     {
         // get plugin
-        $plugin = craft()->plugins->getPlugin('facebook');
+        $plugin = Craft::$app->plugins->getPlugin('facebook');
 
         // get settings
         $settings = $plugin->getSettings();
 
         if($settings->tokenId)
         {
-            $token = craft()->oauth->getTokenById($settings->tokenId);
+            $token = \dukt\oauth\Plugin::getInstance()->oauth->getTokenById($settings->tokenId);
 
             if($token)
             {
-                if(craft()->oauth->deleteToken($token))
+                if(\dukt\oauth\Plugin::getInstance()->oauth->deleteToken($token))
                 {
                     $settings->tokenId = null;
 
-                    craft()->plugins->savePluginSettings($plugin, $settings);
+                    Craft::$app->plugins->savePluginSettings($plugin, $settings);
 
                     return true;
                 }

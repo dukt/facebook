@@ -5,9 +5,12 @@
  * @license   https://dukt.net/craft/facebook/docs/license
  */
 
-namespace Craft;
+namespace dukt\facebook\controllers;
 
-class Facebook_SettingsController extends BaseController
+use Craft;
+use craft\web\Controller;
+
+class SettingsController extends Controller
 {
     // Public Methods
     // =========================================================================
@@ -19,9 +22,9 @@ class Facebook_SettingsController extends BaseController
      */
     public function actionIndex()
     {
-        craft()->facebook->requireDependencies();
+        \dukt\facebook\Plugin::getInstance()->facebook->requireDependencies();
 
-        $plugin = craft()->plugins->getPlugin('facebook');
+        $plugin = Craft::$app->plugins->getPlugin('facebook');
 
         $variables = array(
             'provider' => false,
@@ -30,22 +33,22 @@ class Facebook_SettingsController extends BaseController
             'error' => false
         );
 
-        $provider = craft()->oauth->getProvider('facebook');
+        $provider = \dukt\oauth\Plugin::getInstance()->oauth->getProvider('facebook');
 
         if ($provider && $provider->isConfigured())
         {
-            $token = craft()->facebook_oauth->getToken();
+            $token = \dukt\facebook\Plugin::getInstance()->facebook_oauth->getToken();
 
             if ($token)
             {
                 try
                 {
-                    $account = craft()->facebook_cache->get(['getResourceOwner', $token]);
+                    $account = \dukt\facebook\Plugin::getInstance()->facebook_cache->get(['getResourceOwner', $token]);
 
                     if(!$account)
                     {
                         $account = $provider->getResourceOwner($token);
-                        craft()->facebook_cache->set(['getResourceOwner', $token], $account);
+                        \dukt\facebook\Plugin::getInstance()->facebook_cache->set(['getResourceOwner', $token], $account);
                     }
 
                     if ($account)
@@ -56,11 +59,11 @@ class Facebook_SettingsController extends BaseController
                 }
                 catch(\Exception $e)
                 {
-                    FacebookPlugin::log("Couldn't get account\r\n".$e->getMessage().'\r\n'.$e->getTraceAsString(), LogLevel::Error);
+                    // FacebookPlugin::log("Couldn't get account\r\n".$e->getMessage().'\r\n'.$e->getTraceAsString(), LogLevel::Error);
 
                     if(method_exists($e, 'getResponse'))
                     {
-                        FacebookPlugin::log("GuzzleErrorResponse\r\n".$e->getResponse(), LogLevel::Error);
+                        // FacebookPlugin::log("GuzzleErrorResponse\r\n".$e->getResponse(), LogLevel::Error);
                     }
 
                     $variables['error'] = $e->getMessage();
@@ -71,6 +74,6 @@ class Facebook_SettingsController extends BaseController
             $variables['provider'] = $provider;
         }
 
-        $this->renderTemplate('facebook/settings', $variables);
+        return $this->renderTemplate('facebook/settings', $variables);
     }
 }

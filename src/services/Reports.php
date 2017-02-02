@@ -5,9 +5,11 @@
  * @license   https://dukt.net/craft/facebook/docs/license
  */
 
-namespace Craft;
+namespace dukt\facebook\services;
 
-class Facebook_ReportsService extends BaseApplicationComponent
+use craft\base\Component;
+
+class Reports extends Component
 {
 	// Public Methods
 	// =========================================================================

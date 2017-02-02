@@ -5,7 +5,9 @@
  * @license   https://dukt.net/craft/facebook/docs/license
  */
 
-namespace Craft;
+namespace dukt\facebook\base;
+
+use Craft;
 
 trait FacebookTrait
 {
@@ -20,7 +22,7 @@ trait FacebookTrait
         if(!$this->checkDependencies())
         {
             $url = UrlHelper::getUrl('facebook/install');
-            craft()->request->redirect($url);
+            Craft::$app->request->redirect($url);
             return false;
         }
         else
@@ -48,11 +50,11 @@ trait FacebookTrait
     {
         if($this->checkDependencies())
         {
-            $provider = craft()->oauth->getProvider('facebook');
+            $provider = \dukt\oauth\Plugin::getInstance()->oauth->getProvider('facebook');
 
             if ($provider && $provider->isConfigured())
             {
-                $token = craft()->facebook_oauth->getToken();
+                $token = \dukt\facebook\Plugin::getInstance()->facebook_oauth->getToken();
 
                 if($token)
                 {
@@ -90,7 +92,7 @@ trait FacebookTrait
      */
     private function getDependencies($missingOnly = false)
     {
-        $plugin = craft()->plugins->getPlugin('facebook');
+        $plugin = Craft::$app->plugins->getPlugin('facebook');
 
         $dependencies = array();
 
@@ -116,40 +118,36 @@ trait FacebookTrait
         return $dependencies;
     }
 
+
     /**
-     * Get Dependency
+     * Get dependency
+     *
+     * @return array
      */
     private function getDependency($dependency)
     {
         $isMissing = true;
-        $isInstalled = true;
 
-        $plugin = craft()->plugins->getPlugin($dependency['handle'], false);
+        $plugin = Craft::$app->plugins->getPlugin($dependency['handle'], false);
 
         if($plugin)
         {
             $currentVersion = $plugin->version;
 
-
-            // requires update ?
-
             if(version_compare($currentVersion, $dependency['version']) >= 0)
             {
-                // no (requirements OK)
+                $allPluginInfo = Craft::$app->plugins->getAllPluginInfo();
 
-                if($plugin->isInstalled && $plugin->isEnabled)
+                if(isset($allPluginInfo[$dependency['handle']]))
                 {
-                    $isMissing = false;
+                    $pluginInfos = $allPluginInfo[$dependency['handle']];
+
+                    if($pluginInfos['isInstalled'] && $pluginInfos['isEnabled'])
+                    {
+                        $isMissing = false;
+                    }
                 }
             }
-            else
-            {
-                // yes (requirement not OK)
-            }
-        }
-        else
-        {
-            // not installed
         }
 
         $dependency['isMissing'] = $isMissing;

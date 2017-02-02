@@ -5,11 +5,15 @@
  * @license   https://dukt.net/craft/facebook/docs/license
  */
 
-namespace Craft;
+namespace dukt\facebook\services;
 
-require_once(CRAFT_PLUGINS_PATH.'facebook/base/FacebookTrait.php');
+use dukt\facebook\base\FacebookTrait;
 
-class FacebookService extends BaseApplicationComponent
+// require_once(CRAFT_PLUGINS_PATH.'facebook/base/FacebookTrait.php');
+
+use yii\base\Component;
+
+class Facebook extends Component
 {
     // Traits
     // =========================================================================

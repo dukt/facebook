@@ -5,14 +5,15 @@
  * @license   https://dukt.net/craft/facebook/docs/license
  */
 
-namespace Craft;
+namespace dukt\facebook\services;
 
 use Facebook;
 
 use Guzzle\Http\Client;
 use Guzzle\Http\Exception\RequestException;
+use yii\base\Component;
 
-class Facebook_ApiService extends BaseApplicationComponent
+class Api extends Component
 {
 	// Properties
 	// =========================================================================
