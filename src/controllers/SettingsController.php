@@ -74,6 +74,6 @@ class SettingsController extends Controller
             $variables['provider'] = $provider;
         }
 
-        return $this->renderTemplate('facebook/settings', $variables);
+        return $this->renderTemplate('facebook/settings/_index', $variables);
     }
 }

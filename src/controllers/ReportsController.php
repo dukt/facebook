@@ -5,9 +5,11 @@
  * @license   https://dukt.net/craft/facebook/docs/license
  */
 
-namespace Craft;
+namespace dukt\facebook\controllers;
 
-class Facebook_ReportsController extends BaseController
+use craft\web\Controller;
+
+class ReportsController extends Controller
 {
 	// Public Methods
 	// =========================================================================

@@ -9,6 +9,7 @@ namespace dukt\facebook\services;
 
 use Craft;
 use yii\base\Component;
+use dukt\oauth\models\Token;
 
 class Oauth extends Component
 {
@@ -23,9 +24,9 @@ class Oauth extends Component
     /**
      * Save Token
      *
-     * @param Oauth_TokenModel $token
+     * @param Token $token
      */
-    public function saveToken(Oauth_TokenModel $token)
+    public function saveToken(Token $token)
     {
         // get plugin
         $plugin = Craft::$app->plugins->getPlugin('facebook');
@@ -50,7 +51,7 @@ class Oauth extends Component
         $settings->tokenId = $token->id;
 
         // save plugin settings
-        Craft::$app->plugins->savePluginSettings($plugin, $settings);
+        Craft::$app->plugins->savePluginSettings($plugin, $settings->getAttributes());
     }
 
     /**

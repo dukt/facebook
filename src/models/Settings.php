@@ -10,6 +10,7 @@ class Settings extends Model
     // =========================================================================
 
     public $tokenId;
+    public $facebookInsightsObjectId;
 
     // Public Methods
     // =========================================================================

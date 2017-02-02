@@ -7,6 +7,7 @@
 
 namespace dukt\facebook\services;
 
+use Craft;
 use yii\base\Component;
 
 class Cache extends Component
@@ -16,7 +17,7 @@ class Cache extends Component
 
     public function get($id)
     {
-        if(craft()->config->get('enableCache', 'facebook') == true)
+        if(Craft::$app->config->get('enableCache', 'facebook') == true)
         {
             $cacheKey = $this->getCacheKey($id);
 
@@ -28,7 +29,7 @@ class Cache extends Component
     {
         if(is_null($enableCache))
         {
-            $enableCache = craft()->config->get('enableCache', 'facebook');
+            $enableCache = Craft::$app->config->get('enableCache', 'facebook');
         }
 
         if($enableCache)
@@ -37,11 +38,11 @@ class Cache extends Component
 
             if(!$expire)
             {
-                $expire = craft()->config->get('cacheDuration', 'facebook');
+                $expire = Craft::$app->config->get('cacheDuration', 'facebook');
                 $expire = $this->_formatDuration($expire);
             }
 
-            return craft()->cache->set($cacheKey, $value, $expire, $dependency);
+            return Craft::$app->cache->set($cacheKey, $value, $expire, $dependency);
         }
     }
 

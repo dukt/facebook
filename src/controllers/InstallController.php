@@ -5,12 +5,14 @@
  * @license   https://dukt.net/craft/facebook/docs/license
  */
 
-namespace Craft;
+namespace dukt\facebook\controllers;
+
+use craft\web\Controller;
 
 /**
  * Facebook Plugin controller
  */
-class Facebook_InstallController extends BaseController
+class InstallController extends Controller
 {
     // Public Methods
     // =========================================================================

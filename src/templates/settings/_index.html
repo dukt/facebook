@@ -22,9 +22,9 @@
 
                     {{ getCsrfInput() }}
 
-                    <input type="hidden" name="action" value="plugins/savePluginSettings">
-                    <input type="hidden" name="pluginClass" value="Facebook">
-                    <input type="hidden" name="redirect" value="facebook/settings">
+                    <input type="hidden" name="action" value="plugins/save-plugin-settings">
+                    <input type="hidden" name="pluginHandle" value="facebook">
+                    <input type="hidden" name="redirect" value="{{ 'facebook/settings'|hash }}">
 
                     <h2 class="first">{{'Facebook Account'|t}}</h2>
                     <p>{{'You are authenticated to Facebook with the following account'|t}} :</p>
@@ -34,7 +34,7 @@
                         <li><strong>{{ 'Name'|t }} : </strong> {{ account.name }}</li>
                     </ul>
 
-                    <p><a class="btn small" href="{{ actionUrl('facebook/disconnect') }}">{{'Disconnect'|t}}</a></p>
+                    <p><a class="btn small" href="{{ actionUrl('facebook/oauth/disconnect') }}">{{'Disconnect'|t}}</a></p>
 
                     <hr>
 
@@ -59,7 +59,7 @@
                 <h2 class="first">{{'Facebook Account'|t}}</h2>
                 <p>{{'You need to connect Craft to a Facebook account in order to get started.'|t}}</p>
                 <p>{{"Getting errors trying to connect ?"|t}} <a href="{{url('oauth/providers/facebook')}}">{{"Check Facebook API key & secret in OAuth settings"|t}}</a>.</p>
-                <p><a class="btn submit" href="{{ actionUrl('facebook/connect') }}">{{"Connect to Facebook"|t}}</a></p>
+                <p><a class="btn submit" href="{{ actionUrl('facebook/oauth/connect') }}">{{"Connect to Facebook"|t}}</a></p>
 
             {% endif %}
 
@@ -77,7 +77,7 @@
         <p class="error">{{ error }}</p>
 
         {% if token %}
-            <p><a class="btn small" href="{{ actionUrl('facebook/disconnect') }}">{{'Disconnect'|t}}</a></p>
+            <p><a class="btn small" href="{{ actionUrl('facebook/oauth/disconnect') }}">{{'Disconnect'|t}}</a></p>
         {% endif %}
 
     {% endif %}
