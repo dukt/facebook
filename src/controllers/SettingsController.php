@@ -22,7 +22,7 @@ class SettingsController extends Controller
      */
     public function actionIndex()
     {
-        \dukt\facebook\Plugin::getInstance()->facebook->requireDependencies();
+        Facebook::$plugin->facebook->requireDependencies();
 
         $plugin = Craft::$app->plugins->getPlugin('facebook');
 
@@ -37,18 +37,18 @@ class SettingsController extends Controller
 
         if ($provider && $provider->isConfigured())
         {
-            $token = \dukt\facebook\Plugin::getInstance()->facebook_oauth->getToken();
+            $token = Facebook::$plugin->facebook_oauth->getToken();
 
             if ($token)
             {
                 try
                 {
-                    $account = \dukt\facebook\Plugin::getInstance()->facebook_cache->get(['getResourceOwner', $token]);
+                    $account = Facebook::$plugin->facebook_cache->get(['getResourceOwner', $token]);
 
                     if(!$account)
                     {
                         $account = $provider->getResourceOwner($token);
-                        \dukt\facebook\Plugin::getInstance()->facebook_cache->set(['getResourceOwner', $token], $account);
+                        Facebook::$plugin->facebook_cache->set(['getResourceOwner', $token], $account);
                     }
 
                     if ($account)

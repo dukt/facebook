@@ -54,7 +54,7 @@ trait FacebookTrait
 
             if ($provider && $provider->isConfigured())
             {
-                $token = \dukt\facebook\Plugin::getInstance()->facebook_oauth->getToken();
+                $token = Facebook::$plugin->facebook_oauth->getToken();
 
                 if($token)
                 {

@@ -23,7 +23,7 @@ class ReportsController extends Controller
     {
         try
         {
-            $report = \dukt\facebook\Plugin::getInstance()->facebook_reports->getInsightsReport();
+            $report = Facebook::$plugin->facebook_reports->getInsightsReport();
 
             return $this->asJson($report);
         }

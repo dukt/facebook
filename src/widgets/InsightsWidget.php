@@ -36,7 +36,7 @@ class InsightsWidget extends \craft\base\Widget
 	 */
     public function getBodyHtml()
     {
-        if(\dukt\facebook\Plugin::getInstance()->facebook->checkPluginRequirements())
+        if(Facebook::$plugin->facebook->checkPluginRequirements())
         {
             $widgetId = $this->id;
 

@@ -14,6 +14,6 @@ class FacebookVariable
 
     public function api()
     {
-        return \dukt\facebook\Plugin::getInstance()->facebook_api;
+        return Facebook::$plugin->facebook_api;
     }
 }

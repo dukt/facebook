@@ -24,9 +24,9 @@ class InstallController extends Controller
      */
     public function actionIndex()
     {
-        if(!\dukt\facebook\Plugin::getInstance()->facebook->checkDependencies())
+        if(!Facebook::$plugin->facebook->checkDependencies())
         {
-            $missingDependencies = \dukt\facebook\Plugin::getInstance()->facebook->getMissingDependencies();
+            $missingDependencies = Facebook::$plugin->facebook->getMissingDependencies();
             $this->renderTemplate('facebook/_special/install/index', [
                 'missingDependencies' => $missingDependencies,
             ]);

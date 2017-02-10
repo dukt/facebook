@@ -67,7 +67,7 @@ class OauthController extends Controller
                 $token = $response['token'];
 
                 // save token
-                \dukt\facebook\Plugin::getInstance()->facebook_oauth->saveToken($token);
+                Facebook::$plugin->facebook_oauth->saveToken($token);
 
 /*                FacebookPlugin::log('Connect - Step 2'."\r\n".print_r([
                         'token' => $token,
@@ -104,7 +104,7 @@ class OauthController extends Controller
      */
     public function actionDisconnect()
     {
-        if (\dukt\facebook\Plugin::getInstance()->facebook_oauth->deleteToken())
+        if (Facebook::$plugin->facebook_oauth->deleteToken())
         {
             Craft::$app->getSession()->setNotice(Craft::t('app', "Disconnected from Facebook."));
         }
@@ -114,7 +114,7 @@ class OauthController extends Controller
         }
 
         // redirect
-        $redirect = Craft::$app->request->getUrlReferrer();
+        $redirect = Craft::$app->request->referrer;
         return $this->redirect($redirect);
     }
 }

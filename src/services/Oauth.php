@@ -102,7 +102,7 @@ class Oauth extends Component
                 {
                     $settings->tokenId = null;
 
-                    Craft::$app->plugins->savePluginSettings($plugin, $settings);
+                    Craft::$app->plugins->savePluginSettings($plugin, $settings->getAttributes());
 
                     return true;
                 }

@@ -21,17 +21,17 @@ class Reports extends Component
 
         $facebookInsightsObjectId = $pluginSettings['facebookInsightsObjectId'];
 
-        $report = \dukt\facebook\Plugin::getInstance()->facebook_cache->get(['insightsReport', $facebookInsightsObjectId]);
+        $report = Facebook::$plugin->facebook_cache->get(['insightsReport', $facebookInsightsObjectId]);
 
         if(!$report)
         {
-            $token = \dukt\facebook\Plugin::getInstance()->facebook_oauth->getToken();
+            $token = Facebook::$plugin->facebook_oauth->getToken();
 
             if($token)
             {
                 // Object
 
-                $object = \dukt\facebook\Plugin::getInstance()->facebook_api->get('/'.$facebookInsightsObjectId, ['metadata' => 1, 'fields' => 'name']);;
+                $object = Facebook::$plugin->facebook_api->get('/'.$facebookInsightsObjectId, ['metadata' => 1, 'fields' => 'name']);;
                 $objectType = $object['metadata']['type'];
                 $message = false;
 
@@ -45,7 +45,7 @@ class Reports extends Component
 
                         $supportedObject = true;
 
-                        $insights = \dukt\facebook\Plugin::getInstance()->facebook_api->get('/'.$facebookInsightsObjectId.'/insights', array(
+                        $insights = Facebook::$plugin->facebook_api->get('/'.$facebookInsightsObjectId.'/insights', array(
                             'metric' => 'page_fans,page_impressions_unique',
                             'since' => date('Y-m-d', strtotime('-6 day')),
                             'until' => date('Y-m-d', strtotime('+1 day')),
@@ -116,7 +116,7 @@ class Reports extends Component
                     'counts' => $counts,
                 ];
 
-                \dukt\facebook\Plugin::getInstance()->facebook_cache->set(['insightsReport', $facebookInsightsObjectId], $report);
+                Facebook::$plugin->facebook_cache->set(['insightsReport', $facebookInsightsObjectId], $report);
             }
             else
             {
