@@ -8,6 +8,7 @@
 namespace dukt\facebook\controllers;
 
 use craft\web\Controller;
+use dukt\facebook\Plugin as Facebook;
 
 class ReportsController extends Controller
 {

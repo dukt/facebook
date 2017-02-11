@@ -9,6 +9,7 @@ namespace dukt\facebook\services;
 
 use Craft;
 use craft\base\Component;
+use dukt\facebook\Plugin as Facebook;
 
 class Reports extends Component
 {

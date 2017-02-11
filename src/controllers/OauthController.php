@@ -9,6 +9,7 @@ namespace dukt\facebook\controllers;
 
 use Craft;
 use craft\web\Controller;
+use dukt\facebook\Plugin as Facebook;
 
 class OauthController extends Controller
 {

@@ -7,11 +7,11 @@
 
 namespace dukt\facebook\services;
 
-use Facebook;
 use Craft;
 use GuzzleHttp\Client;
 use Guzzle\Http\Exception\RequestException;
 use yii\base\Component;
+use dukt\facebook\Plugin as Facebook;
 
 class Api extends Component
 {

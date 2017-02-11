@@ -3,6 +3,7 @@ namespace dukt\facebook\widgets;
 
 use Craft;
 use dukt\facebook\web\assets\facebook\FacebookAsset;
+use dukt\facebook\Plugin as Facebook;
 
 class InsightsWidget extends \craft\base\Widget
 {

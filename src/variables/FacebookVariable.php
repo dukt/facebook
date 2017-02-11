@@ -7,6 +7,8 @@
 
 namespace Craft;
 
+use dukt\facebook\Plugin as Facebook;
+
 class FacebookVariable
 {
     // Public Methods

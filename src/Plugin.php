@@ -14,11 +14,14 @@ class Plugin extends \craft\base\Plugin
 {
     public $hasSettings = true;
 
+    public static $plugin;
+
     // Public Methods
     // =========================================================================
     public function init()
     {
         parent::init();
+        self::$plugin = $this;
 
         $this->setComponents([
             'facebook' => \dukt\facebook\services\Facebook::class,

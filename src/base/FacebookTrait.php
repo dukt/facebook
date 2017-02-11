@@ -8,6 +8,7 @@
 namespace dukt\facebook\base;
 
 use Craft;
+use dukt\facebook\Plugin as Facebook;
 
 trait FacebookTrait
 {
