@@ -10,6 +10,7 @@ namespace dukt\facebook\controllers;
 use Craft;
 use craft\web\Controller;
 use dukt\facebook\Plugin as Facebook;
+use dukt\oauth\Plugin as Oauth;
 
 class SettingsController extends Controller
 {
@@ -34,7 +35,7 @@ class SettingsController extends Controller
             'error' => false
         );
 
-        $provider = \dukt\oauth\Plugin::getInstance()->oauth->getProvider('facebook');
+        $provider = Oauth::$plugin->oauth->getProvider('facebook');
 
         if ($provider && $provider->isConfigured())
         {

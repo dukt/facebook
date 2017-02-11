@@ -9,6 +9,7 @@ use dukt\facebook\models\Settings;
 use craft\services\Dashboard;
 use craft\events\RegisterComponentTypesEvent;
 use dukt\facebook\widgets\InsightsWidget;
+use dukt\oauth\Plugin as Oauth;
 
 class Plugin extends \craft\base\Plugin
 {
@@ -76,9 +77,9 @@ class Plugin extends \craft\base\Plugin
      */
     public function onBeforeUninstall()
     {
-        if(isset(\dukt\oauth\Plugin::getInstance()->oauth))
+        if(isset(Oauth::$plugin->oauth))
         {
-            \dukt\oauth\Plugin::getInstance()->oauth->deleteTokensByPlugin('facebook');
+            Oauth::$plugin->oauth->deleteTokensByPlugin('facebook');
         }
     }
 

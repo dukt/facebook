@@ -10,6 +10,7 @@ namespace dukt\facebook\controllers;
 use Craft;
 use craft\web\Controller;
 use dukt\facebook\Plugin as Facebook;
+use dukt\oauth\Plugin as Oauth;
 
 class OauthController extends Controller
 {
@@ -50,7 +51,7 @@ class OauthController extends Controller
 
         // connect
 
-        if ($response = \dukt\oauth\Plugin::getInstance()->oauth->connect(array(
+        if ($response = Oauth::$plugin->oauth->connect(array(
             'plugin'   => 'facebook',
             'provider' => $this->oauthProvider,
             'scope'   => Craft::$app->config->get('oauthScope', 'facebook'),

@@ -9,6 +9,7 @@ namespace dukt\facebook\base;
 
 use Craft;
 use dukt\facebook\Plugin as Facebook;
+use dukt\oauth\Plugin as Oauth;
 
 trait FacebookTrait
 {
@@ -51,7 +52,7 @@ trait FacebookTrait
     {
         if($this->checkDependencies())
         {
-            $provider = \dukt\oauth\Plugin::getInstance()->oauth->getProvider('facebook');
+            $provider = Oauth::$plugin->oauth->getProvider('facebook');
 
             if ($provider && $provider->isConfigured())
             {
