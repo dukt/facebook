@@ -16,6 +16,6 @@ class FacebookVariable
 
     public function api()
     {
-        return Facebook::$plugin->facebook_api;
+        return Facebook::$plugin->api;
     }
 }

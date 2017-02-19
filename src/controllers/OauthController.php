@@ -69,7 +69,7 @@ class OauthController extends Controller
                 $token = $response['token'];
 
                 // save token
-                Facebook::$plugin->facebook_oauth->saveToken($token);
+                Facebook::$plugin->oauth->saveToken($token);
 
 /*                FacebookPlugin::log('Connect - Step 2'."\r\n".print_r([
                         'token' => $token,
@@ -106,7 +106,7 @@ class OauthController extends Controller
      */
     public function actionDisconnect()
     {
-        if (Facebook::$plugin->facebook_oauth->deleteToken())
+        if (Facebook::$plugin->oauth->deleteToken())
         {
             Craft::$app->getSession()->setNotice(Craft::t('app', "Disconnected from Facebook."));
         }

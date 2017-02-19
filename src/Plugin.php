@@ -26,10 +26,10 @@ class Plugin extends \craft\base\Plugin
 
         $this->setComponents([
             'facebook' => \dukt\facebook\services\Facebook::class,
-            'facebook_api' => \dukt\facebook\services\Api::class,
-            'facebook_cache' => \dukt\facebook\services\Cache::class,
-            'facebook_oauth' => \dukt\facebook\services\Oauth::class,
-            'facebook_reports' => \dukt\facebook\services\Reports::class,
+            'api' => \dukt\facebook\services\Api::class,
+            'cache' => \dukt\facebook\services\Cache::class,
+            'oauth' => \dukt\facebook\services\Oauth::class,
+            'reports' => \dukt\facebook\services\Reports::class,
         ]);
 
         Event::on(Dashboard::class, Dashboard::EVENT_REGISTER_WIDGET_TYPES, function(RegisterComponentTypesEvent $event) {

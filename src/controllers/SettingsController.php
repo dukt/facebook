@@ -39,18 +39,18 @@ class SettingsController extends Controller
 
         if ($provider && $provider->isConfigured())
         {
-            $token = Facebook::$plugin->facebook_oauth->getToken();
+            $token = Facebook::$plugin->oauth->getToken();
 
             if ($token)
             {
                 try
                 {
-                    $account = Facebook::$plugin->facebook_cache->get(['getResourceOwner', $token]);
+                    $account = Facebook::$plugin->cache->get(['getResourceOwner', $token]);
 
                     if(!$account)
                     {
                         $account = $provider->getResourceOwner($token);
-                        Facebook::$plugin->facebook_cache->set(['getResourceOwner', $token], $account);
+                        Facebook::$plugin->cache->set(['getResourceOwner', $token], $account);
                     }
 
                     if ($account)
