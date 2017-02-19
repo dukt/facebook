@@ -10,19 +10,10 @@ namespace dukt\facebook\controllers;
 use Craft;
 use craft\web\Controller;
 use dukt\facebook\Plugin as Facebook;
-use dukt\oauth\Plugin as Oauth;
+use Exception;
 
 class OauthController extends Controller
 {
-    // Properties
-    // =========================================================================
-
-    /**
-     * @var string
-     */
-    private $oauthProvider = 'facebook';
-
-
     // Public Methods
     // =========================================================================
 
@@ -33,70 +24,49 @@ class OauthController extends Controller
      */
     public function actionConnect()
     {
-        // referer
+        $provider = Facebook::$plugin->oauth->getOauthProvider();
 
-        $referer = Craft::$app->getSession()->get('facebook.referer');
+        Craft::$app->getSession()->set('facebook.oauthState', $provider->getState());
 
-        if (!$referer)
-        {
-            $referer = Craft::$app->request->referrer;
+        $options = Craft::$app->config->get('oauthAuthorizationOptions', 'facebook');
+        $options['scope'] = Craft::$app->config->get('oauthScope', 'facebook');
 
-            Craft::$app->getSession()->set('facebook.referer', $referer);
+        $authorizationUrl = $provider->getAuthorizationUrl($options);
+
+        return $this->redirect($authorizationUrl);
+    }
+
+    /**
+     * Callback
+     *
+     * @return null
+     */
+    public function actionCallback()
+    {
+        $provider = Facebook::$plugin->oauth->getOauthProvider();
+
+        $code = Craft::$app->request->getParam('code');
+
+        try {
+            // Try to get an access token (using the authorization code grant)
+            $token = $provider->getAccessToken('authorization_code', [
+                'code' => $code
+            ]);
+
+            // Save token
+            Facebook::$plugin->oauth->saveToken($token);
+
+            // Reset session variables
+
+            // Redirect
+            Craft::$app->getSession()->setNotice(Craft::t('facebook', "Connected to Google Analytics."));
+
+        } catch (Exception $e) {
+            // Failed to get the token credentials or user details.
+            Craft::$app->getSession()->setError($e->getMessage());
         }
 
-/*        FacebookPlugin::log('Connect - Step 1'."\r\n".print_r([
-                'referer' => $referer,
-            ], true), LogLevel::Info, true);*/
-
-
-        // connect
-
-        if ($response = Oauth::$plugin->oauth->connect(array(
-            'plugin'   => 'facebook',
-            'provider' => $this->oauthProvider,
-            'scope'   => Craft::$app->config->get('oauthScope', 'facebook'),
-            'authorizationOptions'   => Craft::$app->config->get('oauthAuthorizationOptions', 'facebook')
-        )))
-        {
-            if($response && is_object($response) && !$response->data)
-            {
-                return $response;
-            }
-
-            if ($response['success'])
-            {
-                // token
-                $token = $response['token'];
-
-                // save token
-                Facebook::$plugin->oauth->saveToken($token);
-
-/*                FacebookPlugin::log('Connect - Step 2'."\r\n".print_r([
-                        'token' => $token,
-                    ], true), LogLevel::Info, true);*/
-
-                // session notice
-                Craft::$app->getSession()->setNotice(Craft::t('app', "Connected to Facebook."));
-            }
-            else
-            {
-                // session error
-                Craft::$app->getSession()->setError(Craft::t('app', $response['errorMsg']));
-            }
-        }
-        else
-        {
-            // session error
-            Craft::$app->getSession()->setError(Craft::t('app', "Couldn’t connect"));
-        }
-
-        // OAuth Step 5
-
-        // redirect
-
-        Craft::$app->getSession()->remove('facebook.referer');
-
-        return $this->redirect($referer);
+        return $this->redirect('facebook/settings');
     }
 
     /**

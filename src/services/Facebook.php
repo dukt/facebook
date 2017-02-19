@@ -7,19 +7,35 @@
 
 namespace dukt\facebook\services;
 
-use dukt\facebook\base\FacebookTrait;
-
-// require_once(CRAFT_PLUGINS_PATH.'facebook/base/FacebookTrait.php');
+use Craft;
+use dukt\facebook\Plugin as FacebookPlugin;
 
 use yii\base\Component;
 
 class Facebook extends Component
 {
-    // Traits
-    // =========================================================================
-
-    use FacebookTrait;
-
     // Public Methods
     // =========================================================================
+
+    public function checkPluginRequirements()
+    {
+        $provider = FacebookPlugin::$plugin->oauth->getOauthProvider();
+
+        if ($provider)
+        {
+            $oauthProviderOptions = Craft::$app->config->get('oauthProviderOptions', 'facebook');
+
+            if(!empty($oauthProviderOptions['clientId']) && !empty($oauthProviderOptions['clientSecret']))
+            {
+                $token = FacebookPlugin::$plugin->oauth->getToken();
+
+                if($token)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
 }

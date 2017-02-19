@@ -60,7 +60,7 @@ class Api extends Component
         if($token)
         {
 
-            $headers['Authorization'] = 'Bearer '.$token->accessToken;
+            $headers['Authorization'] = 'Bearer '.$token->getToken();
         }
 
 /*        $client = new Client($this->getApiUrl(), [

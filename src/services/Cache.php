@@ -9,6 +9,7 @@ namespace dukt\facebook\services;
 
 use Craft;
 use yii\base\Component;
+use DateInterval;
 
 class Cache extends Component
 {

@@ -2,23 +2,37 @@
 
 namespace dukt\facebook;
 
+use Craft;
+use craft\helpers\UrlHelper;
 use craft\web\UrlManager;
-use yii\base\Event;
 use craft\events\RegisterUrlRulesEvent;
-use dukt\facebook\models\Settings;
 use craft\services\Dashboard;
 use craft\events\RegisterComponentTypesEvent;
+use dukt\facebook\models\Settings;
 use dukt\facebook\widgets\InsightsWidget;
-use dukt\oauth\Plugin as Oauth;
+use yii\base\Event;
 
 class Plugin extends \craft\base\Plugin
 {
+    // Properties
+    // =========================================================================
+
+    /**
+     * @var bool
+     */
     public $hasSettings = true;
 
+    /**
+     * @var
+     */
     public static $plugin;
 
     // Public Methods
     // =========================================================================
+
+    /**
+     *
+     */
     public function init()
     {
         parent::init();
@@ -39,6 +53,9 @@ class Plugin extends \craft\base\Plugin
         Event::on(UrlManager::class, UrlManager::EVENT_REGISTER_CP_URL_RULES, [$this, 'registerCpUrlRules']);
     }
 
+    /**
+     * @param RegisterUrlRulesEvent $event
+     */
     public function registerCpUrlRules(RegisterUrlRulesEvent $event)
     {
         $rules = [
@@ -48,41 +65,6 @@ class Plugin extends \craft\base\Plugin
 
         $event->rules = array_merge($event->rules, $rules);
     }
-
-    /**
-     * Get Required Plugins
-     */
-    public function getRequiredPlugins()
-    {
-        return array(
-            array(
-                'name' => "OAuth",
-                'handle' => 'oauth',
-                'url' => 'https://dukt.net/craft/oauth',
-                'version' => '2.0.2'
-            )
-        );
-    }
-
-    /**
-     * Get Settings URL
-     */
-    public function getSettingsUrl()
-    {
-        return 'facebook/settings';
-    }
-
-    /**
-     * On Before Uninstall
-     */
-    public function onBeforeUninstall()
-    {
-        if(isset(Oauth::$plugin->oauth))
-        {
-            Oauth::$plugin->oauth->deleteTokensByPlugin('facebook');
-        }
-    }
-
 
     // Protected Methods
     // =========================================================================
@@ -105,21 +87,10 @@ class Plugin extends \craft\base\Plugin
      */
     public function getSettingsResponse()
     {
-        $url = \craft\helpers\UrlHelper::cpUrl('facebook/settings');
+        $url = UrlHelper::cpUrl('facebook/settings');
 
-        \Craft::$app->controller->redirect($url);
+        Craft::$app->controller->redirect($url);
 
         return '';
-    }
-
-    /**
-     * Defined Settings
-     */
-    protected function defineSettings()
-    {
-        return array(
-            'tokenId' => array(AttributeType::Number),
-            'facebookInsightsObjectId' => array(AttributeType::String),
-        );
     }
 }

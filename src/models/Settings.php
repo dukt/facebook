@@ -9,16 +9,16 @@ class Settings extends Model
     // Public Properties
     // =========================================================================
 
-    public $tokenId;
+    public $token;
     public $facebookInsightsObjectId;
 
     // Public Methods
     // =========================================================================
 
-    public function rules()
+/*    public function rules()
     {
         return [
             [['tokenId'], 'number', 'integerOnly' => true],
         ];
-    }
+    }*/
 }

@@ -10,7 +10,6 @@ namespace dukt\facebook\controllers;
 use Craft;
 use craft\web\Controller;
 use dukt\facebook\Plugin as Facebook;
-use dukt\oauth\Plugin as Oauth;
 
 class SettingsController extends Controller
 {
@@ -24,8 +23,6 @@ class SettingsController extends Controller
      */
     public function actionIndex()
     {
-        Facebook::$plugin->facebook->requireDependencies();
-
         $plugin = Craft::$app->plugins->getPlugin('facebook');
 
         $variables = array(
@@ -35,9 +32,9 @@ class SettingsController extends Controller
             'error' => false
         );
 
-        $provider = Oauth::$plugin->oauth->getProvider('facebook');
+        $provider = Facebook::$plugin->oauth->getOauthProvider();
 
-        if ($provider && $provider->isConfigured())
+        if ($provider)
         {
             $token = Facebook::$plugin->oauth->getToken();
 
