@@ -14,7 +14,7 @@ trait PluginTrait
     /**
      * Returns the facebook service.
      *
-     * @return \dukt\facebook\services\Facebook The config service
+     * @return \dukt\facebook\services\Facebook The facebook service
      */
     public function getFacebook()
     {
@@ -25,7 +25,7 @@ trait PluginTrait
     /**
      * Returns the api service.
      *
-     * @return \dukt\facebook\services\Api The config service
+     * @return \dukt\facebook\services\Api The api service
      */
     public function getApi()
     {
@@ -36,7 +36,7 @@ trait PluginTrait
     /**
      * Returns the cache service.
      *
-     * @return \dukt\facebook\services\Cache The config service
+     * @return \dukt\facebook\services\Cache The cache service
      */
     public function getCache()
     {
@@ -47,7 +47,7 @@ trait PluginTrait
     /**
      * Returns the oauth service.
      *
-     * @return \dukt\facebook\services\Oauth The config service
+     * @return \dukt\facebook\services\Oauth The oauth service
      */
     public function getOauth()
     {
@@ -58,7 +58,7 @@ trait PluginTrait
     /**
      * Returns the reports service.
      *
-     * @return \dukt\facebook\services\Reports The config service
+     * @return \dukt\facebook\services\Reports The reports service
      */
     public function getReports()
     {
