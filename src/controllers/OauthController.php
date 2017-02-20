@@ -28,8 +28,8 @@ class OauthController extends Controller
 
         Craft::$app->getSession()->set('facebook.oauthState', $provider->getState());
 
-        $options = Craft::$app->config->get('oauthAuthorizationOptions', 'facebook');
-        $options['scope'] = Craft::$app->config->get('oauthScope', 'facebook');
+        $options = Craft::$app->getConfig()->get('oauthAuthorizationOptions', 'facebook');
+        $options['scope'] = Craft::$app->getConfig()->get('oauthScope', 'facebook');
 
         $authorizationUrl = $provider->getAuthorizationUrl($options);
 
@@ -45,7 +45,7 @@ class OauthController extends Controller
     {
         $provider = Facebook::$plugin->oauth->getOauthProvider();
 
-        $code = Craft::$app->request->getParam('code');
+        $code = Craft::$app->getRequest()->getParam('code');
 
         try {
             // Try to get an access token (using the authorization code grant)
@@ -86,7 +86,7 @@ class OauthController extends Controller
         }
 
         // redirect
-        $redirect = Craft::$app->request->referrer;
+        $redirect = Craft::$app->getRequest()->referrer;
         return $this->redirect($redirect);
     }
 }

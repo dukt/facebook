@@ -31,11 +31,11 @@ class Oauth extends Component
      */
     public function getOauthProvider()
     {
-        $options = Craft::$app->config->get('oauthProviderOptions', 'facebook');
+        $options = Craft::$app->getConfig()->get('oauthProviderOptions', 'facebook');
 
         if(!isset($options['graphApiVersion']))
         {
-            $options['graphApiVersion'] = Craft::$app->config->get('apiVersion', 'facebook');
+            $options['graphApiVersion'] = Craft::$app->getConfig()->get('apiVersion', 'facebook');
         }
 
         if(!isset($options['redirectUri']))
@@ -55,7 +55,7 @@ class Oauth extends Component
     {
         // Save token and token secret in the plugin's settings
 
-        $plugin = Craft::$app->plugins->getPlugin('facebook');
+        $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
 
         $settings = $plugin->getSettings();
 
@@ -69,7 +69,7 @@ class Oauth extends Component
 
         $settings->token = $token;
 
-        Craft::$app->plugins->savePluginSettings($plugin, $settings->getAttributes());
+        Craft::$app->getPlugins()->savePluginSettings($plugin, $settings->getAttributes());
     }
 
     /**
@@ -85,7 +85,7 @@ class Oauth extends Component
         }
         else
         {
-            $plugin = Craft::$app->plugins->getPlugin('facebook');
+            $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
             $settings = $plugin->getSettings();
 
             if($settings->token) {
@@ -127,11 +127,11 @@ class Oauth extends Component
      */
     public function deleteToken()
     {
-        $plugin = Craft::$app->plugins->getPlugin('facebook');
+        $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
 
         $settings = $plugin->getSettings();
         $settings->token = null;
-        Craft::$app->plugins->savePluginSettings($plugin, $settings->getAttributes());
+        Craft::$app->getPlugins()->savePluginSettings($plugin, $settings->getAttributes());
 
         return true;
     }

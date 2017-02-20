@@ -18,7 +18,7 @@ class Reports extends Component
 
 	public function getInsightsReport()
     {
-        $pluginSettings = Craft::$app->plugins->getPlugin('facebook')->getSettings();
+        $pluginSettings = Craft::$app->getPlugins()->getPlugin('facebook')->getSettings();
 
         $facebookInsightsObjectId = $pluginSettings['facebookInsightsObjectId'];
 

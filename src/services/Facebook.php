@@ -23,7 +23,7 @@ class Facebook extends Component
 
         if ($provider)
         {
-            $oauthProviderOptions = Craft::$app->config->get('oauthProviderOptions', 'facebook');
+            $oauthProviderOptions = Craft::$app->getConfig()->get('oauthProviderOptions', 'facebook');
 
             if(!empty($oauthProviderOptions['clientId']) && !empty($oauthProviderOptions['clientSecret']))
             {

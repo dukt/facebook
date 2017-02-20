@@ -46,7 +46,7 @@ class Api extends Component
 
 	private function getApiUrl()
 	{
-		$apiVersion = Craft::$app->config->get('apiVersion', 'facebook');
+		$apiVersion = Craft::$app->getConfig()->get('apiVersion', 'facebook');
 
 		return $this->baseApiUrl.$apiVersion.'/';
 	}

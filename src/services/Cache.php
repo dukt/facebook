@@ -18,7 +18,7 @@ class Cache extends Component
 
     public function get($id)
     {
-        if(Craft::$app->config->get('enableCache', 'facebook') == true)
+        if(Craft::$app->getConfig()->get('enableCache', 'facebook') == true)
         {
             $cacheKey = $this->getCacheKey($id);
 
@@ -30,7 +30,7 @@ class Cache extends Component
     {
         if(is_null($enableCache))
         {
-            $enableCache = Craft::$app->config->get('enableCache', 'facebook');
+            $enableCache = Craft::$app->getConfig()->get('enableCache', 'facebook');
         }
 
         if($enableCache)
@@ -39,7 +39,7 @@ class Cache extends Component
 
             if(!$expire)
             {
-                $expire = Craft::$app->config->get('cacheDuration', 'facebook');
+                $expire = Craft::$app->getConfig()->get('cacheDuration', 'facebook');
                 $expire = $this->_formatDuration($expire);
             }
 

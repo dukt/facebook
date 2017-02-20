@@ -23,7 +23,7 @@ class SettingsController extends Controller
      */
     public function actionIndex()
     {
-        $plugin = Craft::$app->plugins->getPlugin('facebook');
+        $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
 
         $variables = array(
             'provider' => false,
