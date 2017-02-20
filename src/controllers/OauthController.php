@@ -24,7 +24,7 @@ class OauthController extends Controller
      */
     public function actionConnect()
     {
-        $provider = Facebook::$plugin->oauth->getOauthProvider();
+        $provider = Facebook::$plugin->getOauth()->getOauthProvider();
 
         Craft::$app->getSession()->set('facebook.oauthState', $provider->getState());
 
@@ -43,7 +43,7 @@ class OauthController extends Controller
      */
     public function actionCallback()
     {
-        $provider = Facebook::$plugin->oauth->getOauthProvider();
+        $provider = Facebook::$plugin->getOauth()->getOauthProvider();
 
         $code = Craft::$app->getRequest()->getParam('code');
 
@@ -54,7 +54,7 @@ class OauthController extends Controller
             ]);
 
             // Save token
-            Facebook::$plugin->oauth->saveToken($token);
+            Facebook::$plugin->getOauth()->saveToken($token);
 
             // Reset session variables
 
@@ -76,7 +76,7 @@ class OauthController extends Controller
      */
     public function actionDisconnect()
     {
-        if (Facebook::$plugin->oauth->deleteToken())
+        if (Facebook::$plugin->getOauth()->deleteToken())
         {
             Craft::$app->getSession()->setNotice(Craft::t('app', "Disconnected from Facebook."));
         }

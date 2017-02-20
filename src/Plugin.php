@@ -8,12 +8,18 @@ use craft\web\UrlManager;
 use craft\events\RegisterUrlRulesEvent;
 use craft\services\Dashboard;
 use craft\events\RegisterComponentTypesEvent;
+use dukt\facebook\base\PluginTrait;
 use dukt\facebook\models\Settings;
 use dukt\facebook\widgets\InsightsWidget;
 use yii\base\Event;
 
 class Plugin extends \craft\base\Plugin
 {
+    // Traits
+    // =========================================================================
+
+    use PluginTrait;
+
     // Properties
     // =========================================================================
 
@@ -23,7 +29,7 @@ class Plugin extends \craft\base\Plugin
     public $hasSettings = true;
 
     /**
-     * @var
+     * @var \dukt\facebook\Plugin The plugin instance.
      */
     public static $plugin;
 

@@ -32,22 +32,22 @@ class SettingsController extends Controller
             'error' => false
         );
 
-        $provider = Facebook::$plugin->oauth->getOauthProvider();
+        $provider = Facebook::$plugin->getOauth()->getOauthProvider();
 
         if ($provider)
         {
-            $token = Facebook::$plugin->oauth->getToken();
+            $token = Facebook::$plugin->getOauth()->getToken();
 
             if ($token)
             {
                 try
                 {
-                    $account = Facebook::$plugin->cache->get(['getResourceOwner', $token]);
+                    $account = Facebook::$plugin->getCache()->get(['getResourceOwner', $token]);
 
                     if(!$account)
                     {
                         $account = $provider->getResourceOwner($token);
-                        Facebook::$plugin->cache->set(['getResourceOwner', $token], $account);
+                        Facebook::$plugin->getCache()->set(['getResourceOwner', $token], $account);
                     }
 
                     if ($account)

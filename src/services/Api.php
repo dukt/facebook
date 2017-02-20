@@ -53,7 +53,7 @@ class Api extends Component
 
     private function getClient()
     {
-        $token = Facebook::$plugin->oauth->getToken();
+        $token = Facebook::$plugin->getOauth()->getToken();
 
         $headers = array();
 

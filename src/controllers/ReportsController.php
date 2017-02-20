@@ -24,7 +24,7 @@ class ReportsController extends Controller
     {
         try
         {
-            $report = Facebook::$plugin->reports->getInsightsReport();
+            $report = Facebook::$plugin->getReports()->getInsightsReport();
 
             return $this->asJson($report);
         }

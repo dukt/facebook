@@ -19,7 +19,7 @@ class Facebook extends Component
 
     public function checkPluginRequirements()
     {
-        $provider = FacebookPlugin::$plugin->oauth->getOauthProvider();
+        $provider = FacebookPlugin::$plugin->getOauth()->getOauthProvider();
 
         if ($provider)
         {
@@ -27,7 +27,7 @@ class Facebook extends Component
 
             if(!empty($oauthProviderOptions['clientId']) && !empty($oauthProviderOptions['clientSecret']))
             {
-                $token = FacebookPlugin::$plugin->oauth->getToken();
+                $token = FacebookPlugin::$plugin->getOauth()->getToken();
 
                 if($token)
                 {
