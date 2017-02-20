@@ -21,8 +21,8 @@ class Oauth extends Component
 
     private $token;
 
-	// Public Methods
-	// =========================================================================
+    // Public Methods
+    // =========================================================================
 
     /**
      * Returns a Twitter provider (server) object.

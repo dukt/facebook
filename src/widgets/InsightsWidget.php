@@ -30,11 +30,11 @@ class InsightsWidget extends \craft\base\Widget
         return Craft::$app->resources->getResourcePath('facebook/images/widgets/like.svg');
     }
 
-	/**
-	 * @inheritDoc IWidget::getBodyHtml()
-	 *
-	 * @return string|false
-	 */
+    /**
+     * @inheritDoc IWidget::getBodyHtml()
+     *
+     * @return string|false
+     */
     public function getBodyHtml()
     {
         if(Facebook::$plugin->getFacebook()->checkPluginRequirements())

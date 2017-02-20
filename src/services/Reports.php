@@ -13,10 +13,10 @@ use dukt\facebook\Plugin as Facebook;
 
 class Reports extends Component
 {
-	// Public Methods
-	// =========================================================================
+    // Public Methods
+    // =========================================================================
 
-	public function getInsightsReport()
+    public function getInsightsReport()
     {
         $pluginSettings = Craft::$app->getPlugins()->getPlugin('facebook')->getSettings();
 

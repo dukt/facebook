@@ -13,8 +13,8 @@ use DateInterval;
 
 class Cache extends Component
 {
-	// Public Methods
-	// =========================================================================
+    // Public Methods
+    // =========================================================================
 
     public function get($id)
     {
@@ -47,8 +47,8 @@ class Cache extends Component
         }
     }
 
-	// Private Methods
-	// =========================================================================
+    // Private Methods
+    // =========================================================================
 
     private function _formatDuration($cacheDuration, $format='%s')
     {

@@ -12,15 +12,15 @@ use dukt\facebook\Plugin as Facebook;
 
 class ReportsController extends Controller
 {
-	// Public Methods
-	// =========================================================================
+    // Public Methods
+    // =========================================================================
 
-	/**
-	 * Returns the insights report
-	 *
-	 * @return null
-	 */
-	public function actionGetInsightsReport()
+    /**
+     * Returns the insights report
+     *
+     * @return null
+     */
+    public function actionGetInsightsReport()
     {
         try
         {

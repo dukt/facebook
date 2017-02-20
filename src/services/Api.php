@@ -15,13 +15,13 @@ use dukt\facebook\Plugin as Facebook;
 
 class Api extends Component
 {
-	// Properties
-	// =========================================================================
+    // Properties
+    // =========================================================================
 
-	private $baseApiUrl = 'https://graph.facebook.com/';
-	
-	// Public Methods
-	// =========================================================================
+    private $baseApiUrl = 'https://graph.facebook.com/';
+
+    // Public Methods
+    // =========================================================================
 
     public function get($uri = null, $query = null, $headers = null)
     {
@@ -41,15 +41,15 @@ class Api extends Component
         return $jsonResponse;
     }
 
-	// Private Methods
-	// =========================================================================
+    // Private Methods
+    // =========================================================================
 
-	private function getApiUrl()
-	{
-		$apiVersion = Craft::$app->getConfig()->get('apiVersion', 'facebook');
+    private function getApiUrl()
+    {
+        $apiVersion = Craft::$app->getConfig()->get('apiVersion', 'facebook');
 
-		return $this->baseApiUrl.$apiVersion.'/';
-	}
+        return $this->baseApiUrl.$apiVersion.'/';
+    }
 
     private function getClient()
     {
