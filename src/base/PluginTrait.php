@@ -9,6 +9,15 @@ namespace dukt\facebook\base;
 
 use dukt\facebook\Plugin as Facebook;
 
+/**
+ * PluginTrait
+ *
+ * @property \dukt\facebook\services\Facebook       $facebook       The facebook service
+ * @property \dukt\facebook\services\Api            $api            The api service
+ * @property \dukt\facebook\services\Cache          $cache          The cache service
+ * @property \dukt\facebook\services\Oauth          $oauth          The oauth service
+ * @property \dukt\facebook\services\Reports        $reports        The reports service
+ */
 trait PluginTrait
 {
     /**
