@@ -73,6 +73,9 @@ class SettingsController extends Controller
             $variables['provider'] = $provider;
         }
 
+        $variables['redirectUri'] = Facebook::$plugin->oauth->getRedirectUri();
+        $variables['oauthProviderOptions'] = Craft::$app->getConfig()->get('oauthProviderOptions', 'facebook');
+
         return $this->renderTemplate('facebook/settings/_index', $variables);
     }
 }

@@ -135,4 +135,14 @@ class Oauth extends Component
 
         return true;
     }
+
+    /**
+     * Get redirect URI
+     *
+     * @return string
+     */
+    public function getRedirectUri()
+    {
+        return UrlHelper::actionUrl('facebook/oauth/callback');
+    }
 }
