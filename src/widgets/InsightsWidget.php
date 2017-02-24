@@ -21,13 +21,11 @@ class InsightsWidget extends \craft\base\Widget
     }
 
     /**
-     * @inheritDoc IWidget::getIconPath()
-     *
-     * @return string
+     * @inheritdoc
      */
-    public function getIconPath()
+    public static function iconPath()
     {
-        return Craft::$app->resources->getResourcePath('facebook/images/widgets/like.svg');
+        return Craft::getAlias('@dukt/facebook/icons/like.svg');
     }
 
     /**
