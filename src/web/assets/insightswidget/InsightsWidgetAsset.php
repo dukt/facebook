@@ -1,15 +1,14 @@
 <?php
-namespace dukt\facebook\web\assets\facebook;
+namespace dukt\facebook\web\assets\insightswidget;
 
 use craft\web\AssetBundle;
 use craft\web\assets\cp\CpAsset;
 
-class FacebookAsset extends AssetBundle
+class InsightsWidgetAsset extends AssetBundle
 {
     public function init()
     {
-        // define the path that your publishable resources live
-        $this->sourcePath = '@dukt/facebook/resources';
+        $this->sourcePath = __DIR__.'/dist';
 
         // define the dependencies
         $this->depends = [
@@ -19,11 +18,11 @@ class FacebookAsset extends AssetBundle
         // define the relative path to CSS/JS files that should be registered with the page
         // when this asset bundle is registered
         $this->js = [
-            'js/InsightsWidget.js',
+            'InsightsWidget.js',
         ];
 
         $this->css = [
-            'css/insights-widget.css',
+            'insights-widget.css',
         ];
 
         parent::init();

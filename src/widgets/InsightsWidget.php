@@ -2,8 +2,8 @@
 namespace dukt\facebook\widgets;
 
 use Craft;
-use dukt\facebook\web\assets\facebook\FacebookAsset;
 use dukt\facebook\Plugin as Facebook;
+use dukt\facebook\web\assets\insightswidget\InsightsWidgetAsset;
 
 class InsightsWidget extends \craft\base\Widget
 {
@@ -37,10 +37,7 @@ class InsightsWidget extends \craft\base\Widget
         {
             $widgetId = $this->id;
 
-            /*Craft::$app->getView()->includeJsResource('facebook/js/InsightsWidget.js');
-            Craft::$app->getView()->includeCssResource('facebook/css/insights-widget.css');*/
-
-            Craft::$app->getView()->registerAssetBundle(FacebookAsset::class);
+            Craft::$app->getView()->registerAssetBundle(InsightsWidgetAsset::class);
             Craft::$app->getView()->registerJs('new Craft.FacebookInsightsWidget("widget'.$widgetId.'");');
 
 
