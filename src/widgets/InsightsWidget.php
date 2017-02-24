@@ -11,13 +11,11 @@ class InsightsWidget extends \craft\base\Widget
     // =========================================================================
 
     /**
-     * @inheritDoc IComponentType::getName()
-     *
-     * @return string
+     * @inheritdoc
      */
-    public function getName()
+    public static function displayName(): string
     {
-        return Craft::t('app', 'Facebook Insights');
+        return Craft::t('facebook', 'Facebook Insights');
     }
 
     /**
