@@ -53,12 +53,12 @@
 
         {% else %}
             <h2>{{ 'Create the OAuth application'|t('facebook') }}</h2>
-			<ol>
-				<li>{{ 'Go to the {link} and click the “Add a new app” button.'|t('facebook', {link: '<a href="https://developers.facebook.com/apps">'~'Facebook API Console'|t('facebook')~'</a>'})|raw }}</li>
-				<li>{{ 'Fill the display name, contact email and category fields and click “Create App ID”.'|t('facebook') }}</li>
-				<li>{{ 'Go to the app that you have just created and click “Add product”.'|t('facebook') }}</li>
-				<li>{{ 'Find the “Facebook Login” section, click “Get Started” and configure your app with the informations below.'|t('facebook') }}</li>
-			</ol>
+
+			<p>{{ 'Go to the {link} and click the “Add a new app” button.'|t('facebook', {link: '<a href="https://developers.facebook.com/apps">'~'Facebook API Console'|t('facebook')~'</a>'})|raw }}</p>
+			<p>{{ 'Fill the display name, contact email and category fields and click “Create App ID”.'|t('facebook') }}</p>
+			<p>{{ 'Go to the app that you have just created and click “Add product”.'|t('facebook') }}</p>
+			<p>{{ 'Find the “Facebook Login” section, click “Get Started” and configure your app with the informations below.'|t('facebook') }}</p>
+
 
 			{{ forms.textField({
 				readonly: true,
@@ -67,10 +67,10 @@
 			}) }}
 
 			<h2>{{ 'Configure the OAuth client'|t('facebook') }}</h2>
-			<ol>
-				<li>{{ 'Once the OAuth client is created, Facebook will provide you with a client ID and secret.'|t('facebook') }}</li>
-				<li>{{ ("Copy the client ID & secret from the <a href=\"https://developers.facebook.com/apps\">"~'Facebook Api Console'|t('facebook')~"</a> under the API Manager → Credentials tab, and paste them in the <code>craft/config/facebook.php</code> config file.")|raw }}</li>
-			</ol>
+
+			<p>{{ 'Once the OAuth client is created, Facebook will provide you with a client ID and secret.'|t('facebook') }}</p>
+			<p>{{ ("Copy the App ID & secret from the <a href=\"https://developers.facebook.com/apps\">"~'Facebook API Console'|t('facebook')~"</a> under the Settings → Basic tab, and paste them in the <code>craft/config/facebook.php</code> config file.")|raw }}</p>
+
 
 			{{ forms.textField({
 				readonly: true,
