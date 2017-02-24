@@ -69,8 +69,7 @@
 			<h2>{{ 'Configure the OAuth client'|t('facebook') }}</h2>
 
 			<p>{{ 'Once the OAuth client is created, Facebook will provide you with a client ID and secret.'|t('facebook') }}</p>
-			<p>{{ ("Copy the App ID & secret from the <a href=\"https://developers.facebook.com/apps\">"~'Facebook API Console'|t('facebook')~"</a> under the Settings → Basic tab, and paste them in the <code>craft/config/facebook.php</code> config file.")|raw }}</p>
-
+			<p>{{ ("Copy the Client ID (App ID) & secret (App Secret) from the <a href=\"https://developers.facebook.com/apps\">"~'Facebook API Console'|t('facebook')~"</a> under the Settings → Basic tab, and paste them in the <code>craft/config/facebook.php</code> config file.")|raw }}</p>
 
 			{{ forms.textField({
 				readonly: true,
