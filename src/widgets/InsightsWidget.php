@@ -33,19 +33,29 @@ class InsightsWidget extends \craft\base\Widget
      */
     public function getBodyHtml()
     {
-        if(Facebook::$plugin->getFacebook()->checkPluginRequirements())
+        $provider = FacebookPlugin::$plugin->getOauth()->getOauthProvider();
+
+        if ($provider)
         {
-            $widgetId = $this->id;
+            $oauthProviderOptions = Craft::$app->getConfig()->get('oauthProviderOptions', 'facebook');
 
-            Craft::$app->getView()->registerAssetBundle(InsightsWidgetAsset::class);
-            Craft::$app->getView()->registerJs('new Craft.FacebookInsightsWidget("widget'.$widgetId.'");');
+            if(!empty($oauthProviderOptions['clientId']) && !empty($oauthProviderOptions['clientSecret']))
+            {
+                $token = FacebookPlugin::$plugin->getOauth()->getToken();
+
+                if($token)
+                {
+                    $widgetId = $this->id;
+
+                    Craft::$app->getView()->registerAssetBundle(InsightsWidgetAsset::class);
+                    Craft::$app->getView()->registerJs('new Craft.FacebookInsightsWidget("widget'.$widgetId.'");');
 
 
-            return Craft::$app->getView()->renderTemplate('facebook/_components/widgets/Insights/body');
+                    return Craft::$app->getView()->renderTemplate('facebook/_components/widgets/Insights/body');
+                }
+            }
         }
-        else
-        {
-            return Craft::$app->getView()->renderTemplate('facebook/_special/plugin-not-configured');
-        }
+
+        return Craft::$app->getView()->renderTemplate('facebook/_special/plugin-not-configured');
     }
 }
