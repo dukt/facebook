@@ -11,11 +11,21 @@ use Craft;
 use yii\base\Component;
 use DateInterval;
 
+/**
+ * Class Cache
+ *
+ * @package dukt\facebook\services
+ */
 class Cache extends Component
 {
     // Public Methods
     // =========================================================================
 
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
     public function get($id)
     {
         if(Craft::$app->getConfig()->get('enableCache', 'facebook') == true)
@@ -26,6 +36,15 @@ class Cache extends Component
         }
     }
 
+    /**
+     * @param      $id
+     * @param      $value
+     * @param null $expire
+     * @param null $dependency
+     * @param null $enableCache
+     *
+     * @return bool
+     */
     public function set($id, $value, $expire = null, $dependency = null, $enableCache = null)
     {
         if(is_null($enableCache))
@@ -50,6 +69,12 @@ class Cache extends Component
     // Private Methods
     // =========================================================================
 
+    /**
+     * @param        $cacheDuration
+     * @param string $format
+     *
+     * @return string
+     */
     private function _formatDuration($cacheDuration, $format='%s')
     {
         $cacheDuration = new DateInterval($cacheDuration);
@@ -57,6 +82,13 @@ class Cache extends Component
         return $cacheDuration->format($format);
     }
 
+    /**
+     * Return the cache key
+     *
+     * @param array $request
+     *
+     * @return string
+     */
     private function getCacheKey(array $request)
     {
         $dataSourceClassName = 'Facebook';
