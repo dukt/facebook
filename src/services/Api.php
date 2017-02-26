@@ -13,16 +13,33 @@ use Guzzle\Http\Exception\RequestException;
 use yii\base\Component;
 use dukt\facebook\Plugin as Facebook;
 
+/**
+ * Class Api
+ *
+ * @package dukt\facebook\services
+ */
 class Api extends Component
 {
     // Properties
     // =========================================================================
 
+    /**
+     * @var string
+     */
     private $baseApiUrl = 'https://graph.facebook.com/';
 
     // Public Methods
     // =========================================================================
 
+    /**
+     * Performs an authenticated GET request on Facebook’s API
+     *
+     * @param null $uri
+     * @param null $query
+     * @param null $headers
+     *
+     * @return mixed
+     */
     public function get($uri = null, $query = null, $headers = null)
     {
         $client = $this->getClient();
@@ -44,6 +61,11 @@ class Api extends Component
     // Private Methods
     // =========================================================================
 
+    /**
+     * Returns the Facebook API URL.
+     *
+     * @return string
+     */
     private function getApiUrl()
     {
         $apiVersion = Craft::$app->getConfig()->get('apiVersion', 'facebook');
@@ -51,6 +73,11 @@ class Api extends Component
         return $this->baseApiUrl.$apiVersion.'/';
     }
 
+    /**
+     * Return the authenticated OAuth client.
+     *
+     * @return Client
+     */
     private function getClient()
     {
         $token = Facebook::$plugin->getOauth()->getToken();
@@ -62,7 +89,7 @@ class Api extends Component
 
             $headers['Authorization'] = 'Bearer '.$token->getToken();
         }
-        
+
         $options = [
             'base_uri' => $this->getApiUrl(),
             'headers' => $headers
