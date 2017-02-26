@@ -72,7 +72,7 @@ class Api extends Component
     }
 
     /**
-     * Return the authenticated OAuth client.
+     * Return the authenticated Facebook OAuth client.
      *
      * @return Client
      */
