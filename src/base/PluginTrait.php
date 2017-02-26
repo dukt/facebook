@@ -21,17 +21,6 @@ use dukt\facebook\Plugin as Facebook;
 trait PluginTrait
 {
     /**
-     * Returns the facebook service.
-     *
-     * @return \dukt\facebook\services\Facebook The facebook service
-     */
-    public function getFacebook()
-    {
-        /** @var Facebook $this */
-        return $this->get('facebook');
-    }
-
-    /**
      * Returns the api service.
      *
      * @return \dukt\facebook\services\Api The api service

@@ -45,7 +45,6 @@ class Plugin extends \craft\base\Plugin
         self::$plugin = $this;
 
         $this->setComponents([
-            'facebook' => \dukt\facebook\services\Facebook::class,
             'api' => \dukt\facebook\services\Api::class,
             'cache' => \dukt\facebook\services\Cache::class,
             'oauth' => \dukt\facebook\services\Oauth::class,
