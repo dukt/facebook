@@ -22,6 +22,8 @@ class Cache extends Component
     // =========================================================================
 
     /**
+     * Retrieves a value from cache with a specified key.
+     *
      * @param $id
      *
      * @return mixed
@@ -37,6 +39,8 @@ class Cache extends Component
     }
 
     /**
+     * Stores a value identified by a key into cache.
+     *
      * @param      $id
      * @param      $value
      * @param null $expire
@@ -70,6 +74,8 @@ class Cache extends Component
     // =========================================================================
 
     /**
+     * Formats duration.
+     *
      * @param        $cacheDuration
      * @param string $format
      *
@@ -83,7 +89,7 @@ class Cache extends Component
     }
 
     /**
-     * Return the cache key
+     * Return the cache key.
      *
      * @param array $request
      *
