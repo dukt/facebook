@@ -11,7 +11,6 @@ use Craft;
 use craft\helpers\UrlHelper;
 use League\OAuth2\Client\Provider\Facebook;
 use yii\base\Component;
-use dukt\facebook\Plugin as FacebookPlugin;
 use League\OAuth2\Client\Token\AccessToken;
 
 /**
