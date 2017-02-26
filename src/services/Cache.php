@@ -53,9 +53,8 @@ class Cache extends Component
     private function _formatDuration($cacheDuration, $format='%s')
     {
         $cacheDuration = new DateInterval($cacheDuration);
-        $cacheDurationSeconds = $cacheDuration->format('%s');
 
-        return $cacheDurationSeconds;
+        return $cacheDuration->format('%s');
     }
 
     private function getCacheKey(array $request)
@@ -68,8 +67,6 @@ class Cache extends Component
 
         $hash = md5(serialize($request));
 
-        $cacheKey = 'facebook.'.$hash;
-
-        return $cacheKey;
+        return 'facebook.'.$hash;
     }
 }
