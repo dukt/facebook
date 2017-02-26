@@ -66,7 +66,6 @@ class Plugin extends \craft\base\Plugin
     {
         $rules = [
             'facebook/settings' => 'facebook/settings/index',
-            'facebook/install' => 'facebook/install/index',
         ];
 
         $event->rules = array_merge($event->rules, $rules);
