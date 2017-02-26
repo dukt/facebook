@@ -14,11 +14,19 @@ use yii\base\Component;
 use dukt\facebook\Plugin as FacebookPlugin;
 use League\OAuth2\Client\Token\AccessToken;
 
+/**
+ * Class Oauth
+ *
+ * @package dukt\facebook\services
+ */
 class Oauth extends Component
 {
     // Properties
     // =========================================================================
 
+    /**
+     * @var
+     */
     private $token;
 
     // Public Methods
@@ -47,7 +55,7 @@ class Oauth extends Component
     }
 
     /**
-     * Save Token
+     * Saves a token.
      *
      * @param AccessToken $token
      */
@@ -73,7 +81,7 @@ class Oauth extends Component
     }
 
     /**
-     * Get OAuth Token
+     * Returns the OAuth token.
      *
      * @return AccessToken|null
      */
@@ -137,7 +145,7 @@ class Oauth extends Component
     }
 
     /**
-     * Get redirect URI
+     * Get the redirect URI.
      *
      * @return string
      */
