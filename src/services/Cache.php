@@ -54,7 +54,7 @@ class Cache extends Component
     {
         $cacheDuration = new DateInterval($cacheDuration);
 
-        return $cacheDuration->format('%s');
+        return $cacheDuration->format($format);
     }
 
     private function getCacheKey(array $request)
