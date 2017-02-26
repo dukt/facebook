@@ -62,13 +62,7 @@ class Api extends Component
 
             $headers['Authorization'] = 'Bearer '.$token->getToken();
         }
-
-/*        $client = new Client($this->getApiUrl(), [
-            'request.options' => [
-                'headers' => $headers
-            ]
-        ]);
-        */
+        
         $options = [
             'base_uri' => $this->getApiUrl(),
             'headers' => $headers
