@@ -53,9 +53,7 @@ class Api extends Component
 
         $response = $client->request('GET', $uri, $options);
 
-        $jsonResponse = json_decode($response->getBody(), true);
-
-        return $jsonResponse;
+        return json_decode($response->getBody(), true);
     }
 
     // Private Methods
