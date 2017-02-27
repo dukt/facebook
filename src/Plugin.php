@@ -13,6 +13,12 @@ use dukt\facebook\models\Settings;
 use dukt\facebook\widgets\InsightsWidget;
 use yii\base\Event;
 
+/**
+ * Facebook plugin.
+ *
+ * @author Dukt <support@dukt.net>
+ * @since  2.0
+ */
 class Plugin extends \craft\base\Plugin
 {
     // Traits
