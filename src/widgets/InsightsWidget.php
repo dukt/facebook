@@ -5,6 +5,12 @@ use Craft;
 use dukt\facebook\Plugin as Facebook;
 use dukt\facebook\web\assets\insightswidget\InsightsWidgetAsset;
 
+/**
+ * InsightsWidget represents an Insights dashboard widget.
+ *
+ * @author Dukt <support@dukt.net>
+ * @since  2.0
+ */
 class InsightsWidget extends \craft\base\Widget
 {
     // Public Methods

@@ -4,8 +4,17 @@ namespace dukt\facebook\web\assets\insightswidget;
 use craft\web\AssetBundle;
 use craft\web\assets\cp\CpAsset;
 
+/**
+ * Insights widget asset bundle.
+ *
+ * @author Dukt <support@dukt.net>
+ * @since  2.0
+ */
 class InsightsWidgetAsset extends AssetBundle
 {
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         $this->sourcePath = __DIR__.'/dist';
