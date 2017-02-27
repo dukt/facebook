@@ -11,6 +11,12 @@ use Craft;
 use craft\web\Controller;
 use dukt\facebook\Plugin as Facebook;
 
+/**
+ * Class SettingsController
+ *
+ * @author Dukt <support@dukt.net>
+ * @since  2.0
+ */
 class SettingsController extends Controller
 {
     // Public Methods
@@ -19,7 +25,7 @@ class SettingsController extends Controller
     /**
      * Settings
      *
-     * @return null
+     * @return string
      */
     public function actionIndex()
     {

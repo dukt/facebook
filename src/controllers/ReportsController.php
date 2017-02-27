@@ -10,15 +10,21 @@ namespace dukt\facebook\controllers;
 use craft\web\Controller;
 use dukt\facebook\Plugin as Facebook;
 
+/**
+ * Class ReportsController
+ *
+ * @author Dukt <support@dukt.net>
+ * @since  2.0
+ */
 class ReportsController extends Controller
 {
     // Public Methods
     // =========================================================================
 
     /**
-     * Returns the insights report
+     * Returns the insights report.
      *
-     * @return null
+     * @return \yii\web\Response
      */
     public function actionGetInsightsReport()
     {

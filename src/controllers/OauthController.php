@@ -12,15 +12,21 @@ use craft\web\Controller;
 use dukt\facebook\Plugin as Facebook;
 use Exception;
 
+/**
+ * Class OauthController
+ *
+ * @author Dukt <support@dukt.net>
+ * @since  2.0
+ */
 class OauthController extends Controller
 {
     // Public Methods
     // =========================================================================
 
     /**
-     * Connect
+     * OAuth connect.
      *
-     * @return null
+     * @return \yii\web\Response
      */
     public function actionConnect()
     {
@@ -37,9 +43,9 @@ class OauthController extends Controller
     }
 
     /**
-     * Callback
+     * OAuth callback.
      *
-     * @return null
+     * @return \yii\web\Response
      */
     public function actionCallback()
     {
@@ -70,9 +76,9 @@ class OauthController extends Controller
     }
 
     /**
-     * Disconnect
+     * OAuth disconnect.
      *
-     * @return null
+     * @return \yii\web\Response
      */
     public function actionDisconnect()
     {
