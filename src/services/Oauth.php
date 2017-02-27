@@ -33,7 +33,7 @@ class Oauth extends Component
     // =========================================================================
 
     /**
-     * Returns a Twitter provider (server) object.
+     * Returns a Facebook provider object.
      *
      * @return Facebook
      */
