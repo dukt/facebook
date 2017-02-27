@@ -65,7 +65,7 @@ class OauthController extends Controller
             // Reset session variables
 
             // Redirect
-            Craft::$app->getSession()->setNotice(Craft::t('facebook', "Connected to Google Analytics."));
+            Craft::$app->getSession()->setNotice(Craft::t('facebook', "Connected to Facebook."));
 
         } catch (Exception $e) {
             // Failed to get the token credentials or user details.
