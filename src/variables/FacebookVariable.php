@@ -8,6 +8,7 @@
 namespace Craft;
 
 use dukt\facebook\Plugin as Facebook;
+use dukt\facebook\services\Api;
 
 /**
  * Class FacebookVariable

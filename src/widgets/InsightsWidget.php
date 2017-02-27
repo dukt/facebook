@@ -39,7 +39,7 @@ class InsightsWidget extends \craft\base\Widget
      */
     public function getBodyHtml()
     {
-        $provider = FacebookPlugin::$plugin->getOauth()->getOauthProvider();
+        $provider = Facebook::$plugin->getOauth()->getOauthProvider();
 
         if ($provider)
         {
@@ -47,7 +47,7 @@ class InsightsWidget extends \craft\base\Widget
 
             if(!empty($oauthProviderOptions['clientId']) && !empty($oauthProviderOptions['clientSecret']))
             {
-                $token = FacebookPlugin::$plugin->getOauth()->getToken();
+                $token = Facebook::$plugin->getOauth()->getToken();
 
                 if($token)
                 {
