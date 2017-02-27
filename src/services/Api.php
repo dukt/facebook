@@ -14,9 +14,10 @@ use yii\base\Component;
 use dukt\facebook\Plugin as Facebook;
 
 /**
- * Class Api
+ * Class API service
  *
- * @package dukt\facebook\services
+ * @author Dukt <support@dukt.net>
+ * @since  2.0
  */
 class Api extends Component
 {

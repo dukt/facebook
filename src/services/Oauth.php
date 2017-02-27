@@ -14,9 +14,10 @@ use yii\base\Component;
 use League\OAuth2\Client\Token\AccessToken;
 
 /**
- * Class Oauth
+ * Class Oauth service
  *
- * @package dukt\facebook\services
+ * @author Dukt <support@dukt.net>
+ * @since  2.0
  */
 class Oauth extends Component
 {

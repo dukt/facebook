@@ -11,10 +11,12 @@ use Craft;
 use yii\base\Component;
 use DateInterval;
 
+
 /**
- * Class Cache
+ * Class Cache service
  *
- * @package dukt\facebook\services
+ * @author Dukt <support@dukt.net>
+ * @since  2.0
  */
 class Cache extends Component
 {

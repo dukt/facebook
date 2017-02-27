@@ -11,10 +11,12 @@ use Craft;
 use craft\base\Component;
 use dukt\facebook\Plugin as Facebook;
 
+
 /**
- * Class Reports
+ * Class Reports service
  *
- * @package dukt\facebook\services
+ * @author Dukt <support@dukt.net>
+ * @since  2.0
  */
 class Reports extends Component
 {
@@ -23,7 +25,7 @@ class Reports extends Component
 
     /**
      * Returns the Insights report.
-     * 
+     *
      * @return array|mixed
      */
     public function getInsightsReport()
