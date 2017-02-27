@@ -11,11 +11,21 @@ use Craft;
 use craft\base\Component;
 use dukt\facebook\Plugin as Facebook;
 
+/**
+ * Class Reports
+ *
+ * @package dukt\facebook\services
+ */
 class Reports extends Component
 {
     // Public Methods
     // =========================================================================
 
+    /**
+     * Returns the Insights report.
+     * 
+     * @return array|mixed
+     */
     public function getInsightsReport()
     {
         $pluginSettings = Craft::$app->getPlugins()->getPlugin('facebook')->getSettings();
