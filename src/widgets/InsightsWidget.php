@@ -33,9 +33,7 @@ class InsightsWidget extends \craft\base\Widget
     }
 
     /**
-     * @inheritDoc IWidget::getBodyHtml()
-     *
-     * @return string|false
+     * @inheritdoc
      */
     public function getBodyHtml()
     {
