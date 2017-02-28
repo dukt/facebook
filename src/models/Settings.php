@@ -18,8 +18,22 @@ class Settings extends Model
      * @var
      */
     public $token;
+
     /**
      * @var
      */
     public $facebookInsightsObjectId;
+
+    // Public Methods
+    // =========================================================================
+
+    /**
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            [['facebookInsightsObjectId'], 'string'],
+        ];
+    }
 }
