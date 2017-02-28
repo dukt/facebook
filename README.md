@@ -24,7 +24,7 @@ To install the plugin, follow these instructions.
 
 ## Learn more
 
-- [Facebook Plugin Overview](https://dukt.net/craft/facebook/)
-- [Facebook Documentation](https://dukt.net/craft/facebook/docs)
+- [Plugin Overview](https://dukt.net/craft/facebook/)
+- [Documentation](https://dukt.net/craft/facebook/docs)
 
 [Dukt.net](https://dukt.net/) © 2017 - All rights reserved
