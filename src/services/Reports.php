@@ -117,7 +117,7 @@ class Reports extends Component
                     default:
                         $supportedObject = false;
                         $message = 'Insights only supports pages, please choose a different Facebook Page ID in <a href="'.UrlHelper::getUrl('facebook/settings').'">Facebook’s settings</a>.';
-                        Craft::trace("Insights not available for object type `".$objectType."`, only pages are supported.", __METHOD__);
+                        Craft::info("Insights not available for object type `".$objectType."`, only pages are supported.", __METHOD__);
                 }
 
                 $report = [

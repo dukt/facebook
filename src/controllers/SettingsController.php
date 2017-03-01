@@ -41,10 +41,10 @@ class SettingsController extends Controller
                     Facebook::$plugin->getCache()->set(['getResourceOwner', $token], $account);
                 }
             } catch (\Exception $e) {
-                Craft::trace("Couldn't get account\r\n".$e->getMessage().'\r\n'.$e->getTraceAsString(), __METHOD__);
+                Craft::info("Couldn't get account\r\n".$e->getMessage().'\r\n'.$e->getTraceAsString(), __METHOD__);
 
                 if (method_exists($e, 'getResponse')) {
-                    Craft::trace("GuzzleErrorResponse\r\n".$e->getResponse(), __METHOD__);
+                    Craft::info("GuzzleErrorResponse\r\n".$e->getResponse(), __METHOD__);
                 }
 
                 $error = $e->getMessage();
