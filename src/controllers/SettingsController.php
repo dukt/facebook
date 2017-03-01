@@ -62,6 +62,11 @@ class SettingsController extends Controller
         ]);
     }
 
+    /**
+     * OAuth settings.
+     *
+     * @return string
+     */
     public function actionOauth()
     {
         $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
@@ -72,6 +77,11 @@ class SettingsController extends Controller
         ]);
     }
 
+    /**
+     * Save OAuth settings.
+     * 
+     * @return \yii\web\Response
+     */
     public function actionSaveOauthSettings()
     {
         $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
