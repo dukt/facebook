@@ -62,7 +62,7 @@ class OauthController extends Controller
             // Save token
             Facebook::$plugin->getOauth()->saveToken($token);
 
-            // Reset session variables
+            // Todo: Reset session variables
 
             // Redirect
             Craft::$app->getSession()->setNotice(Craft::t('facebook', "Connected to Facebook."));
