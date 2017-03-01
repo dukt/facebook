@@ -74,8 +74,8 @@ trait PluginTrait
      */
     public function isConfigured()
     {
-        $oauthClientId = $this->getOauth()->getClientId();
-        $oauthClientSecret = $this->getOauth()->getClientSecret();
+        $oauthClientId = $this->getClientId();
+        $oauthClientSecret = $this->getClientSecret();
 
         if(!empty($oauthClientId) && !empty($oauthClientSecret))
         {
@@ -88,5 +88,38 @@ trait PluginTrait
         }
 
         return false;
+    }
+
+    public function getClientId()
+    {
+        $clientId = Craft::$app->getConfig()->get('oauthClientId', 'facebook');
+
+        if($clientId) {
+            return $clientId;
+        } else {
+            $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
+            $settings = $plugin->getSettings();
+
+            if(!empty($settings['oauthClientId']))
+            {
+                return $settings['oauthClientId'];
+            }
+        }
+    }
+    public function getClientSecret()
+    {
+        $clientSecret = Craft::$app->getConfig()->get('oauthClientSecret', 'facebook');
+
+        if($clientSecret) {
+            return $clientSecret;
+        } else {
+            $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
+            $settings = $plugin->getSettings();
+
+            if(!empty($settings['oauthClientSecret']))
+            {
+                return $settings['oauthClientSecret'];
+            }
+        }
     }
 }

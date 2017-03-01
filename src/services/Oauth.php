@@ -9,7 +9,8 @@ namespace dukt\facebook\services;
 
 use Craft;
 use craft\helpers\UrlHelper;
-use League\OAuth2\Client\Provider\Facebook;
+use dukt\facebook\Plugin as Facebook;
+use League\OAuth2\Client\Provider\Facebook as FacebookProvider;
 use yii\base\Component;
 use League\OAuth2\Client\Token\AccessToken;
 
@@ -32,39 +33,6 @@ class Oauth extends Component
     // Public Methods
     // =========================================================================
 
-    public function getClientId()
-    {
-        $clientId = Craft::$app->getConfig()->get('oauthClientId', 'facebook');
-
-        if($clientId) {
-            return $clientId;
-        } else {
-            $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
-            $settings = $plugin->getSettings();
-
-            if(!empty($settings['oauthClientId']))
-            {
-                return $settings['oauthClientId'];
-            }
-        }
-    }
-    public function getClientSecret()
-    {
-        $clientSecret = Craft::$app->getConfig()->get('oauthClientSecret', 'facebook');
-
-        if($clientSecret) {
-            return $clientSecret;
-        } else {
-            $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
-            $settings = $plugin->getSettings();
-
-            if(!empty($settings['oauthClientSecret']))
-            {
-                return $settings['oauthClientSecret'];
-            }
-        }
-    }
-
     /**
      * Returns a Facebook provider object.
      *
@@ -74,13 +42,13 @@ class Oauth extends Component
     {
         $options = [];
 
-        $clientId = $this->getClientId();
+        $clientId = Facebook::$plugin->getClientId();
 
         if($clientId) {
             $options['clientId'] = $clientId;
         }
 
-        $clientSecret = $this->getClientSecret();
+        $clientSecret = Facebook::$plugin->getClientSecret();
 
         if($clientSecret) {
             $options['clientSecret'] = $clientSecret;
@@ -96,7 +64,7 @@ class Oauth extends Component
             $options['redirectUri'] = UrlHelper::actionUrl('facebook/oauth/callback');
         }
 
-        return new Facebook($options);
+        return new FacebookProvider($options);
     }
 
     /**
