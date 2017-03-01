@@ -74,8 +74,8 @@ trait PluginTrait
      */
     public function isConfigured()
     {
-        $oauthClientId = Craft::$app->getConfig()->get('oauthClientId', 'facebook');
-        $oauthClientSecret = Craft::$app->getConfig()->get('oauthClientSecret', 'facebook');
+        $oauthClientId = $this->getOauth()->getClientId();
+        $oauthClientSecret = $this->getOauth()->getClientSecret();
 
         if(!empty($oauthClientId) && !empty($oauthClientSecret))
         {
