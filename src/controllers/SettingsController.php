@@ -29,6 +29,41 @@ class SettingsController extends Controller
      */
     public function actionIndex()
     {
+        $token = Facebook::$plugin->getOauth()->getToken();
+
+        if ($token) {
+            try {
+                $account = Facebook::$plugin->getCache()->get(['getResourceOwner', $token]);
+
+                if (!$account) {
+                    $provider = Facebook::$plugin->getOauth()->getOauthProvider();
+                    $account = $provider->getResourceOwner($token);
+                    Facebook::$plugin->getCache()->set(['getResourceOwner', $token], $account);
+                }
+            } catch (\Exception $e) {
+                Craft::trace("Couldn't get account\r\n".$e->getMessage().'\r\n'.$e->getTraceAsString(), __METHOD__);
+
+                if (method_exists($e, 'getResponse')) {
+                    Craft::trace("GuzzleErrorResponse\r\n".$e->getResponse(), __METHOD__);
+                }
+
+                $error = $e->getMessage();
+            }
+        }
+
+        $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
+
+        return $this->renderTemplate('facebook/settings/index', [
+            'account' => (isset($account) ? $account : null),
+            'token' => (isset($token) ? $token : null),
+            'error' => (isset($error) ? $error : null),
+            'settings' => $plugin->getSettings(),
+            'redirectUri' => Facebook::$plugin->oauth->getRedirectUri(),
+        ]);
+    }
+
+    public function actionOauth()
+    {
         $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
 
         $variables = array(
@@ -59,7 +94,6 @@ class SettingsController extends Controller
                     if ($account)
                     {
                         $variables['account'] = $account;
-                        $variables['settings'] = $plugin->getSettings();
                     }
                 }
                 catch(\Exception $e)
@@ -80,8 +114,25 @@ class SettingsController extends Controller
         }
 
         $variables['redirectUri'] = Facebook::$plugin->oauth->getRedirectUri();
-        $variables['oauthProviderOptions'] = Craft::$app->getConfig()->get('oauthProviderOptions', 'facebook');
+        $variables['settings'] = $plugin->getSettings();
 
-        return $this->renderTemplate('facebook/settings/_index', $variables);
+        return $this->renderTemplate('facebook/settings/oauth', $variables);
+    }
+
+    public function actionSaveOauthSettings()
+    {
+        $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
+        $settings = $plugin->getSettings();
+
+        $postSettings = Craft::$app->getRequest()->getBodyParam('settings');
+
+        $settings['oauthClientId'] = $postSettings['oauthClientId'];
+        $settings['oauthClientSecret'] = $postSettings['oauthClientSecret'];
+
+        Craft::$app->getPlugins()->savePluginSettings($plugin, $settings->getAttributes());
+
+        Craft::$app->getSession()->setNotice(Craft::t('app', 'OAuth settings saved.'));
+
+        return $this->redirectToPostedUrl();
     }
 }

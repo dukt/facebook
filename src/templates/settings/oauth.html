@@ -1,0 +1,70 @@
+{% extends "_layouts/cp" %}
+
+{% import "_includes/forms" as forms %}
+
+
+{% set crumbs = [
+	{ label: "Settings"|t, url: url('settings') },
+	{ label: "Plugins"|t, url: url('settings/plugins') },
+	{ label: "Facebook"|t, url: url('facebook/settings') }
+] %}
+
+{% set title = "OAuth Settings"|t('facebook') %}
+
+{% set docsUrl = 'https://dukt.net/craft/facebook/docs' %}
+
+{% macro configWarning(setting, file) -%}
+	{{ "This is being overridden by the {setting} config setting."|t({
+		setting: '<strong>'~setting~'</strong>'
+	})|raw }}
+{%- endmacro %}
+
+{% from _self import configWarning %}
+
+
+{% set content %}
+
+	<form action="" method="post">
+		{{ csrfInput() }}
+		<input type="hidden" name="action" value="facebook/settings/save-oauth-settings">
+		<input type="hidden" name="pluginHandle" value="facebook">
+
+		<h2 class="first">{{ 'Create the OAuth application'|t('facebook') }}</h2>
+
+		<p>{{ 'Go to the {link} and click the “Add a new app” button.'|t('facebook', {link: '<a href="https://developers.facebook.com/apps">'~'Facebook API Console'|t('facebook')~'</a>'})|raw }}</p>
+		<p>{{ 'Fill the display name, contact email and category fields and click “Create App ID”.'|t('facebook') }}</p>
+		<p>{{ 'Go to the app that you have just created and click “Add product”.'|t('facebook') }}</p>
+		<p>{{ 'Find the “Facebook Login” section, click “Get Started” and configure your app with the informations below.'|t('facebook') }}</p>
+
+		{{ forms.textField({
+			readonly: true,
+			label: "Redirect URI",
+			value: redirectUri
+		}) }}
+
+		<h2>{{ 'Configure the OAuth client'|t('facebook') }}</h2>
+
+		<p>{{ 'Once the OAuth client is created, Facebook will provide you with a client ID and secret.'|t('facebook') }}</p>
+		<p>{{ ("Copy the Client ID (App ID) & secret (App Secret) from the <a href=\"https://developers.facebook.com/apps\">"~'Facebook API Console'|t('facebook')~"</a> under the Settings → Basic tab, and paste them in the <code>craft/config/facebook.php</code> config file.")|raw }}</p>
+
+		{{ forms.textField({
+			label: "Client ID",
+			name: 'settings[oauthClientId]',
+			value: settings.oauthClientId,
+			warning: (not craft.app.config.get('oauthClientId', 'facebook') is empty ? configWarning('oauthClientId'))
+		}) }}
+
+		{{ forms.textField({
+			label: "Client Secret",
+			name: 'settings[oauthClientSecret]',
+			value: settings.oauthClientSecret,
+			warning: (not craft.app.config.get('oauthClientSecret', 'facebook') is empty ? configWarning('oauthClientSecret'))
+		}) }}
+
+		<div class="buttons">
+			<input type="submit" class="btn submit" value="{{ "Save"|t('facebook') }}">
+		</div>
+	</form>
+
+{% endset %}
+

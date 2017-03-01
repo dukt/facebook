@@ -20,6 +20,16 @@ return [
     'cacheDuration' => 'PT1H',
 
     /**
+     * OAuth client ID.
+     */
+    'oauthClientId' => null,
+
+    /**
+     * OAuth client secret.
+     */
+    'oauthClientSecret' => null,
+
+    /**
      * OAuth scope.
      */
     'oauthScope' => ['public_profile', 'manage_pages', 'read_insights'],
@@ -28,12 +38,4 @@ return [
      * OAuth provider authorization options.
      */
     'oauthAuthorizationOptions' => [],
-
-    /**
-     * OAuth provider options.
-     */
-    'oauthProviderOptions' => [
-        'clientId' => '123456789012345',
-        'clientSecret' => 'zfo8G8wef8G92fZbkHF83owy7weY2300'
-    ],
 ];

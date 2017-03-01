@@ -71,6 +71,7 @@ class Plugin extends \craft\base\Plugin
     {
         $rules = [
             'facebook/settings' => 'facebook/settings/index',
+            'facebook/settings/oauth' => 'facebook/settings/oauth',
         ];
 
         $event->rules = array_merge($event->rules, $rules);

@@ -24,6 +24,16 @@ class Settings extends Model
      */
     public $facebookInsightsObjectId;
 
+    /**
+     * @var
+     */
+    public $oauthClientId;
+
+    /**
+     * @var
+     */
+    public $oauthClientSecret;
+
     // Public Methods
     // =========================================================================
 

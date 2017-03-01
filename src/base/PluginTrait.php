@@ -7,12 +7,12 @@
 
 namespace dukt\facebook\base;
 
+use Craft;
 use dukt\facebook\Plugin as Facebook;
 
 /**
  * PluginTrait implements the common methods and properties for plugin classes.
  *
- * @property \dukt\facebook\services\Facebook       $facebook       The facebook service
  * @property \dukt\facebook\services\Api            $api            The api service
  * @property \dukt\facebook\services\Cache          $cache          The cache service
  * @property \dukt\facebook\services\Oauth          $oauth          The oauth service
@@ -65,5 +65,28 @@ trait PluginTrait
     {
         /** @var Facebook $this */
         return $this->get('reports');
+    }
+
+    /**
+     * Returns `true` if client ID, client secret and token are defined.
+     *
+     * @return bool
+     */
+    public function isConfigured()
+    {
+        $oauthClientId = Craft::$app->getConfig()->get('oauthClientId', 'facebook');
+        $oauthClientSecret = Craft::$app->getConfig()->get('oauthClientSecret', 'facebook');
+
+        if(!empty($oauthClientId) && !empty($oauthClientSecret))
+        {
+            $token = Facebook::$plugin->getOauth()->getToken();
+
+            if($token)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
