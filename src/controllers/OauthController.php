@@ -84,11 +84,11 @@ class OauthController extends Controller
     {
         if (Facebook::$plugin->getOauth()->deleteToken())
         {
-            Craft::$app->getSession()->setNotice(Craft::t('app', "Disconnected from Facebook."));
+            Craft::$app->getSession()->setNotice(Craft::t('facebook', "Disconnected from Facebook."));
         }
         else
         {
-            Craft::$app->getSession()->setError(Craft::t('app', "Couldn’t disconnect from Facebook"));
+            Craft::$app->getSession()->setError(Craft::t('facebook', "Couldn’t disconnect from Facebook"));
         }
 
         // redirect

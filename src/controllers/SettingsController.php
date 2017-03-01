@@ -94,7 +94,7 @@ class SettingsController extends Controller
 
         Craft::$app->getPlugins()->savePluginSettings($plugin, $settings->getAttributes());
 
-        Craft::$app->getSession()->setNotice(Craft::t('app', 'OAuth settings saved.'));
+        Craft::$app->getSession()->setNotice(Craft::t('facebook', 'OAuth settings saved.'));
 
         return $this->redirectToPostedUrl();
     }

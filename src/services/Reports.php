@@ -76,11 +76,11 @@ class Reports extends Component
                                     $weekTotal = $weekTotalEnd - $weekTotalStart;
 
                                     $counts[] = [
-                                        'label' => 'Total likes',
+                                        'label' => Craft::t('facebook', 'Total likes'),
                                         'value' => end($insight['values'])['value']
                                     ];
                                     $counts[] = [
-                                        'label' => 'Likes this week',
+                                        'label' => Craft::t('facebook', 'Likes this week'),
                                         'value' => $weekTotal
                                     ];
                                     break;
@@ -92,7 +92,7 @@ class Reports extends Component
                                         case 'week':
 
                                             $counts[] = [
-                                                'label' => 'Total Reach this week',
+                                                'label' => Craft::t('facebook', 'Total Reach this week'),
                                                 'value' => end($insight['values'])['value']
                                             ];
 
@@ -101,7 +101,7 @@ class Reports extends Component
                                         case 'days_28':
 
                                             $counts[] = [
-                                                'label' => 'Total Reach this month',
+                                                'label' => Craft::t('facebook', 'Total Reach this month'),
                                                 'value' => end($insight['values'])['value']
                                             ];
 

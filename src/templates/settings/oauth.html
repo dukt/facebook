@@ -2,25 +2,22 @@
 
 {% import "_includes/forms" as forms %}
 
-
 {% set crumbs = [
-	{ label: "Settings"|t, url: url('settings') },
-	{ label: "Plugins"|t, url: url('settings/plugins') },
-	{ label: "Facebook"|t, url: url('facebook/settings') }
+	{ label: "Settings"|t('facebook'), url: url('settings') },
+	{ label: "Plugins"|t('facebook'), url: url('settings/plugins') },
+	{ label: "Facebook"|t('facebook'), url: url('facebook/settings') }
 ] %}
 
 {% set title = "OAuth Settings"|t('facebook') %}
-
 {% set docsUrl = 'https://dukt.net/craft/facebook/docs' %}
 
 {% macro configWarning(setting, file) -%}
-	{{ "This is being overridden by the {setting} config setting."|t({
+	{{ "This is being overridden by the {setting} config setting."|t('facebook', {
 		setting: '<strong>'~setting~'</strong>'
 	})|raw }}
 {%- endmacro %}
 
 {% from _self import configWarning %}
-
 
 {% set content %}
 
@@ -38,24 +35,24 @@
 
 		{{ forms.textField({
 			readonly: true,
-			label: "Redirect URI",
+			label: "Redirect URI"|t('facebook'),
 			value: redirectUri
 		}) }}
 
 		<h2>{{ 'Configure the OAuth client'|t('facebook') }}</h2>
 
 		<p>{{ 'Once that is done Facebook will provide you with a client ID and secret.'|t('facebook') }}</p>
-		<p>{{ ("Copy the Client ID (App ID) & secret (App Secret) from the <a href=\"https://developers.facebook.com/apps\">"~'Facebook API Console'|t('facebook')~"</a> under the Settings → Basic tab, paste them below and save.")|raw }}</p>
+		<p>{{ ("Copy the Client ID (App ID) & secret (App Secret) from the {link} under the Settings → Basic tab, paste them below and save.")|t('facebook', { link: '<a href="https://developers.facebook.com/apps">'~'Facebook API Console'|t('facebook')~'</a>'})|raw }}</p>
 
 		{{ forms.textField({
-			label: "Client ID",
+			label: "Client ID"|t('facebook'),
 			name: 'settings[oauthClientId]',
 			value: settings.oauthClientId,
 			warning: (not craft.app.config.get('oauthClientId', 'facebook') is empty ? configWarning('oauthClientId'))
 		}) }}
 
 		{{ forms.textField({
-			label: "Client Secret",
+			label: "Client Secret"|t('facebook'),
 			name: 'settings[oauthClientSecret]',
 			value: settings.oauthClientSecret,
 			warning: (not craft.app.config.get('oauthClientSecret', 'facebook') is empty ? configWarning('oauthClientSecret'))

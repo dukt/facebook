@@ -1,34 +1,32 @@
-{% extends "facebook/_layouts/settings" %}
+{% extends "_layouts/cp" %}
 
 {% import "_includes/forms" as forms %}
 
+{% set crumbs = [
+    { label: "Settings"|t('facebook'), url: url('settings') },
+    { label: "Plugins"|t('facebook'), url: url('settings/plugins') }
+] %}
+
+{% set title = "Facebook"|t('facebook') %}
 {% set docsUrl = 'https://dukt.net/craft/facebook/docs' %}
-
-{% macro configWarning(setting, file) -%}
-    {{ "This is being overridden by the {setting} config setting."|t({
-        setting: '<strong>'~setting~'</strong>'
-    })|raw }}
-{%- endmacro %}
-
-{% from _self import configWarning %}
 
 {% set content %}
 
-    <h2 class="first">{{'Account'|t}}</h2>
+    <h2 class="first">{{'Account'|t('facebook') }}</h2>
 
     {% if not error %}
         {% if account %}
 
-            <p>{{'You are authenticated to Facebook with the following account'|t}} :</p>
+            <p>{{'You are authenticated to Facebook with the following account'|t('facebook') }} :</p>
 
             <ul>
-                <li><strong>{{ 'UID'|t }} : </strong> {{ account.id }}</li>
-                <li><strong>{{ 'Name'|t }} : </strong> {{ account.name }}</li>
+                <li><strong>{{ 'UID'|t('facebook') }} : </strong> {{ account.id }}</li>
+                <li><strong>{{ 'Name'|t('facebook') }} : </strong> {{ account.name }}</li>
             </ul>
 
             <div class="buttons">
-                <a class="btn small" href="{{ actionUrl('facebook/oauth/disconnect') }}">{{'Disconnect'|t}}</a>
-                <a class="btn small" href="{{ url('facebook/settings/oauth') }}">OAuth Settings</a>
+                <a class="btn small" href="{{ actionUrl('facebook/oauth/disconnect') }}">{{'Disconnect'|t('facebook') }}</a>
+                <a class="btn small" href="{{ url('facebook/settings/oauth') }}">{{ 'OAuth Settings'|t('facebook') }}</a>
             </div>
 
             <hr>
@@ -41,7 +39,7 @@
                 <input type="hidden" name="redirect" value="{{ 'facebook/settings'|hash }}">
 
 				{{ forms.textField({
-					label: "Facebook Page ID"|t,
+					label: "Facebook Page ID"|t('facebook'),
 					placeholder: "123456789012345",
 					name: 'settings[facebookInsightsObjectId]',
 					value: settings.facebookInsightsObjectId,
@@ -49,15 +47,15 @@
 				}) }}
 
                 <div class="buttons">
-                    <input type="submit" class="btn submit force" value="{{'Save'|t}}">
+                    <input type="submit" class="btn submit force" value="{{'Save'|t('facebook') }}">
                 </div>
             </form>
         {% else %}
 
-            <p>To connect to a Facebook account, <a href="{{ url('facebook/settings/oauth') }}">configure OAuth</a> and then click “Connect”.</p>
+            <p>{{ 'To connect to a Facebook account, {link} and then click “Connect”.'|t('facebook', {link: '<a href="'~ url('facebook/settings/oauth') ~'">'~'configure OAuth'|t('facebook')~'</a>' })|raw }}</p>
 
             <div class="buttons">
-                <a class="btn submit" href="{{ actionUrl('facebook/oauth/connect') }}">{{"Connect"|t}}</a>
+                <a class="btn submit" href="{{ actionUrl('facebook/oauth/connect') }}">{{"Connect"|t('facebook') }}</a>
             </div>
 
         {% endif %}
@@ -67,9 +65,9 @@
 
         <div class="buttons">
 			{% if token %}
-                <a class="btn small" href="{{ actionUrl('facebook/oauth/disconnect') }}">{{'Disconnect'|t}}</a>
+                <a class="btn small" href="{{ actionUrl('facebook/oauth/disconnect') }}">{{'Disconnect'|t('facebook') }}</a>
 			{% endif %}
-            <a class="btn small" href="{{ url('facebook/settings/oauth') }}">OAuth Settings</a>
+            <a class="btn small" href="{{ url('facebook/settings/oauth') }}">{{ 'OAuth Settings'|t('facebook') }}</a>
         </div>
 
     {% endif %}
