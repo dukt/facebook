@@ -15,10 +15,12 @@
 
 {% set content %}
 
+    <h2 class="first">{{'Account'|t}}</h2>
+
     {% if not error %}
         {% if account %}
 
-            <h2 class="first">{{'Account'|t}}</h2>
+
 
             <p>{{'You are authenticated to Facebook with the following account'|t}} :</p>
 
@@ -54,10 +56,8 @@
                 </div>
             </form>
         {% else %}
-
-            <h2>{{ 'Connect to Facebook'|t('facebook') }}</h2>
-
-            <p>Please <a href="{{ url('facebook/settings/oauth') }}">configure OAuth</a>, and then click “Connect”.</p>
+            
+            <p>To connect to a Facebook account, <a href="{{ url('facebook/settings/oauth') }}">configure OAuth</a> and then click “Connect”.</p>
 
             <div class="buttons">
                 <a class="btn submit" href="{{ actionUrl('facebook/oauth/connect') }}">{{"Connect"|t}}</a>
@@ -65,8 +65,6 @@
 
         {% endif %}
     {% else %}
-
-        <h2 class="first">{{'Account'|t}}</h2>
 
         <p class="error">{{ error }}</p>
 
