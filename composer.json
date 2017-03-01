@@ -27,8 +27,8 @@
   "extra": {
     "name": "Facebook",
     "handle": "facebook",
-    "documentationUrl": "https://dukt.net/craft/facebook/docs",
     "schemaVersion": "1.0.0",
+    "documentationUrl": "https://dukt.net/craft/facebook/docs",
     "changelogUrl": "https://dukt.net/craft/facebook/updates.json"
   }
 }
