@@ -41,8 +41,8 @@
 
 		<h2>{{ 'Configure the OAuth client'|t('facebook') }}</h2>
 
-		<p>{{ 'Once that is done Facebook will provide you with a client ID and secret.'|t('facebook') }}</p>
-		<p>{{ ("Copy the Client ID (App ID) & secret (App Secret) from the {link} under the Settings → Basic tab, paste them below and save.")|t('facebook', { link: '<a href="https://developers.facebook.com/apps">'~'Facebook API Console'|t('facebook')~'</a>'})|raw }}</p>
+		<p>{{ 'Once the application is created Facebook will provide you with a client ID and secret.'|t('facebook') }}</p>
+		<p>{{ 'Copy the Client ID (App ID) & secret (App Secret) from the {link} under the Settings → Basic tab, paste them below and save.'|t('facebook', { link: '<a href="https://developers.facebook.com/apps">'~'Facebook API Console'|t('facebook')~'</a>'})|raw }}</p>
 
 		{{ forms.textField({
 			label: "Client ID"|t('facebook'),
