@@ -79,7 +79,7 @@ class SettingsController extends Controller
 
     /**
      * Save OAuth settings.
-     * 
+     *
      * @return \yii\web\Response
      */
     public function actionSaveOauthSettings()
