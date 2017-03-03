@@ -18,13 +18,13 @@ To install the plugin, follow these instructions.
 
 2. Then tell Composer to load the plugin:
 
-        composer require dukt/craft-facebook
+        composer require dukt/facebook:~2.0
 
 3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Facebook.
 
 ## Learn more
 
-- [Plugin Overview](https://dukt.net/craft/facebook/)
-- [Documentation](https://dukt.net/craft/facebook/docs)
+- [Plugin Overview](https://dukt.net/facebook)
+- [Documentation](https://dukt.net/facebook/docs)
 
 [Dukt.net](https://dukt.net/) © 2017 - All rights reserved
