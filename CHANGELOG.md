@@ -6,12 +6,12 @@ Changelog
 
 ### Added
 - Craft 3 compatibility.
-- Added `craftcms/cms` dependency
-- Added `league/oauth2-client` dependency
-- Added `league/oauth2-facebook` dependency
+- Added `craftcms/cms` dependency.
+- Added `league/oauth2-client` dependency.
+- Added `league/oauth2-facebook` dependency.
 
 ### Removed
-- Removed `dukt/craft-oauth` dependency
+- Removed `dukt/craft-oauth` dependency.
 
 
 ## 1.1.1 - 2016-11-08
