@@ -25,6 +25,6 @@ To install the plugin, follow these instructions.
 ## Learn more
 
 - [Plugin Overview](https://dukt.net/facebook)
-- [Documentation](https://dukt.net/facebook/docs)
+- [Documentation](https://github.com/dukt/facebook/wiki)
 
 [Dukt.net](https://dukt.net/) © 2017 - All rights reserved
