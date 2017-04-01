@@ -32,7 +32,7 @@ class Plugin extends \craft\base\Plugin
     /**
      * @var bool
      */
-    public $hasSettings = true;
+    public $hasCpSettings = true;
 
     /**
      * @var \dukt\facebook\Plugin The plugin instance.
