@@ -92,7 +92,7 @@ trait PluginTrait
 
     public function getClientId()
     {
-        $clientId = Craft::$app->getConfig()->get('oauthClientId', 'facebook');
+        $clientId = Facebook::$plugin->getSettings()->oauthClientId;
 
         if($clientId) {
             return $clientId;
@@ -108,7 +108,7 @@ trait PluginTrait
     }
     public function getClientSecret()
     {
-        $clientSecret = Craft::$app->getConfig()->get('oauthClientSecret', 'facebook');
+        $clientSecret = Facebook::$plugin->getSettings()->oauthClientSecret;
 
         if($clientSecret) {
             return $clientSecret;

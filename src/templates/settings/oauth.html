@@ -11,14 +11,6 @@
 {% set title = "OAuth Settings"|t('facebook') %}
 {% set docsUrl = 'https://dukt.net/craft/facebook/docs' %}
 
-{% macro configWarning(setting, file) -%}
-	{{ "This is being overridden by the {setting} config setting."|t('facebook', {
-		setting: '<strong>'~setting~'</strong>'
-	})|raw }}
-{%- endmacro %}
-
-{% from _self import configWarning %}
-
 {% set content %}
 
 	<form action="" method="post">
@@ -48,14 +40,12 @@
 			label: "Client ID"|t('facebook'),
 			name: 'settings[oauthClientId]',
 			value: settings.oauthClientId,
-			warning: (not craft.app.config.get('oauthClientId', 'facebook') is empty ? configWarning('oauthClientId'))
 		}) }}
 
 		{{ forms.textField({
 			label: "Client Secret"|t('facebook'),
 			name: 'settings[oauthClientSecret]',
 			value: settings.oauthClientSecret,
-			warning: (not craft.app.config.get('oauthClientSecret', 'facebook') is empty ? configWarning('oauthClientSecret'))
 		}) }}
 
 		<div class="buttons">

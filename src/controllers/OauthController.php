@@ -34,8 +34,8 @@ class OauthController extends Controller
 
         Craft::$app->getSession()->set('facebook.oauthState', $provider->getState());
 
-        $options = Craft::$app->getConfig()->get('oauthAuthorizationOptions', 'facebook');
-        $options['scope'] = Craft::$app->getConfig()->get('oauthScope', 'facebook');
+        $options = Facebook::$plugin->getSettings()->oauthAuthorizationOptions;
+        $options['scope'] = Facebook::$plugin->getSettings()->oauthScope;
 
         $authorizationUrl = $provider->getAuthorizationUrl($options);
 

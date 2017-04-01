@@ -10,6 +10,7 @@ namespace dukt\facebook\services;
 use Craft;
 use yii\base\Component;
 use DateInterval;
+use dukt\facebook\Plugin as Facebook;
 
 
 /**
@@ -32,7 +33,7 @@ class Cache extends Component
      */
     public function get($id)
     {
-        if(Craft::$app->getConfig()->get('enableCache', 'facebook') == true)
+        if(Facebook::$plugin->getSettings()->enableCache == true)
         {
             $cacheKey = $this->getCacheKey($id);
 
@@ -55,7 +56,7 @@ class Cache extends Component
     {
         if(is_null($enableCache))
         {
-            $enableCache = Craft::$app->getConfig()->get('enableCache', 'facebook');
+            $enableCache = Facebook::$plugin->getSettings()->enableCache;
         }
 
         if($enableCache)
@@ -64,7 +65,7 @@ class Cache extends Component
 
             if(!$expire)
             {
-                $expire = Craft::$app->getConfig()->get('cacheDuration', 'facebook');
+                $expire = Facebook::$plugin->getSettings()->cacheDuration;
                 $expire = $this->_formatDuration($expire);
             }
 

@@ -13,26 +13,70 @@ class Settings extends Model
 {
     // Properties
     // =========================================================================
-
     /**
-     * @var
+     * Graph API version used to request the Facebook API.
+     *
+     * @var string
      */
-    public $token;
+    public $apiVersion = 'v2.8';
 
     /**
-     * @var
+     * The amount of time cache should last.
+     *
+     * @see http://www.php.net/manual/en/dateinterval.construct.php
+     *
+     * @var string
      */
-    public $facebookInsightsObjectId;
+    public $cacheDuration = 'PT1H';
 
     /**
-     * @var
+     * Whether request to APIs should be cached or not.
+     *
+     * @var bool
+     */
+    public $enableCache = true;
+
+    /**
+     * OAuth client ID.
+     *
+     * @var string|null
      */
     public $oauthClientId;
 
     /**
-     * @var
+     * OAuth client secret.
+     *
+     * @var string|null
      */
     public $oauthClientSecret;
+
+    /**
+     * OAuth provider authorization options.
+     *
+     * @var array
+     */
+    public $oauthAuthorizationOptions = [];
+
+    /**
+     * OAuth scope.
+     *
+     * @var array
+     */
+    public $oauthScope = ['public_profile', 'manage_pages', 'read_insights'];
+
+    /**
+     * Token
+     *
+     * @var mixed|null
+     */
+    public $token;
+
+    /**
+     * Facebook Insights Object ID
+     *
+     * @var string|null
+     */
+    public $facebookInsightsObjectId;
 
     // Public Methods
     // =========================================================================

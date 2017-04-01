@@ -56,7 +56,7 @@ class Oauth extends Component
 
         if(!isset($options['graphApiVersion']))
         {
-            $options['graphApiVersion'] = Craft::$app->getConfig()->get('apiVersion', 'facebook');
+            $options['graphApiVersion'] = Facebook::$plugin->getSettings()->apiVersion;
         }
 
         if(!isset($options['redirectUri']))
