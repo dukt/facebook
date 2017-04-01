@@ -35,6 +35,6 @@ Then open the `build/index.html` file in the browser.
 ## Learn more
 
 - [Plugin Overview](https://dukt.net/facebook)
-- [Documentation](https://github.com/dukt/facebook/wiki)
+- [Documentation](https://github.com/dukt/facebook/docs)
 
 [Dukt.net](https://dukt.net/) © 2017 - All rights reserved
