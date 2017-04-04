@@ -1,7 +1,23 @@
 Changelog
 =========
 
-## 2.0.0 - 2017-03-09
+## 2.0.0-beta.2 - 2017-04-05
+
+### Added
+
+- Added reference generation instructions
+- Added docs
+
+### Improved
+
+- Updated config settings for Craft 3.0.0-beta.8+
+- Renamed `$hasSettings` to `$hasCpSettings`
+
+### Removed
+
+- Removed `FacebookVariable`
+
+## 2.0.0-beta.1 - 2017-03-09
 
 ### Added
 - Craft 3 compatibility.
