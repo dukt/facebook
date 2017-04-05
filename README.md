@@ -6,7 +6,7 @@ Facebook Insights widget for the dashboard.
 
 ## Requirements
 
-This plugin requires Craft CMS 3.0.0-beta.1 or later.
+This plugin requires Craft CMS 3.0.0-beta.8 or later.
 
 ## Installation
 
