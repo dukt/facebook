@@ -2,27 +2,13 @@
 
 Facebook Insights widget for the dashboard.
 
--------------------------------------------
+Learn more about the Facebook plugin for Craft CMS at [dukt.net/facebook](https://dukt.net/facebook). 
 
-## Requirements
+## How to install Facebook 2 Beta
 
-This plugin requires Craft CMS 3.0.0-beta.8 or later.
+Installation instructions can be found in [Facebook 2 Documentation](https://github.com/dukt/facebook/tree/docs)
 
-## Installation
-
-To install the plugin, follow these instructions.
-
-1. Open your terminal and go to your Craft project:
-
-        cd /path/to/project
-
-2. Then tell Composer to load the plugin:
-
-        composer require dukt/facebook:~2.0
-
-3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Facebook.
-
-## Learn more
+## Resources
 
 - [Plugin Overview](https://dukt.net/facebook)
 - [Documentation](https://github.com/dukt/facebook/tree/docs)
