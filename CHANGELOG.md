@@ -6,9 +6,9 @@ Changelog
 ### Added
 - Added support informations to composer.json
 
-### Changed
+### Improved
 - Facebook now requires Craft 3.0.0 beta 20 or above
-
+- Improved README instructions
 
 ## 2.0.0-beta.2 - 2017-04-05
 
