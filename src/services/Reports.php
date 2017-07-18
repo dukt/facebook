@@ -44,7 +44,7 @@ class Reports extends Component
             {
                 // Object
 
-                $object = Facebook::$plugin->getApi()->get('/'.$facebookInsightsObjectId, ['metadata' => 1, 'fields' => 'name']);;
+                $object = Facebook::$plugin->getApi()->get('/'.$facebookInsightsObjectId, ['metadata' => 1, 'fields' => 'name,picture']);
                 $objectType = $object['metadata']['type'];
                 $message = false;
 
