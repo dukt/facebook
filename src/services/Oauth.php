@@ -61,7 +61,7 @@ class Oauth extends Component
 
         if(!isset($options['redirectUri']))
         {
-            $options['redirectUri'] = UrlHelper::actionUrl('facebook/oauth/callback');
+            $options['redirectUri'] = $this->getRedirectUri();
         }
 
         return new FacebookProvider($options);
@@ -164,6 +164,17 @@ class Oauth extends Component
      */
     public function getRedirectUri()
     {
-        return UrlHelper::actionUrl('facebook/oauth/callback');
+        $url = UrlHelper::actionUrl('facebook/oauth/callback');
+        $parsedUrl = parse_url($url);
+
+        if(isset($parsedUrl['query'])) {
+            parse_str($parsedUrl['query'], $query);
+
+            $query = http_build_query($query);
+
+            return $parsedUrl['scheme'].'://'.$parsedUrl['host'].$parsedUrl['path'].'?'.$query;
+        }
+
+        return $url;
     }
 }
