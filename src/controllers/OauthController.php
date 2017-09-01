@@ -66,7 +66,6 @@ class OauthController extends Controller
 
             // Redirect
             Craft::$app->getSession()->setNotice(Craft::t('facebook', "Connected to Facebook."));
-
         } catch (Exception $e) {
             // Failed to get the token credentials or user details.
             Craft::$app->getSession()->setError($e->getMessage());
@@ -82,17 +81,15 @@ class OauthController extends Controller
      */
     public function actionDisconnect()
     {
-        if (Facebook::$plugin->getOauth()->deleteToken())
-        {
+        if (Facebook::$plugin->getOauth()->deleteToken()) {
             Craft::$app->getSession()->setNotice(Craft::t('facebook', "Disconnected from Facebook."));
-        }
-        else
-        {
+        } else {
             Craft::$app->getSession()->setError(Craft::t('facebook', "Couldn’t disconnect from Facebook"));
         }
 
         // redirect
         $redirect = Craft::$app->getRequest()->referrer;
+
         return $this->redirect($redirect);
     }
 }

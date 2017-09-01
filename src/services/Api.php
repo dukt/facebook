@@ -46,8 +46,7 @@ class Api extends Component
 
         $options['query'] = ($query ? $query : []);
 
-        if($headers)
-        {
+        if ($headers) {
             $options['headers'] = $headers;
         }
 
@@ -80,11 +79,9 @@ class Api extends Component
     {
         $token = Facebook::$plugin->getOauth()->getToken();
 
-        $headers = array();
+        $headers = [];
 
-        if($token)
-        {
-
+        if ($token) {
             $headers['Authorization'] = 'Bearer '.$token->getToken();
         }
 

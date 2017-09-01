@@ -36,12 +36,10 @@ class Reports extends Component
 
         $report = Facebook::$plugin->getCache()->get(['insightsReport', $facebookInsightsObjectId]);
 
-        if(!$report)
-        {
+        if (!$report) {
             $token = Facebook::$plugin->getOauth()->getToken();
 
-            if($token)
-            {
+            if ($token) {
                 // Object
 
                 $object = Facebook::$plugin->getApi()->get('/'.$facebookInsightsObjectId, ['metadata' => 1, 'fields' => 'name']);;
@@ -50,24 +48,21 @@ class Reports extends Component
 
                 $counts = [];
 
-                switch ($objectType)
-                {
+                switch ($objectType) {
                     case 'page':
 
                         // Insights for objects of type `page`
 
                         $supportedObject = true;
 
-                        $insights = Facebook::$plugin->getApi()->get('/'.$facebookInsightsObjectId.'/insights', array(
+                        $insights = Facebook::$plugin->getApi()->get('/'.$facebookInsightsObjectId.'/insights', [
                             'metric' => 'page_fans,page_impressions_unique',
                             'since' => date('Y-m-d', strtotime('-6 day')),
                             'until' => date('Y-m-d', strtotime('+1 day')),
-                        ));
+                        ]);
 
-                        foreach($insights['data'] as $insight)
-                        {
-                            switch ($insight['name'])
-                            {
+                        foreach ($insights['data'] as $insight) {
+                            switch ($insight['name']) {
                                 case 'page_fans':
 
                                     $weekTotalStart = $insight['values'][0]['value'];
@@ -87,8 +82,7 @@ class Reports extends Component
 
                                 case 'page_impressions_unique':
 
-                                    switch($insight['period'])
-                                    {
+                                    switch ($insight['period']) {
                                         case 'week':
 
                                             $counts[] = [
@@ -129,9 +123,7 @@ class Reports extends Component
                 ];
 
                 Facebook::$plugin->getCache()->set(['insightsReport', $facebookInsightsObjectId], $report);
-            }
-            else
-            {
+            } else {
                 throw new Exception("Not authenticated");
             }
         }
