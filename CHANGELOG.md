@@ -8,7 +8,10 @@ Changelog
 
 ### Improved
 - Facebook now requires Craft 3.0.0 beta 20 or above
-- Improved README instructions
+- Updated widget types for Craft 3
+
+### Fixed
+- Fixed encoding bug with Facebook’s redirect URI
 
 ## 2.0.0-beta.2 - 2017-04-05
 
