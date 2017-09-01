@@ -1,7 +1,7 @@
 Changelog
 =========
 
-## 2.0.0-beta.3 - Unreleased
+## 2.0.0-beta.3 - 2017-09-01
 
 ### Added
 - Added support informations to composer.json
