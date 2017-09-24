@@ -61,20 +61,14 @@ class Plugin extends \craft\base\Plugin
             $event->types[] = InsightsWidget::class;
         });
 
-        Event::on(UrlManager::class, UrlManager::EVENT_REGISTER_CP_URL_RULES, [$this, 'registerCpUrlRules']);
-    }
+        Event::on(UrlManager::class, UrlManager::EVENT_REGISTER_CP_URL_RULES, function(RegisterUrlRulesEvent $event) {
+            $rules = [
+                'facebook/settings' => 'facebook/settings/index',
+                'facebook/settings/oauth' => 'facebook/settings/oauth',
+            ];
 
-    /**
-     * @param RegisterUrlRulesEvent $event
-     */
-    public function registerCpUrlRules(RegisterUrlRulesEvent $event)
-    {
-        $rules = [
-            'facebook/settings' => 'facebook/settings/index',
-            'facebook/settings/oauth' => 'facebook/settings/oauth',
-        ];
-
-        $event->rules = array_merge($event->rules, $rules);
+            $event->rules = array_merge($event->rules, $rules);
+        });
     }
 
     // Protected Methods
