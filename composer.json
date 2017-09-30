@@ -36,7 +36,7 @@
     "name": "Facebook",
     "handle": "facebook",
     "schemaVersion": "1.0.0",
-    "documentationUrl": "https://github.com/dukt/facebook/tree/docs",
-    "changelogUrl": "https://raw.githubusercontent.com/dukt/facebook/master/CHANGELOG.md"
+    "documentationUrl": "https://github.com/dukt/facebook/tree/v2-docs",
+    "changelogUrl": "https://raw.githubusercontent.com/dukt/facebook/v2/CHANGELOG.md"
   }
 }
