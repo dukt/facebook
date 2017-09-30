@@ -92,6 +92,14 @@ class FacebookPlugin extends BasePlugin
         }
     }
 
+    /**
+     * Get release feed URL
+     */
+    public function getReleaseFeedUrl()
+    {
+        return 'https://raw.githubusercontent.com/dukt/facebook/v1/releases.json';
+    }
+
     // Protected Methods
     // =========================================================================
 
