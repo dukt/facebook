@@ -1,6 +1,17 @@
 Changelog
 =========
 
+## 2.0.0 - 2017-12-05
+
+### Added 
+- Craft 3 compatibility.
+
+### Fixed
+- Fixed encoding bug with Facebook’s redirect URI.
+
+### Removed
+- Removed `FacebookVariable`.
+
 ## 2.0.0-beta.3 - 2017-09-01
 
 ### Added
