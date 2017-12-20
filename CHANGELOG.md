@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 2.0.1 - Unreleased
+- Updated to require craftcms/cms `^3.0.0-RC1`.
+
 ## 2.0.0 - 2017-12-05
 
 ### Added 
