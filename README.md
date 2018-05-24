@@ -1,3 +1,5 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/dukt/facebook/badges/quality-score.png?b=v2)](https://scrutinizer-ci.com/g/dukt/facebook/?branch=v2) [![Code Coverage](https://scrutinizer-ci.com/g/dukt/facebook/badges/coverage.png?b=v2)](https://scrutinizer-ci.com/g/dukt/facebook/?branch=v2) [![Build Status](https://scrutinizer-ci.com/g/dukt/facebook/badges/build.png?b=v2)](https://scrutinizer-ci.com/g/dukt/facebook/build-status/v2) [![Code Intelligence Status](https://scrutinizer-ci.com/g/dukt/facebook/badges/code-intelligence.svg?b=v2)](https://scrutinizer-ci.com/code-intelligence)
+
 # Facebook for Craft CMS
 
 Facebook Insights widget for the dashboard.
