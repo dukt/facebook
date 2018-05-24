@@ -39,6 +39,7 @@ class Api extends Component
      * @param null $headers
      *
      * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function get($uri = null, $query = null, $headers = null)
     {

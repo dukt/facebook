@@ -11,6 +11,7 @@ use Craft;
 use craft\web\Controller;
 use dukt\facebook\Plugin as Facebook;
 use Exception;
+use yii\web\Response;
 
 /**
  * Class OauthController
@@ -26,7 +27,7 @@ class OauthController extends Controller
     /**
      * OAuth connect.
      *
-     * @return \yii\web\Response
+     * @return Response
      */
     public function actionConnect()
     {
@@ -45,7 +46,7 @@ class OauthController extends Controller
     /**
      * OAuth callback.
      *
-     * @return \yii\web\Response
+     * @return Response
      */
     public function actionCallback()
     {
@@ -77,7 +78,7 @@ class OauthController extends Controller
     /**
      * OAuth disconnect.
      *
-     * @return \yii\web\Response
+     * @return Response
      */
     public function actionDisconnect()
     {

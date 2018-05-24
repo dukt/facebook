@@ -27,6 +27,7 @@ class Reports extends Component
      * Returns the Insights report.
      *
      * @return array|mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getInsightsReport()
     {

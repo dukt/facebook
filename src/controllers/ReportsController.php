@@ -9,6 +9,7 @@ namespace dukt\facebook\controllers;
 
 use craft\web\Controller;
 use dukt\facebook\Plugin as Facebook;
+use yii\web\Response;
 
 /**
  * Class ReportsController
@@ -24,7 +25,8 @@ class ReportsController extends Controller
     /**
      * Returns the insights report.
      *
-     * @return \yii\web\Response
+     * @return Response
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function actionGetInsightsReport()
     {

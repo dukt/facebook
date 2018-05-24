@@ -10,6 +10,7 @@ namespace dukt\facebook\controllers;
 use Craft;
 use craft\web\Controller;
 use dukt\facebook\Plugin as Facebook;
+use yii\web\Response;
 
 /**
  * Class SettingsController
@@ -23,9 +24,9 @@ class SettingsController extends Controller
     // =========================================================================
 
     /**
-     * Settings
+     * Settings index.
      *
-     * @return string
+     * @return Response
      */
     public function actionIndex()
     {
@@ -65,7 +66,7 @@ class SettingsController extends Controller
     /**
      * OAuth settings.
      *
-     * @return string
+     * @return Response
      */
     public function actionOauth()
     {
@@ -80,7 +81,8 @@ class SettingsController extends Controller
     /**
      * Save OAuth settings.
      *
-     * @return \yii\web\Response
+     * @return Response
+     * @throws \yii\web\BadRequestHttpException
      */
     public function actionSaveOauthSettings()
     {
