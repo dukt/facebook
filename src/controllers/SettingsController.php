@@ -28,7 +28,7 @@ class SettingsController extends Controller
      *
      * @return Response
      */
-    public function actionIndex()
+    public function actionIndex(): Response
     {
         $token = Facebook::$plugin->getOauth()->getToken();
 
@@ -68,7 +68,7 @@ class SettingsController extends Controller
      *
      * @return Response
      */
-    public function actionOauth()
+    public function actionOauth(): Response
     {
         $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
 
@@ -84,7 +84,7 @@ class SettingsController extends Controller
      * @return Response
      * @throws \yii\web\BadRequestHttpException
      */
-    public function actionSaveOauthSettings()
+    public function actionSaveOauthSettings(): Response
     {
         $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
         $settings = $plugin->getSettings();

@@ -28,7 +28,7 @@ class ReportsController extends Controller
      * @return Response
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function actionGetInsightsReport()
+    public function actionGetInsightsReport(): Response
     {
         $report = Facebook::$plugin->getReports()->getInsightsReport();
 

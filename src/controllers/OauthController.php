@@ -29,7 +29,7 @@ class OauthController extends Controller
      *
      * @return Response
      */
-    public function actionConnect()
+    public function actionConnect(): Response
     {
         $provider = Facebook::$plugin->getOauth()->getOauthProvider();
 
@@ -48,7 +48,7 @@ class OauthController extends Controller
      *
      * @return Response
      */
-    public function actionCallback()
+    public function actionCallback(): Response
     {
         $provider = Facebook::$plugin->getOauth()->getOauthProvider();
 
@@ -80,7 +80,7 @@ class OauthController extends Controller
      *
      * @return Response
      */
-    public function actionDisconnect()
+    public function actionDisconnect(): Response
     {
         if (Facebook::$plugin->getOauth()->deleteToken()) {
             Craft::$app->getSession()->setNotice(Craft::t('facebook', "Disconnected from Facebook."));
