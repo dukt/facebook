@@ -1,7 +1,7 @@
 <?php
 /**
  * @link      https://dukt.net/craft/facebook/
- * @copyright Copyright (c) 2017, Dukt
+ * @copyright Copyright (c) 2018, Dukt
  * @license   https://dukt.net/craft/facebook/docs/license
  */
 
@@ -10,6 +10,7 @@ namespace dukt\facebook\controllers;
 use Craft;
 use craft\web\Controller;
 use dukt\facebook\Plugin as Facebook;
+use yii\web\Response;
 
 /**
  * Class SettingsController
@@ -23,11 +24,11 @@ class SettingsController extends Controller
     // =========================================================================
 
     /**
-     * Settings
+     * Settings index.
      *
-     * @return string
+     * @return Response
      */
-    public function actionIndex()
+    public function actionIndex(): Response
     {
         $token = Facebook::$plugin->getOauth()->getToken();
 
@@ -65,9 +66,9 @@ class SettingsController extends Controller
     /**
      * OAuth settings.
      *
-     * @return string
+     * @return Response
      */
-    public function actionOauth()
+    public function actionOauth(): Response
     {
         $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
 
@@ -80,9 +81,10 @@ class SettingsController extends Controller
     /**
      * Save OAuth settings.
      *
-     * @return \yii\web\Response
+     * @return Response
+     * @throws \yii\web\BadRequestHttpException
      */
-    public function actionSaveOauthSettings()
+    public function actionSaveOauthSettings(): Response
     {
         $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
         $settings = $plugin->getSettings();

@@ -1,7 +1,7 @@
 <?php
 /**
  * @link      https://dukt.net/craft/facebook/
- * @copyright Copyright (c) 2017, Dukt
+ * @copyright Copyright (c) 2018, Dukt
  * @license   https://dukt.net/craft/facebook/docs/license
  */
 
@@ -50,6 +50,7 @@ class Cache extends Component
      * @param null $enableCache
      *
      * @return bool
+     * @throws \Exception
      */
     public function set($id, $value, $expire = null, $dependency = null, $enableCache = null)
     {
@@ -79,6 +80,7 @@ class Cache extends Component
      * @param string $format
      *
      * @return string
+     * @throws \Exception
      */
     private function _formatDuration($cacheDuration, $format = '%s')
     {

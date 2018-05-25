@@ -1,7 +1,7 @@
 <?php
 /**
  * @link      https://dukt.net/craft/facebook/
- * @copyright Copyright (c) 2017, Dukt
+ * @copyright Copyright (c) 2018, Dukt
  * @license   https://dukt.net/craft/facebook/docs/license
  */
 
@@ -27,6 +27,7 @@ class Reports extends Component
      * Returns the Insights report.
      *
      * @return array|mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getInsightsReport()
     {
@@ -42,7 +43,7 @@ class Reports extends Component
             if ($token) {
                 // Object
 
-                $object = Facebook::$plugin->getApi()->get('/'.$facebookInsightsObjectId, ['metadata' => 1, 'fields' => 'name']);;
+                $object = Facebook::$plugin->getApi()->get('/'.$facebookInsightsObjectId, ['metadata' => 1, 'fields' => 'name,picture']);
                 $objectType = $object['metadata']['type'];
                 $message = false;
 
@@ -55,10 +56,12 @@ class Reports extends Component
 
                         $supportedObject = true;
 
-                        $insights = Facebook::$plugin->getApi()->get('/'.$facebookInsightsObjectId.'/insights', [
-                            'metric' => 'page_fans,page_impressions_unique',
-                            'since' => date('Y-m-d', strtotime('-6 day')),
-                            'until' => date('Y-m-d', strtotime('+1 day')),
+                        $insights = Facebook::$plugin->getApi()->getInsights($facebookInsightsObjectId, [
+                            'query' => [
+                                'metric' => 'page_fans,page_impressions_unique',
+                                'since' => date('Y-m-d', strtotime('-6 day')),
+                                'until' => date('Y-m-d', strtotime('+1 day')),
+                            ]
                         ]);
 
                         foreach ($insights['data'] as $insight) {
