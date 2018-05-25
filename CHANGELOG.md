@@ -1,7 +1,7 @@
 Changelog
 =========
 
-## Unreleased
+## 2.0.1 - 2018-05-25
 
 ### Added
 - Added profile picture to the Insights widget.
