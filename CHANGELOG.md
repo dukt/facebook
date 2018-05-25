@@ -1,10 +1,16 @@
 Changelog
 =========
 
-## 2.0.1 - Unreleased
+## Unreleased
+
+### Added
+- Added profile picture to the Insights widget.
 
 ### Changed
 - Updated to require craftcms/cms `^3.0.0-RC1`.
+
+### Fixed
+- Fixed a bug where the Insights widget would throw an error because insight data was not requested using a page access token.
 
 ## 2.0.0 - 2017-12-05
 
