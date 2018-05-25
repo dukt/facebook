@@ -74,16 +74,21 @@ class Api extends Component
     /**
      * Return the authenticated Facebook OAuth client.
      *
+     * @param null $accessToken
+     *
      * @return Client
      */
-    private function getClient()
+    private function getClient($accessToken = null): Client
     {
-        $token = Facebook::$plugin->getOauth()->getToken();
+        if(!$accessToken) {
+            $token = Facebook::$plugin->getOauth()->getToken();
+            $accessToken = $token->getToken();
+        }
 
         $headers = [];
 
-        if ($token) {
-            $headers['Authorization'] = 'Bearer '.$token->getToken();
+        if ($accessToken) {
+            $headers['Authorization'] = 'Bearer '.$accessToken;
         }
 
         $options = [
