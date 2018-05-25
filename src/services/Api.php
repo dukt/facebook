@@ -9,6 +9,7 @@ namespace dukt\facebook\services;
 
 use Craft;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use yii\base\Component;
 use dukt\facebook\Plugin as Facebook;
 
@@ -43,17 +44,49 @@ class Api extends Component
      */
     public function get($uri = null, $query = null, $headers = null)
     {
-        $client = $this->getClient();
+        try {
+            $client = $this->getClient();
 
-        $options['query'] = ($query ? $query : []);
+            $options['query'] = ($query ? $query : []);
 
-        if ($headers) {
-            $options['headers'] = $headers;
+            if ($headers) {
+                $options['headers'] = $headers;
+            }
+
+            $response = $client->request('GET', $uri, $options);
+
+            return json_decode($response->getBody(), true);
+        } catch (RequestException $e) {
+            Craft::error('Error requesting Facebook’s API: '.$e->getResponse()->getBody(), __METHOD__);
+            throw $e;
         }
+    }
 
-        $response = $client->request('GET', $uri, $options);
+    /**
+     * @param       $facebookInsightsObjectId
+     * @param array $options
+     *
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getInsights($facebookInsightsObjectId, array $options = [])
+    {
+        try {
+            $pageAccessTokenResponse = $this->get('/'.$facebookInsightsObjectId, ['fields' => 'access_token']);
 
-        return json_decode($response->getBody(), true);
+            if(empty($pageAccessTokenResponse['access_token'])) {
+                throw new \Exception('Couldn’t retrieve page access token for '.$facebookInsightsObjectId);
+            }
+
+            $client = $this->getClient($pageAccessTokenResponse['access_token']);
+
+            $response = $client->request('GET', '/'.$facebookInsightsObjectId.'/insights', $options);
+
+            return json_decode($response->getBody(), true);
+        } catch (RequestException $e) {
+            Craft::error('Error requesting insights: '.$e->getResponse()->getBody(), __METHOD__);
+            throw $e;
+        }
     }
 
     // Private Methods
