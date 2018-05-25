@@ -19,6 +19,7 @@ Craft.FacebookInsightsWidget = Garnish.Base.extend(
         this.$body = $('.body', this.$widget);
         this.$infos = $('.infos', this.$widget);
         this.$counts = $('.counts', this.$widget);
+        this.$picture = $('.picture', this.$widget);
 
         this.$spinner = $('<div class="spinner hidden" />').appendTo(this.$body);
         this.$error = $('<div class="error hidden" />').appendTo(this.$body);
@@ -45,6 +46,9 @@ Craft.FacebookInsightsWidget = Garnish.Base.extend(
                 if(response.supportedObject)
                 {
                     var object = response.object;
+
+                    var pagePictureUrl = object.picture.data.url;
+                    $('<img height="50" src="'+pagePictureUrl+'" />').appendTo(this.$picture);
 
                     var $infoLink = $('<a target="_blank" href="https://www.facebook.com/'+object.id+'/">'+object.name+'</a>');
 
