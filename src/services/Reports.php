@@ -55,7 +55,7 @@ class Reports extends Component
                         // Insights for objects of type `page`
 
                         $supportedObject = true;
-                        
+
                         $insights = Facebook::$plugin->getApi()->getInsights($facebookInsightsObjectId, [
                             'query' => [
                                 'metric' => 'page_fans,page_impressions_unique',
