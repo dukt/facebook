@@ -1,7 +1,7 @@
 <?php
 /**
  * @link      https://dukt.net/craft/facebook/
- * @copyright Copyright (c) 2017, Dukt
+ * @copyright Copyright (c) 2018, Dukt
  * @license   https://dukt.net/craft/facebook/docs/license
  */
 
@@ -11,6 +11,7 @@ use Craft;
 use craft\web\Controller;
 use dukt\facebook\Plugin as Facebook;
 use Exception;
+use yii\web\Response;
 
 /**
  * Class OauthController
@@ -26,9 +27,9 @@ class OauthController extends Controller
     /**
      * OAuth connect.
      *
-     * @return \yii\web\Response
+     * @return Response
      */
-    public function actionConnect()
+    public function actionConnect(): Response
     {
         $provider = Facebook::$plugin->getOauth()->getOauthProvider();
 
@@ -45,9 +46,9 @@ class OauthController extends Controller
     /**
      * OAuth callback.
      *
-     * @return \yii\web\Response
+     * @return Response
      */
-    public function actionCallback()
+    public function actionCallback(): Response
     {
         $provider = Facebook::$plugin->getOauth()->getOauthProvider();
 
@@ -66,7 +67,6 @@ class OauthController extends Controller
 
             // Redirect
             Craft::$app->getSession()->setNotice(Craft::t('facebook', "Connected to Facebook."));
-
         } catch (Exception $e) {
             // Failed to get the token credentials or user details.
             Craft::$app->getSession()->setError($e->getMessage());
@@ -78,21 +78,19 @@ class OauthController extends Controller
     /**
      * OAuth disconnect.
      *
-     * @return \yii\web\Response
+     * @return Response
      */
-    public function actionDisconnect()
+    public function actionDisconnect(): Response
     {
-        if (Facebook::$plugin->getOauth()->deleteToken())
-        {
+        if (Facebook::$plugin->getOauth()->deleteToken()) {
             Craft::$app->getSession()->setNotice(Craft::t('facebook', "Disconnected from Facebook."));
-        }
-        else
-        {
+        } else {
             Craft::$app->getSession()->setError(Craft::t('facebook', "Couldn’t disconnect from Facebook"));
         }
 
         // redirect
         $redirect = Craft::$app->getRequest()->referrer;
+
         return $this->redirect($redirect);
     }
 }

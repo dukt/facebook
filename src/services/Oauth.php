@@ -1,7 +1,7 @@
 <?php
 /**
  * @link      https://dukt.net/craft/facebook/
- * @copyright Copyright (c) 2017, Dukt
+ * @copyright Copyright (c) 2018, Dukt
  * @license   https://dukt.net/craft/facebook/docs/license
  */
 
@@ -44,24 +44,22 @@ class Oauth extends Component
 
         $clientId = Facebook::$plugin->getClientId();
 
-        if($clientId) {
+        if ($clientId) {
             $options['clientId'] = $clientId;
         }
 
         $clientSecret = Facebook::$plugin->getClientSecret();
 
-        if($clientSecret) {
+        if ($clientSecret) {
             $options['clientSecret'] = $clientSecret;
         }
 
-        if(!isset($options['graphApiVersion']))
-        {
+        if (!isset($options['graphApiVersion'])) {
             $options['graphApiVersion'] = Facebook::$plugin->getSettings()->apiVersion;
         }
 
-        if(!isset($options['redirectUri']))
-        {
-            $options['redirectUri'] = UrlHelper::actionUrl('facebook/oauth/callback');
+        if (!isset($options['redirectUri'])) {
+            $options['redirectUri'] = $this->getRedirectUri();
         }
 
         return new FacebookProvider($options);
@@ -100,16 +98,13 @@ class Oauth extends Component
      */
     public function getToken()
     {
-        if($this->token)
-        {
+        if ($this->token) {
             return $this->token;
-        }
-        else
-        {
+        } else {
             $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
             $settings = $plugin->getSettings();
 
-            if($settings->token) {
+            if ($settings->token) {
 
                 $token = new AccessToken([
                     'access_token' => (isset($settings->token['accessToken']) ? $settings->token['accessToken'] : null),
@@ -119,8 +114,7 @@ class Oauth extends Component
                     'values' => (isset($settings->token['values']) ? $settings->token['values'] : null),
                 ]);
 
-                if($token->getExpires() && $token->hasExpired())
-                {
+                if ($token->getExpires() && $token->hasExpired()) {
                     $provider = $this->getOauthProvider();
                     $grant = new \League\OAuth2\Client\Grant\RefreshToken();
                     $newToken = $provider->getAccessToken($grant, ['refresh_token' => $token->getRefreshToken()]);
@@ -164,6 +158,17 @@ class Oauth extends Component
      */
     public function getRedirectUri()
     {
-        return UrlHelper::actionUrl('facebook/oauth/callback');
+        $url = UrlHelper::actionUrl('facebook/oauth/callback');
+        $parsedUrl = parse_url($url);
+
+        if (isset($parsedUrl['query'])) {
+            parse_str($parsedUrl['query'], $query);
+
+            $query = http_build_query($query);
+
+            return $parsedUrl['scheme'].'://'.$parsedUrl['host'].$parsedUrl['path'].'?'.$query;
+        }
+
+        return $url;
     }
 }

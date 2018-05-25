@@ -37,8 +37,7 @@ class InsightsWidget extends \craft\base\Widget
      */
     public function getBodyHtml()
     {
-        if(Facebook::$plugin->isConfigured())
-        {
+        if (Facebook::$plugin->isConfigured()) {
             Craft::$app->getView()->registerAssetBundle(InsightsWidgetAsset::class);
             Craft::$app->getView()->registerJs('new Craft.FacebookInsightsWidget("widget'.$this->id.'");');
 

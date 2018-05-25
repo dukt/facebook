@@ -1,7 +1,7 @@
 <?php
 /**
  * @link      https://dukt.net/craft/facebook/
- * @copyright Copyright (c) 2017, Dukt
+ * @copyright Copyright (c) 2018, Dukt
  * @license   https://dukt.net/craft/facebook/docs/license
  */
 
@@ -9,6 +9,7 @@ namespace dukt\facebook\controllers;
 
 use craft\web\Controller;
 use dukt\facebook\Plugin as Facebook;
+use yii\web\Response;
 
 /**
  * Class ReportsController
@@ -24,9 +25,10 @@ class ReportsController extends Controller
     /**
      * Returns the insights report.
      *
-     * @return \yii\web\Response
+     * @return Response
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function actionGetInsightsReport()
+    public function actionGetInsightsReport(): Response
     {
         $report = Facebook::$plugin->getReports()->getInsightsReport();
 

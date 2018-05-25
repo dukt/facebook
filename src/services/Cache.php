@@ -1,7 +1,7 @@
 <?php
 /**
  * @link      https://dukt.net/craft/facebook/
- * @copyright Copyright (c) 2017, Dukt
+ * @copyright Copyright (c) 2018, Dukt
  * @license   https://dukt.net/craft/facebook/docs/license
  */
 
@@ -33,8 +33,7 @@ class Cache extends Component
      */
     public function get($id)
     {
-        if(Facebook::$plugin->getSettings()->enableCache == true)
-        {
+        if (Facebook::$plugin->getSettings()->enableCache == true) {
             $cacheKey = $this->getCacheKey($id);
 
             return Craft::$app->cache->get($cacheKey);
@@ -51,20 +50,18 @@ class Cache extends Component
      * @param null $enableCache
      *
      * @return bool
+     * @throws \Exception
      */
     public function set($id, $value, $expire = null, $dependency = null, $enableCache = null)
     {
-        if(is_null($enableCache))
-        {
+        if (is_null($enableCache)) {
             $enableCache = Facebook::$plugin->getSettings()->enableCache;
         }
 
-        if($enableCache)
-        {
+        if ($enableCache) {
             $cacheKey = $this->getCacheKey($id);
 
-            if(!$expire)
-            {
+            if (!$expire) {
                 $expire = Facebook::$plugin->getSettings()->cacheDuration;
                 $expire = $this->_formatDuration($expire);
             }
@@ -83,8 +80,9 @@ class Cache extends Component
      * @param string $format
      *
      * @return string
+     * @throws \Exception
      */
-    private function _formatDuration($cacheDuration, $format='%s')
+    private function _formatDuration($cacheDuration, $format = '%s')
     {
         $cacheDuration = new DateInterval($cacheDuration);
 

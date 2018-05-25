@@ -1,7 +1,7 @@
 <?php
 /**
  * @link      https://dukt.net/craft/facebook/
- * @copyright Copyright (c) 2017, Dukt
+ * @copyright Copyright (c) 2018, Dukt
  * @license   https://dukt.net/craft/facebook/docs/license
  */
 
@@ -39,6 +39,7 @@ class Api extends Component
      * @param null $headers
      *
      * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function get($uri = null, $query = null, $headers = null)
     {
@@ -46,8 +47,7 @@ class Api extends Component
 
         $options['query'] = ($query ? $query : []);
 
-        if($headers)
-        {
+        if ($headers) {
             $options['headers'] = $headers;
         }
 
@@ -80,11 +80,9 @@ class Api extends Component
     {
         $token = Facebook::$plugin->getOauth()->getToken();
 
-        $headers = array();
+        $headers = [];
 
-        if($token)
-        {
-
+        if ($token) {
             $headers['Authorization'] = 'Bearer '.$token->getToken();
         }
 

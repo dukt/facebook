@@ -1,7 +1,7 @@
 {
   "name": "dukt/facebook",
   "description": "Facebook Insights widget for the dashboard.",
-  "version": "2.0.0-beta.2",
+  "version": "2.0.0",
   "type": "craft-plugin",
   "license": "proprietary",
   "keywords": [
@@ -15,8 +15,15 @@
       "homepage": "https://dukt.net/"
     }
   ],
+  "support": {
+    "email": "support@dukt.net",
+    "issues": "https://github.com/dukt/facebook/issues?state=open",
+    "source": "https://github.com/dukt/facebook",
+    "docs": "https://github.com/dukt/facebook",
+    "rss": "https://github.com/dukt/facebook/commits/v2.atom"
+  },
   "require": {
-    "craftcms/cms": "~3.0.0-beta.1",
+    "craftcms/cms": "^3.0.0-RC1",
     "league/oauth2-client": "~2.2",
     "league/oauth2-facebook": "~2.0"
   },
@@ -29,7 +36,7 @@
     "name": "Facebook",
     "handle": "facebook",
     "schemaVersion": "1.0.0",
-    "documentationUrl": "https://dukt.net/facebook/docs",
-    "changelogUrl": "https://dukt.net/facebook/changelog.md?craft=3"
+    "documentationUrl": "https://github.com/dukt/facebook/tree/v2-docs",
+    "changelogUrl": "https://raw.githubusercontent.com/dukt/facebook/v2/CHANGELOG.md"
   }
 }

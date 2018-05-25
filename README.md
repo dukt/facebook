@@ -1,16 +1,18 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/dukt/facebook/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/dukt/facebook/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/dukt/facebook/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/dukt/facebook/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/dukt/facebook/badges/build.png?b=master)](https://scrutinizer-ci.com/g/dukt/facebook/build-status/master) [![Code Intelligence Status](https://scrutinizer-ci.com/g/dukt/facebook/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
+
 # Facebook for Craft CMS
 
 Facebook Insights widget for the dashboard.
 
-Learn more about the Facebook plugin for Craft CMS at [dukt.net/facebook](https://dukt.net/facebook). 
+## Requirements
 
-## How to install Facebook 2 Beta
+This plugin requires Craft CMS 3.0.0-beta.20 or later.
 
-Installation instructions can be found in [Facebook 2 Documentation](https://github.com/dukt/facebook/tree/docs)
+## How to install Facebook 2
+
+Installation instructions can be found in [Facebook 2 Documentation](https://github.com/dukt/facebook/tree/v2-docs)
 
 ## Resources
 
-- [Plugin Overview](https://dukt.net/facebook)
-- [Documentation](https://github.com/dukt/facebook/tree/docs)
-
-[Dukt.net](https://dukt.net/) © 2017 - All rights reserved
+- [Facebook 2 Documentation](https://github.com/dukt/facebook/tree/v2-docs)
+- [Facebook 2 Overview](https://dukt.net/facebook)
