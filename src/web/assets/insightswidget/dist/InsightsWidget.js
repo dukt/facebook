@@ -48,7 +48,7 @@ Craft.FacebookInsightsWidget = Garnish.Base.extend(
                     var object = response.object;
 
                     var pagePictureUrl = object.picture.data.url;
-                    $('<img src="'+pagePictureUrl+'" />').appendTo(this.$picture);
+                    $('<img height="50" src="'+pagePictureUrl+'" />').appendTo(this.$picture);
 
                     var $infoLink = $('<a target="_blank" href="https://www.facebook.com/'+object.id+'/">'+object.name+'</a>');
 
