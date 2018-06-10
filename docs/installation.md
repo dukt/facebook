@@ -1,3 +1,5 @@
+# Installation
+
 To install the plugin, follow these instructions.
 
 1. Open your terminal and go to your Craft project:

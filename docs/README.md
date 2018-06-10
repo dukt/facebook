@@ -1,4 +1,4 @@
-# Facebook plugin for Craft CMS 3.0
+# Introduction
 
 Facebook Insights widget for Craft’s dashboard.
 

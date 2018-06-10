@@ -2,11 +2,11 @@
 
 ## Getting Started
 
-- [Introduction](en/introduction.md)
-- [Requirements](en/requirements.md)
-- [Installation](en/installation.md)
-- [Configuration](en/configuration.md)
+- [Introduction](docs/introduction.md)
+- [Requirements](docs/requirements.md)
+- [Installation](docs/installation.md)
+- [Configuration](docs/configuration.md)
 
 ## Widgets
 
-- [Insights Widget](en/insights-widget.md)
+- [Insights Widget](docs/insights-widget.md)
