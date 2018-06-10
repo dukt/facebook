@@ -1,6 +1,6 @@
 # Configuration
 
-Facebook comes with a bunch of config settings that give you control over various aspects of its behavior.
+Facebook supports several configuration settings. You can override their values in your `config/facebook.php` file.
 
 ## apiVersion
 
