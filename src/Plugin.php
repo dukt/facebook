@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link      https://dukt.net/facebook/
+ * @copyright Copyright (c) 2018, Dukt
+ * @license   https://github.com/dukt/facebook/blob/master/LICENSE.md
+ */
 
 namespace dukt\facebook;
 
