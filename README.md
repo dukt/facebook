@@ -1,12 +1,3 @@
-# Facebook Documentation
+# Facebook 2 Documentation
 
-## Getting Started
-
-- [Introduction](docs/introduction.md)
-- [Requirements](docs/requirements.md)
-- [Installation](docs/installation.md)
-- [Configuration](docs/configuration.md)
-
-## Widgets
-
-- [Insights Widget](docs/insights-widget.md)
+Facebook 2 documentation can be found at [https://docs.dukt.net/facebook/v2](https://docs.dukt.net/facebook/v2).
