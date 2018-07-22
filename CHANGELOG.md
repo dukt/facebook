@@ -6,6 +6,9 @@ Changelog
 ### Added
 - Added the Facebook user picture to the plugin’s settings.
 
+### Changed
+- Updated default Facebook API version to v3.0.
+
 ## 2.0.1 - 2018-05-25
 
 ### Added
