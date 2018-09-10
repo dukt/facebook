@@ -8,7 +8,7 @@
 ] %}
 
 {% set title = "Facebook"|t('facebook') %}
-{% set docsUrl = 'https://dukt.net/craft/facebook/docs' %}
+{% set docsUrl = 'https://docs.dukt.net/facebook/v2/' %}
 
 {% set content %}
 
@@ -18,6 +18,10 @@
         {% if account %}
 
             <p>{{'You are authenticated to Facebook with the following account'|t('facebook') }} :</p>
+
+            {% if account.pictureUrl %}
+                <img src="{{ account.pictureUrl }}" height="46" />
+            {% endif %}
 
             <ul>
                 <li><strong>{{ 'UID'|t('facebook') }} : </strong> {{ account.id }}</li>

@@ -18,7 +18,7 @@ class Settings extends Model
      *
      * @var string
      */
-    public $apiVersion = 'v2.8';
+    public $apiVersion = 'v3.0';
 
     /**
      * The amount of time cache should last.

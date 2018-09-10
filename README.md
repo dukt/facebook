@@ -10,9 +10,9 @@ This plugin requires Craft CMS 3.0.0-beta.20 or later.
 
 ## How to install Facebook 2
 
-Installation instructions can be found in [Facebook 2 Documentation](https://github.com/dukt/facebook/tree/v2-docs)
+Installation instructions can be found in [Facebook 2 Documentation](https://docs.dukt.net/facebook/v2)
 
 ## Resources
 
-- [Facebook 2 Documentation](https://github.com/dukt/facebook/tree/v2-docs)
+- [Facebook 2 Documentation](https://docs.dukt.net/facebook/v2)
 - [Facebook 2 Overview](https://dukt.net/facebook)

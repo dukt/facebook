@@ -1,8 +1,8 @@
 <?php
 /**
- * @link      https://dukt.net/craft/facebook/
+ * @link      https://dukt.net/facebook/
  * @copyright Copyright (c) 2018, Dukt
- * @license   https://dukt.net/craft/facebook/docs/license
+ * @license   https://github.com/dukt/facebook/blob/master/LICENSE.md
  */
 
 namespace dukt\facebook\controllers;

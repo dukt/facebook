@@ -1,6 +1,17 @@
 Changelog
 =========
 
+## 2.0.2 - 2018-09-10
+
+### Added
+- Added the Facebook user picture to the plugin’s settings.
+
+### Changed
+- Updated default Facebook API version to v3.0.
+
+### Fixed
+- Fixed Craft 3 upgrade migration.
+
 ## 2.0.1 - 2018-05-25
 
 ### Added
