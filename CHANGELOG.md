@@ -1,7 +1,7 @@
 Changelog
 =========
 
-## Unreleased
+## 2.0.2 - 2018-09-10
 
 ### Added
 - Added the Facebook user picture to the plugin’s settings.
