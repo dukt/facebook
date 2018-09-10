@@ -9,6 +9,9 @@ Changelog
 ### Changed
 - Updated default Facebook API version to v3.0.
 
+### Fixed
+- Fixed Craft 3 upgrade migration.
+
 ## 2.0.1 - 2018-05-25
 
 ### Added
