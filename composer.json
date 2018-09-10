@@ -1,7 +1,7 @@
 {
   "name": "dukt/facebook",
   "description": "Facebook Insights widget for the dashboard.",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "type": "craft-plugin",
   "license": "proprietary",
   "keywords": [
@@ -35,7 +35,7 @@
   "extra": {
     "name": "Facebook",
     "handle": "facebook",
-    "schemaVersion": "1.0.0",
+    "schemaVersion": "1.0.1",
     "documentationUrl": "https://docs.dukt.net/facebook/v2/",
     "changelogUrl": "https://raw.githubusercontent.com/dukt/facebook/v2/CHANGELOG.md"
   }
