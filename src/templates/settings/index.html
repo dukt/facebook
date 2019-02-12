@@ -68,7 +68,7 @@
         <p class="error">{{ error }}</p>
 
         <div class="buttons">
-			{% if token %}
+			{% if settings.token %}
                 <a class="btn small" href="{{ actionUrl('facebook/oauth/disconnect') }}">{{'Disconnect'|t('facebook') }}</a>
 			{% endif %}
             <a class="btn small" href="{{ url('facebook/settings/oauth') }}">{{ 'OAuth Settings'|t('facebook') }}</a>

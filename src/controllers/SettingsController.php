@@ -30,10 +30,10 @@ class SettingsController extends Controller
      */
     public function actionIndex(): Response
     {
-        $token = Facebook::$plugin->getOauth()->getToken();
+        try {
+            $token = Facebook::$plugin->getOauth()->getToken();
 
-        if ($token) {
-            try {
+            if ($token) {
                 $account = Facebook::$plugin->getCache()->get(['getResourceOwner', $token]);
 
                 if (!$account) {
@@ -41,15 +41,15 @@ class SettingsController extends Controller
                     $account = $provider->getResourceOwner($token);
                     Facebook::$plugin->getCache()->set(['getResourceOwner', $token], $account);
                 }
-            } catch (\Exception $e) {
-                Craft::info("Couldn't get account\r\n".$e->getMessage().'\r\n'.$e->getTraceAsString(), __METHOD__);
-
-                if (method_exists($e, 'getResponse')) {
-                    Craft::info("GuzzleErrorResponse\r\n".$e->getResponse(), __METHOD__);
-                }
-
-                $error = $e->getMessage();
             }
+        } catch (\Exception $e) {
+            Craft::info("Couldn't get account\r\n".$e->getMessage().'\r\n'.$e->getTraceAsString(), __METHOD__);
+
+            if (method_exists($e, 'getResponse')) {
+                Craft::info("GuzzleErrorResponse\r\n".$e->getResponse(), __METHOD__);
+            }
+
+            $error = $e->getMessage();
         }
 
         $plugin = Craft::$app->getPlugins()->getPlugin('facebook');

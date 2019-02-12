@@ -1,6 +1,11 @@
 Changelog
 =========
 
+## 2.0.3 - Unreleased
+
+### Fixed
+- Fixed a bug where the settings page was throwing an error when the OAuth token got expired.
+
 ## 2.0.2 - 2018-09-10
 
 ### Added
