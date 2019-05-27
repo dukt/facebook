@@ -1,8 +1,8 @@
-# Craft Facebook
+# Deprecated
+Facebook for Craft CMS 2 is no longer supported. The Craft 3 version of this plugin can be found here: [dukt/facebook](https://github.com/dukt/facebook) and can be installed via the Plugin Store in Craft’s control panel.
 
+# Facebook for Craft CMS 2
 Facebook Insights widget for the dashboard.
-
--------------------------------------------
 
 ## Requirements
 
