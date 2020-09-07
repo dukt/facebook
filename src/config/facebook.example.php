@@ -5,7 +5,7 @@ return [
     /**
      * Graph API version used to request the Facebook API.
      */
-    'apiVersion' => 'v2.8',
+    'apiVersion' => 'v8.0',
 
     /**
      * The amount of time cache should last.
@@ -37,5 +37,5 @@ return [
     /**
      * OAuth scope.
      */
-    'oauthScope' => ['public_profile', 'manage_pages', 'read_insights'],
+    'oauthScope' => ['public_profile', 'pages_manage_metadata', 'read_insights'],
 ];
