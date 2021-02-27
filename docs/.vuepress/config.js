@@ -1,6 +1,6 @@
 module.exports = {
-    title: 'Facebook 2 Documentation',
-    description: 'Facebook 2 Documentation',
+    title: 'Facebook Documentation',
+    description: 'Facebook Documentation',
     base: '/docs/facebook/v2/',
     ga: 'UA-1547168-34',
     themeConfig: {
@@ -19,7 +19,7 @@ module.exports = {
         sidebar: {
             '/': [
                 {
-                    title: 'Getting Started',
+                    title: 'Facebook plugin for Craft CMS',
                     collapsable: false,
                     children: [
                         '',
