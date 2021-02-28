@@ -2,7 +2,7 @@ module.exports = {
     title: 'Facebook Documentation',
     description: 'Facebook Documentation',
     base: '/docs/facebook/v2/',
-    ga: 'UA-1547168-34',
+    ga: 'UA-1547168-20',
     themeConfig: {
         docsRepo: 'dukt/facebook',
         docsDir: 'docs',
