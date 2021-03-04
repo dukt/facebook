@@ -2,14 +2,14 @@ module.exports = {
     title: 'Facebook Documentation',
     description: 'Facebook Documentation',
     base: '/docs/facebook/v2/',
-    plugins: [
-        [
-            '@vuepress/google-analytics',
-            {
-                'ga': 'UA-1547168-20'
-            }
-        ]
-    ],
+    plugins: {
+        '@vuepress/google-analytics': {
+            'ga': 'UA-1547168-20'
+        },
+        'sitemap': {
+            hostname: 'https://dukt.net/docs/facebook/v2/'
+        },
+    },
     themeConfig: {
         docsRepo: 'dukt/facebook',
         docsDir: 'docs',
