@@ -74,7 +74,8 @@ class SettingsController extends Controller
 
         return $this->renderTemplate('facebook/settings/oauth', [
             'redirectUri' => Facebook::$plugin->oauth->getRedirectUri(),
-            'settings' => $plugin->getSettings(),
+            'oauthClientId' => Facebook::$plugin->getClientId(false),
+            'oauthClientSecret' => Facebook::$plugin->getClientSecret(false),
         ]);
     }
 

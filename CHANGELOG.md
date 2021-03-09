@@ -3,6 +3,9 @@ Changelog
 
 ## Unreleased
 
+### Added
+- Added environment variables support for the OAuth client ID and client secret.
+
 ### Changed
 - Facebook OAuth tokens are now stored in a `facebook_accounts` table instead of in the plugin’s settings.
 - Deprecated `\dukt\facebook\models\Settings::$token`.

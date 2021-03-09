@@ -101,36 +101,37 @@ trait PluginTrait
         return false;
     }
 
-    public function getClientId()
+    /**
+     * Gets the OAuth client ID
+     *
+     * @param bool $parse
+     * @return bool|mixed|string|null
+     */
+    public function getClientId(bool $parse = true)
     {
         $clientId = Facebook::$plugin->getSettings()->oauthClientId;
 
-        if($clientId) {
-            return $clientId;
-        } else {
-            $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
-            $settings = $plugin->getSettings();
-
-            if(!empty($settings['oauthClientId']))
-            {
-                return $settings['oauthClientId'];
-            }
+        if (!$clientId) {
+            return null;
         }
+
+        return $parse ? Craft::parseEnv($clientId) : $clientId;
     }
-    public function getClientSecret()
+
+    /**
+     * Gets the OAuth client secret
+     *
+     * @param bool $parse
+     * @return bool|mixed|string|null
+     */
+    public function getClientSecret(bool $parse = true)
     {
         $clientSecret = Facebook::$plugin->getSettings()->oauthClientSecret;
 
-        if($clientSecret) {
-            return $clientSecret;
-        } else {
-            $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
-            $settings = $plugin->getSettings();
-
-            if(!empty($settings['oauthClientSecret']))
-            {
-                return $settings['oauthClientSecret'];
-            }
+        if (!$clientSecret) {
+            return null;
         }
+
+        return $parse ? Craft::parseEnv($clientSecret) : $clientSecret;
     }
 }
