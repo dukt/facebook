@@ -4,6 +4,8 @@ Changelog
 ## Unreleased
 
 ### Changed
+- Facebook OAuth tokens are now stored in a `facebook_accounts` table instead of in the plugin’s settings.
+- Deprecated `\dukt\facebook\models\Settings::$token`.
 - Updated the API version to v8.0.
 
 ### Fixed
