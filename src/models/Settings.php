@@ -65,9 +65,8 @@ class Settings extends Model
     public $oauthScope = ['public_profile', 'read_insights'];
 
     /**
-     * Token
-     *
-     * @var mixed|null
+     * @var mixed|null The OAuth token
+     * @deprecated in 2.1.5
      */
     public $token;
 

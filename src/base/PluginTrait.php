@@ -24,6 +24,17 @@ use dukt\facebook\Plugin as Facebook;
 trait PluginTrait
 {
     /**
+     * Returns the accounts service.
+     *
+     * @return \dukt\facebook\services\Accounts The accounts service
+     */
+    public function getAccounts()
+    {
+        /** @var Facebook $this */
+        return $this->get('accounts');
+    }
+
+    /**
      * Returns the api service.
      *
      * @return \dukt\facebook\services\Api The api service
