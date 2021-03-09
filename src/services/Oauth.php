@@ -7,10 +7,8 @@
 
 namespace dukt\facebook\services;
 
-use Craft;
 use craft\helpers\Json;
 use craft\helpers\UrlHelper;
-use dukt\facebook\Plugin;
 use dukt\facebook\Plugin as Facebook;
 use League\OAuth2\Client\Provider\Facebook as FacebookProvider;
 use yii\base\Component;
