@@ -1,15 +1,16 @@
 Changelog
 =========
 
-## Unreleased
+## 2.0.4 - 2021-03-10
 
 ### Added
-- Added environment variables support for the OAuth client ID and client secret.
+- Added environment variables support for the OAuth client ID and secret.
 
 ### Changed
-- Facebook OAuth tokens are now stored in a `facebook_accounts` table instead of in the plugin’s settings.
+- OAuth tokens are now stored in a `facebook_accounts` table instead of in the plugin’s settings.
 - Deprecated `\dukt\facebook\models\Settings::$token`.
 - Updated the API version to v8.0.
+- Bumped the schema version to 1.0.2.
 
 ### Fixed
 - Fixed the icon of the Insights widget.
