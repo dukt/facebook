@@ -1,13 +1,13 @@
 <?php
 /**
  * @link      https://dukt.net/facebook/
- * @copyright Copyright (c) 2019, Dukt
+ * @copyright Copyright (c) 2021, Dukt
  * @license   https://github.com/dukt/facebook/blob/master/LICENSE.md
  */
 
 namespace dukt\facebook\services;
 
-use Craft;
+use craft\helpers\Json;
 use craft\helpers\UrlHelper;
 use dukt\facebook\Plugin as Facebook;
 use League\OAuth2\Client\Provider\Facebook as FacebookProvider;
@@ -34,9 +34,9 @@ class Oauth extends Component
     // =========================================================================
 
     /**
-     * Returns a Facebook provider object.
+     * Gets the Facebook OAuth provider
      *
-     * @return Facebook
+     * @return FacebookProvider
      */
     public function getOauthProvider()
     {
@@ -66,33 +66,27 @@ class Oauth extends Component
     }
 
     /**
-     * Saves a token.
+     * Saves a token
      *
      * @param AccessToken $token
      */
     public function saveToken(AccessToken $token)
     {
-        // Save token and token secret in the plugin's settings
+        $account = Facebook::$plugin->getAccounts()->getAccount();
 
-        $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
-
-        $settings = $plugin->getSettings();
-
-        $token = [
+        $account->token = [
             'accessToken' => $token->getToken(),
             'expires' => $token->getExpires(),
             'refreshToken' => $token->getRefreshToken(),
             'resourceOwnerId' => $token->getResourceOwnerId(),
             'values' => $token->getValues(),
-        ];
+        ];;
 
-        $settings->token = $token;
-
-        Craft::$app->getPlugins()->savePluginSettings($plugin, $settings->getAttributes());
+        return Facebook::$plugin->getAccounts()->saveAccount($account);
     }
 
     /**
-     * Returns the OAuth token.
+     * Gets a token
      *
      * @return AccessToken|null
      */
@@ -100,59 +94,57 @@ class Oauth extends Component
     {
         if ($this->token) {
             return $this->token;
-        } else {
-            $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
-            $settings = $plugin->getSettings();
-
-            if ($settings->token) {
-
-                $token = new AccessToken([
-                    'access_token' => (isset($settings->token['accessToken']) ? $settings->token['accessToken'] : null),
-                    'expires' => (isset($settings->token['expires']) ? $settings->token['expires'] : null),
-                    'refresh_token' => (isset($settings->token['refreshToken']) ? $settings->token['refreshToken'] : null),
-                    'resource_owner_id' => (isset($settings->token['resourceOwnerId']) ? $settings->token['resourceOwnerId'] : null),
-                    'values' => (isset($settings->token['values']) ? $settings->token['values'] : null),
-                ]);
-
-                if ($token->getExpires() && $token->hasExpired()) {
-                    $provider = $this->getOauthProvider();
-                    $grant = new \League\OAuth2\Client\Grant\RefreshToken();
-                    $newToken = $provider->getAccessToken($grant, ['refresh_token' => $token->getRefreshToken()]);
-
-                    $token = new AccessToken([
-                        'access_token' => $newToken->getToken(),
-                        'expires' => $newToken->getExpires(),
-                        'refresh_token' => $settings->token['refreshToken'],
-                        'resource_owner_id' => $newToken->getResourceOwnerId(),
-                        'values' => $newToken->getValues(),
-                    ]);
-
-                    $this->saveToken($token);
-                }
-
-                return $token;
-            }
         }
+
+        $account = Facebook::$plugin->getAccounts()->getAccount();
+
+        if (!$account || !$account->token) {
+            return null;
+        }
+
+        $accountToken = Json::decode($account->token);
+
+        $token = new AccessToken([
+            'access_token' => (isset($accountToken['accessToken']) ? $accountToken['accessToken'] : null),
+            'expires' => (isset($accountToken['expires']) ? $accountToken['expires'] : null),
+            'refresh_token' => (isset($accountToken['refreshToken']) ? $accountToken['refreshToken'] : null),
+            'resource_owner_id' => (isset($accountToken['resourceOwnerId']) ? $accountToken['resourceOwnerId'] : null),
+            'values' => (isset($accountToken['values']) ? $accountToken['values'] : null),
+        ]);
+
+        if ($token->getExpires() && $token->hasExpired()) {
+            $provider = $this->getOauthProvider();
+            $grant = new \League\OAuth2\Client\Grant\RefreshToken();
+            $newToken = $provider->getAccessToken($grant, ['refresh_token' => $token->getRefreshToken()]);
+
+            $token = new AccessToken([
+                'access_token' => $newToken->getToken(),
+                'expires' => $newToken->getExpires(),
+                'refresh_token' => $accountToken['refreshToken'],
+                'resource_owner_id' => $newToken->getResourceOwnerId(),
+                'values' => $newToken->getValues(),
+            ]);
+
+            $this->saveToken($token);
+        }
+
+        return $token;
     }
 
     /**
-     * Delete Token
+     * Deletes a token
      *
      * @return bool
      */
     public function deleteToken()
     {
-        $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
+        $account = Facebook::$plugin->getAccounts()->getAccount();
 
-        $settings = $plugin->getSettings();
-        $settings->token = null;
-        Craft::$app->getPlugins()->savePluginSettings($plugin, $settings->getAttributes());
-
-        return true;
+        return Facebook::$plugin->getAccounts()->deleteAccount($account);
     }
 
     /**
-     * Get the redirect URI.
+     * Gets the redirect URI.
      *
      * @return string
      */

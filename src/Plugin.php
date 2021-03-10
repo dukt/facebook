@@ -1,7 +1,7 @@
 <?php
 /**
  * @link      https://dukt.net/facebook/
- * @copyright Copyright (c) 2019, Dukt
+ * @copyright Copyright (c) 2021, Dukt
  * @license   https://github.com/dukt/facebook/blob/master/LICENSE.md
  */
 
@@ -56,6 +56,7 @@ class Plugin extends \craft\base\Plugin
         self::$plugin = $this;
 
         $this->setComponents([
+            'accounts' => \dukt\facebook\services\Accounts::class,
             'api' => \dukt\facebook\services\Api::class,
             'cache' => \dukt\facebook\services\Cache::class,
             'oauth' => \dukt\facebook\services\Oauth::class,

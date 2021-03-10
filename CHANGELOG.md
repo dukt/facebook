@@ -1,6 +1,24 @@
 Changelog
 =========
 
+## 2.0.4 - 2021-03-10
+
+### Added
+- Added environment variables support for the OAuth client ID and secret.
+- Added `pages_read_engagement` to the list of default OAuth permissions.
+
+### Changed
+- OAuth tokens are now stored in a `facebook_accounts` table instead of in the plugin’s settings.
+- Deprecated `\dukt\facebook\models\Settings::$token`.
+- Updated the API version to v8.0.
+- Bumped the schema version to 1.0.2.
+
+### Fixed
+- Fixed the icon of the Insights widget.
+- Fixed a bug where the Facebook Insights widget was not able to pull reporting data due to an OAuth permission issue.
+- Fixed a bug where the plugin was missing OAuth permissions to function properly with Facebook Pages.
+- Fixed a bug where the Insights widget could show an error when the Facebook Page ID was not configured.
+
 ## 2.0.3 - 2019-02-12
 
 ### Fixed

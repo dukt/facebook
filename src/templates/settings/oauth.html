@@ -9,7 +9,7 @@
 ] %}
 
 {% set title = "OAuth Settings"|t('facebook') %}
-{% set docsUrl = 'https://docs.dukt.net/facebook/v2/' %}
+{% set docsUrl = 'https://dukt.net/docs/facebook/v2/' %}
 
 {% set content %}
 
@@ -36,16 +36,20 @@
 		<p>{{ 'Once the application is created Facebook will provide you with a client ID and secret.'|t('facebook') }}</p>
 		<p>{{ 'Copy the Client ID (App ID) & secret (App Secret) from the {link} under the Settings → Basic tab, paste them below and save.'|t('facebook', { link: '<a href="https://developers.facebook.com/apps">'~'Facebook API Console'|t('facebook')~'</a>'})|raw }}</p>
 
-		{{ forms.textField({
+		{{ forms.autosuggestField({
 			label: "Client ID"|t('facebook'),
 			name: 'settings[oauthClientId]',
-			value: settings.oauthClientId,
+			value: oauthClientId,
+			suggestions: craft.cp.getEnvSuggestions(),
+			suggestEnvVars: true,
 		}) }}
 
-		{{ forms.textField({
+		{{ forms.autosuggestField({
 			label: "Client Secret"|t('facebook'),
 			name: 'settings[oauthClientSecret]',
-			value: settings.oauthClientSecret,
+			value: oauthClientSecret,
+			suggestions: craft.cp.getEnvSuggestions(),
+			suggestEnvVars: true,
 		}) }}
 
 		<div class="buttons">

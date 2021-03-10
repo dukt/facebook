@@ -18,7 +18,7 @@ class Settings extends Model
      *
      * @var string
      */
-    public $apiVersion = 'v3.0';
+    public $apiVersion = 'v8.0';
 
     /**
      * The amount of time cache should last.
@@ -62,12 +62,11 @@ class Settings extends Model
      *
      * @var array
      */
-    public $oauthScope = ['public_profile', 'manage_pages', 'read_insights'];
+    public $oauthScope = ['public_profile', 'pages_read_engagement', 'read_insights'];
 
     /**
-     * Token
-     *
-     * @var mixed|null
+     * @var mixed|null The OAuth token
+     * @deprecated in 2.1.5
      */
     public $token;
 
