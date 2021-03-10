@@ -12,6 +12,7 @@ Changelog
 - Updated the API version to v8.0.
 
 ### Fixed
+- Fixed the icon of the Insights widget.
 - Fixed a bug where the Facebook Insights widget was not able to pull reporting data due to an OAuth permission issue.
 
 ## 2.0.3 - 2019-02-12

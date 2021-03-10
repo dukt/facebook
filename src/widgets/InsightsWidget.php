@@ -27,7 +27,7 @@ class InsightsWidget extends \craft\base\Widget
     /**
      * @inheritdoc
      */
-    public static function iconPath()
+    public static function icon()
     {
         return Craft::getAlias('@dukt/facebook/icons/like.svg');
     }
