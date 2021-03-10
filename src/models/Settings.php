@@ -62,7 +62,7 @@ class Settings extends Model
      *
      * @var array
      */
-    public $oauthScope = ['public_profile', 'read_insights'];
+    public $oauthScope = ['public_profile', 'pages_read_engagement', 'read_insights'];
 
     /**
      * @var mixed|null The OAuth token

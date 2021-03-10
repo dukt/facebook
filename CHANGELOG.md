@@ -5,6 +5,7 @@ Changelog
 
 ### Added
 - Added environment variables support for the OAuth client ID and secret.
+- Added `pages_read_engagement` to the list of default OAuth permissions.
 
 ### Changed
 - OAuth tokens are now stored in a `facebook_accounts` table instead of in the plugin’s settings.
@@ -15,6 +16,7 @@ Changelog
 ### Fixed
 - Fixed the icon of the Insights widget.
 - Fixed a bug where the Facebook Insights widget was not able to pull reporting data due to an OAuth permission issue.
+- Fixed a bug where the plugin was missing OAuth permissions to function properly with Facebook Pages.
 
 ## 2.0.3 - 2019-02-12
 
