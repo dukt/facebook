@@ -17,6 +17,7 @@ Changelog
 - Fixed the icon of the Insights widget.
 - Fixed a bug where the Facebook Insights widget was not able to pull reporting data due to an OAuth permission issue.
 - Fixed a bug where the plugin was missing OAuth permissions to function properly with Facebook Pages.
+- Fixed a bug where the Insights widget could show an error when the Facebook Page ID was not configured.
 
 ## 2.0.3 - 2019-02-12
 
