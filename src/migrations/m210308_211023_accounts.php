@@ -32,26 +32,11 @@ class m210308_211023_accounts extends Migration
             ]
         );
 
-        // If OAuth token is set on the settings, keep it
+        // Don't try to port the token to the new accounts table since the OAuth scope has changed in Facebook 2.0.4
+
+        // Reset the token on the settings since it will now be stored in the accounts table
         $settings = Plugin::$plugin->getSettings();
-
-        if (
-            !isset($settings->token) ||
-            !$settings->token
-        ) {
-            return null;
-        }
-
-        $this->insert(
-            '{{%facebook_accounts}}',
-            [
-                'token' => Json::encode($settings->token),
-            ]
-        );
-
-        // Reset token and token secret on the settings
         $settings->token = null;
-
         $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
         Craft::$app->getPlugins()->savePluginSettings($plugin, $settings->toArray());
     }
