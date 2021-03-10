@@ -18,8 +18,10 @@ class m210310_143242_oauth_scopes extends Migration
     public function safeUp()
     {
         $settings = Plugin::$plugin->getSettings();
-        $settingsModel = new Settings();
 
+
+        // Reset the OAuth scope to its default configuration
+        $settingsModel = new Settings();
         $settings->oauthScope = $settingsModel->oauthScope;
 
         $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
