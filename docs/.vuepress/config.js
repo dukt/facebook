@@ -10,6 +10,7 @@ module.exports = {
             hostname: 'https://dukt.net/docs/facebook/v2/'
         },
     },
+    theme: 'default-prefers-color-scheme',
     themeConfig: {
         docsRepo: 'dukt/facebook',
         docsDir: 'docs',
