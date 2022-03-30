@@ -1,7 +1,7 @@
 <?php
 /**
  * @link      https://dukt.net/facebook/
- * @copyright Copyright (c) 2021, Dukt
+ * @copyright Copyright (c) Dukt
  * @license   https://github.com/dukt/facebook/blob/master/LICENSE.md
  */
 
@@ -92,7 +92,7 @@ trait PluginTrait
         {
             $token = Facebook::$plugin->getOauth()->getToken();
 
-            if($token)
+            if($token !== null)
             {
                 return true;
             }

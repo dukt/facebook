@@ -1,7 +1,7 @@
 <?php
 /**
  * @link      https://dukt.net/facebook/
- * @copyright Copyright (c) 2021, Dukt
+ * @copyright Copyright (c) Dukt
  * @license   https://github.com/dukt/facebook/blob/master/LICENSE.md
  */
 
@@ -72,17 +72,15 @@ class Cache extends Component
 
     // Private Methods
     // =========================================================================
-
     /**
      * Formats duration.
      *
      * @param        $cacheDuration
-     * @param string $format
      *
      * @return string
      * @throws \Exception
      */
-    private function _formatDuration($cacheDuration, $format = '%s')
+    private function _formatDuration($cacheDuration, string $format = '%s')
     {
         $cacheDuration = new DateInterval($cacheDuration);
 

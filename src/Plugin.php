@@ -1,7 +1,7 @@
 <?php
 /**
  * @link      https://dukt.net/facebook/
- * @copyright Copyright (c) 2021, Dukt
+ * @copyright Copyright (c) Dukt
  * @license   https://github.com/dukt/facebook/blob/master/LICENSE.md
  */
 
@@ -63,11 +63,11 @@ class Plugin extends \craft\base\Plugin
             'reports' => \dukt\facebook\services\Reports::class,
         ]);
 
-        Event::on(Dashboard::class, Dashboard::EVENT_REGISTER_WIDGET_TYPES, function(RegisterComponentTypesEvent $event) {
+        Event::on(Dashboard::class, Dashboard::EVENT_REGISTER_WIDGET_TYPES, function(RegisterComponentTypesEvent $event): void {
             $event->types[] = InsightsWidget::class;
         });
 
-        Event::on(UrlManager::class, UrlManager::EVENT_REGISTER_CP_URL_RULES, function(RegisterUrlRulesEvent $event) {
+        Event::on(UrlManager::class, UrlManager::EVENT_REGISTER_CP_URL_RULES, function(RegisterUrlRulesEvent $event): void {
             $rules = [
                 'facebook/settings' => 'facebook/settings/index',
                 'facebook/settings/oauth' => 'facebook/settings/oauth',

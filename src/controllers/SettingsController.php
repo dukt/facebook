@@ -1,7 +1,7 @@
 <?php
 /**
  * @link      https://dukt.net/facebook/
- * @copyright Copyright (c) 2021, Dukt
+ * @copyright Copyright (c) Dukt
  * @license   https://github.com/dukt/facebook/blob/master/LICENSE.md
  */
 
@@ -33,7 +33,7 @@ class SettingsController extends Controller
         try {
             $token = Facebook::$plugin->getOauth()->getToken();
 
-            if ($token) {
+            if ($token !== null) {
                 $account = Facebook::$plugin->getCache()->get(['getResourceOwner', $token]);
 
                 if (!$account) {
@@ -42,24 +42,24 @@ class SettingsController extends Controller
                     Facebook::$plugin->getCache()->set(['getResourceOwner', $token], $account);
                 }
             }
-        } catch (\Exception $e) {
-            Craft::info("Couldn't get account\r\n".$e->getMessage().'\r\n'.$e->getTraceAsString(), __METHOD__);
+        } catch (\Exception $exception) {
+            Craft::info("Couldn't get account\r\n".$exception->getMessage().'\r\n'.$exception->getTraceAsString(), __METHOD__);
 
-            if (method_exists($e, 'getResponse')) {
-                Craft::info("GuzzleErrorResponse\r\n".$e->getResponse(), __METHOD__);
+            if (method_exists($exception, 'getResponse')) {
+                Craft::info("GuzzleErrorResponse\r\n".$exception->getResponse(), __METHOD__);
             }
 
-            $error = $e->getMessage();
+            $error = $exception->getMessage();
         }
 
         $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
 
         return $this->renderTemplate('facebook/settings/index', [
-            'account' => (isset($account) ? $account : null),
-            'token' => (isset($token) ? $token : null),
-            'error' => (isset($error) ? $error : null),
+            'account' => ($account ?? null),
+            'token' => ($token ?? null),
+            'error' => ($error ?? null),
             'settings' => $plugin->getSettings(),
-            'redirectUri' => Facebook::$plugin->oauth->getRedirectUri(),
+            'redirectUri' => Facebook::$plugin->getOauth()->getRedirectUri(),
         ]);
     }
 
@@ -73,7 +73,7 @@ class SettingsController extends Controller
         $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
 
         return $this->renderTemplate('facebook/settings/oauth', [
-            'redirectUri' => Facebook::$plugin->oauth->getRedirectUri(),
+            'redirectUri' => Facebook::$plugin->getOauth()->getRedirectUri(),
             'oauthClientId' => Facebook::$plugin->getClientId(false),
             'oauthClientSecret' => Facebook::$plugin->getClientSecret(false),
         ]);
