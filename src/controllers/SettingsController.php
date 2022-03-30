@@ -55,9 +55,9 @@ class SettingsController extends Controller
         $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
 
         return $this->renderTemplate('facebook/settings/index', [
-            'account' => (isset($account) ? $account : null),
-            'token' => (isset($token) ? $token : null),
-            'error' => (isset($error) ? $error : null),
+            'account' => ($account ?? null),
+            'token' => ($token ?? null),
+            'error' => ($error ?? null),
             'settings' => $plugin->getSettings(),
             'redirectUri' => Facebook::$plugin->oauth->getRedirectUri(),
         ]);

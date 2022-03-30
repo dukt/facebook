@@ -105,11 +105,11 @@ class Oauth extends Component
         $accountToken = Json::decode($account->token);
 
         $token = new AccessToken([
-            'access_token' => (isset($accountToken['accessToken']) ? $accountToken['accessToken'] : null),
-            'expires' => (isset($accountToken['expires']) ? $accountToken['expires'] : null),
-            'refresh_token' => (isset($accountToken['refreshToken']) ? $accountToken['refreshToken'] : null),
-            'resource_owner_id' => (isset($accountToken['resourceOwnerId']) ? $accountToken['resourceOwnerId'] : null),
-            'values' => (isset($accountToken['values']) ? $accountToken['values'] : null),
+            'access_token' => ($accountToken['accessToken'] ?? null),
+            'expires' => ($accountToken['expires'] ?? null),
+            'refresh_token' => ($accountToken['refreshToken'] ?? null),
+            'resource_owner_id' => ($accountToken['resourceOwnerId'] ?? null),
+            'values' => ($accountToken['values'] ?? null),
         ]);
 
         if ($token->getExpires() && $token->hasExpired()) {

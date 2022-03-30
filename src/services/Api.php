@@ -44,10 +44,11 @@ class Api extends Component
      */
     public function get($uri = null, $query = null, $headers = null)
     {
+        $options = [];
         try {
             $client = $this->getClient();
 
-            $options['query'] = ($query ? $query : []);
+            $options['query'] = ($query ?: []);
 
             if ($headers) {
                 $options['headers'] = $headers;
