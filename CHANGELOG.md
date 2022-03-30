@@ -1,7 +1,7 @@
 Changelog
 =========
 
-## Unreleased
+## 2.0.5 - 2022-03-30
 
 ### Changed
 - Updated plugin icon.
