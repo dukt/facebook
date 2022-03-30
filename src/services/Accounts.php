@@ -110,7 +110,7 @@ class Accounts extends Component
 
         $accountRecord = AccountRecord::findOne($account->id);
 
-        if ($accountRecord === null) {
+        if (!$accountRecord instanceof \dukt\facebook\records\Account) {
             return true;
         }
 

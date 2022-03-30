@@ -59,7 +59,7 @@ class SettingsController extends Controller
             'token' => ($token ?? null),
             'error' => ($error ?? null),
             'settings' => $plugin->getSettings(),
-            'redirectUri' => Facebook::$plugin->oauth->getRedirectUri(),
+            'redirectUri' => Facebook::$plugin->getOauth()->getRedirectUri(),
         ]);
     }
 
@@ -73,7 +73,7 @@ class SettingsController extends Controller
         $plugin = Craft::$app->getPlugins()->getPlugin('facebook');
 
         return $this->renderTemplate('facebook/settings/oauth', [
-            'redirectUri' => Facebook::$plugin->oauth->getRedirectUri(),
+            'redirectUri' => Facebook::$plugin->getOauth()->getRedirectUri(),
             'oauthClientId' => Facebook::$plugin->getClientId(false),
             'oauthClientSecret' => Facebook::$plugin->getClientSecret(false),
         ]);
