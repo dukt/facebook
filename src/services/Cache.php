@@ -72,17 +72,15 @@ class Cache extends Component
 
     // Private Methods
     // =========================================================================
-
     /**
      * Formats duration.
      *
      * @param        $cacheDuration
-     * @param string $format
      *
      * @return string
      * @throws \Exception
      */
-    private function _formatDuration($cacheDuration, $format = '%s')
+    private function _formatDuration($cacheDuration, string $format = '%s')
     {
         $cacheDuration = new DateInterval($cacheDuration);
 
