@@ -40,7 +40,7 @@ class Reports extends Component
         if (!$report) {
             $token = Facebook::$plugin->getOauth()->getToken();
 
-            if ($token) {
+            if ($token !== null) {
                 // Object
 
                 $object = Facebook::$plugin->getApi()->get('/'.$facebookInsightsObjectId, ['metadata' => 1, 'fields' => 'name,picture']);
@@ -49,72 +49,47 @@ class Reports extends Component
 
                 $counts = [];
 
-                switch ($objectType) {
-                    case 'page':
-
-                        // Insights for objects of type `page`
-
-                        $supportedObject = true;
-
-                        $insights = Facebook::$plugin->getApi()->getInsights($facebookInsightsObjectId, [
-                            'query' => [
-                                'metric' => 'page_fans,page_impressions_unique',
-                                'since' => date('Y-m-d', strtotime('-6 day')),
-                                'until' => date('Y-m-d', strtotime('+1 day')),
-                            ]
-                        ]);
-
-                        foreach ($insights['data'] as $insight) {
-                            switch ($insight['name']) {
-                                case 'page_fans':
-
-                                    $weekTotalStart = $insight['values'][0]['value'];
-                                    $weekTotalEnd = end($insight['values'])['value'];
-
-                                    $weekTotal = $weekTotalEnd - $weekTotalStart;
-
-                                    $counts[] = [
-                                        'label' => Craft::t('facebook', 'Total likes'),
-                                        'value' => end($insight['values'])['value']
-                                    ];
-                                    $counts[] = [
-                                        'label' => Craft::t('facebook', 'Likes this week'),
-                                        'value' => $weekTotal
-                                    ];
-                                    break;
-
-                                case 'page_impressions_unique':
-
-                                    switch ($insight['period']) {
-                                        case 'week':
-
-                                            $counts[] = [
-                                                'label' => Craft::t('facebook', 'Total Reach this week'),
-                                                'value' => end($insight['values'])['value']
-                                            ];
-
-                                            break;
-
-                                        case 'days_28':
-
-                                            $counts[] = [
-                                                'label' => Craft::t('facebook', 'Total Reach this month'),
-                                                'value' => end($insight['values'])['value']
-                                            ];
-
-                                            break;
-                                    }
-
-                                    break;
+                if ($objectType == 'page') {
+                    // Insights for objects of type `page`
+                    $supportedObject = true;
+                    $insights = Facebook::$plugin->getApi()->getInsights($facebookInsightsObjectId, [
+                        'query' => [
+                            'metric' => 'page_fans,page_impressions_unique',
+                            'since' => date('Y-m-d', strtotime('-6 day')),
+                            'until' => date('Y-m-d', strtotime('+1 day')),
+                        ]
+                    ]);
+                    foreach ($insights['data'] as $insight) {
+                        if ($insight['name'] == 'page_fans') {
+                            $weekTotalStart = $insight['values'][0]['value'];
+                            $weekTotalEnd = end($insight['values'])['value'];
+                            $weekTotal = $weekTotalEnd - $weekTotalStart;
+                            $counts[] = [
+                                'label' => Craft::t('facebook', 'Total likes'),
+                                'value' => end($insight['values'])['value']
+                            ];
+                            $counts[] = [
+                                'label' => Craft::t('facebook', 'Likes this week'),
+                                'value' => $weekTotal
+                            ];
+                        } elseif ($insight['name'] == 'page_impressions_unique') {
+                            if ($insight['period'] == 'week') {
+                                $counts[] = [
+                                    'label' => Craft::t('facebook', 'Total Reach this week'),
+                                    'value' => end($insight['values'])['value']
+                                ];
+                            } elseif ($insight['period'] == 'days_28') {
+                                $counts[] = [
+                                    'label' => Craft::t('facebook', 'Total Reach this month'),
+                                    'value' => end($insight['values'])['value']
+                                ];
                             }
                         }
-
-                        break;
-
-                    default:
-                        $supportedObject = false;
-                        $message = 'Insights only supports pages, please choose a different Facebook Page ID in <a href="'.UrlHelper::getUrl('facebook/settings').'">Facebook’s settings</a>.';
-                        Craft::info("Insights not available for object type `".$objectType."`, only pages are supported.", __METHOD__);
+                    }
+                } else {
+                    $supportedObject = false;
+                    $message = 'Insights only supports pages, please choose a different Facebook Page ID in <a href="'.UrlHelper::getUrl('facebook/settings').'">Facebook’s settings</a>.';
+                    Craft::info("Insights not available for object type `".$objectType."`, only pages are supported.", __METHOD__);
                 }
 
                 $report = [

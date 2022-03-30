@@ -57,9 +57,9 @@ class Api extends Component
             $response = $client->request('GET', $uri, $options);
 
             return json_decode($response->getBody(), true);
-        } catch (RequestException $e) {
-            Craft::error('Error requesting Facebook’s API: '.$e->getResponse()->getBody(), __METHOD__);
-            throw $e;
+        } catch (RequestException $requestException) {
+            Craft::error('Error requesting Facebook’s API: '.$requestException->getResponse()->getBody(), __METHOD__);
+            throw $requestException;
         }
     }
 
@@ -84,9 +84,9 @@ class Api extends Component
             $response = $client->request('GET', '/'.$facebookInsightsObjectId.'/insights', $options);
 
             return json_decode($response->getBody(), true);
-        } catch (RequestException $e) {
-            Craft::error('Error requesting insights: '.$e->getResponse()->getBody(), __METHOD__);
-            throw $e;
+        } catch (RequestException $requestException) {
+            Craft::error('Error requesting insights: '.$requestException->getResponse()->getBody(), __METHOD__);
+            throw $requestException;
         }
     }
 

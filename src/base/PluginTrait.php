@@ -92,7 +92,7 @@ trait PluginTrait
         {
             $token = Facebook::$plugin->getOauth()->getToken();
 
-            if($token)
+            if($token !== null)
             {
                 return true;
             }

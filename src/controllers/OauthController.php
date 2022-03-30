@@ -67,9 +67,9 @@ class OauthController extends Controller
 
             // Redirect
             Craft::$app->getSession()->setNotice(Craft::t('facebook', "Connected to Facebook."));
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             // Failed to get the token credentials or user details.
-            Craft::$app->getSession()->setError($e->getMessage());
+            Craft::$app->getSession()->setError($exception->getMessage());
         }
 
         return $this->redirect('facebook/settings');
