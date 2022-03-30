@@ -4,7 +4,7 @@ Changelog
 ## 2.0.4 - 2021-03-10
 
 ### Added
-- Added environment variables support for the OAuth client ID and secret.
+- Added environment variable suggestions support for the OAuth client ID and secret.
 - Added `pages_read_engagement` to the list of default OAuth permissions.
 
 ### Changed
