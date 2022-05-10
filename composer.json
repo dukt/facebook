@@ -23,6 +23,7 @@
     "rss": "https://github.com/dukt/facebook/commits/v2.atom"
   },
   "require": {
+    "php": "^8.0.2",
     "craftcms/cms": "^4.0.0",
     "league/oauth2-client": "~2.2",
     "league/oauth2-facebook": "~2.0"
