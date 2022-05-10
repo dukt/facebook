@@ -27,7 +27,7 @@ class InsightsWidget extends \craft\base\Widget
     /**
      * @inheritdoc
      */
-    public static function icon()
+    public static function icon(): ?string
     {
         return Craft::getAlias('@dukt/facebook/icons/like.svg');
     }
@@ -35,7 +35,7 @@ class InsightsWidget extends \craft\base\Widget
     /**
      * @inheritdoc
      */
-    public function getBodyHtml()
+    public function getBodyHtml(): ?string
     {
         $facebookInsightsObjectId = Facebook::$plugin->getSettings()->facebookInsightsObjectId;
 

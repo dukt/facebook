@@ -37,7 +37,7 @@ class Plugin extends \craft\base\Plugin
     /**
      * @var bool
      */
-    public $hasCpSettings = true;
+    public bool $hasCpSettings = true;
 
     /**
      * @var \dukt\facebook\Plugin The plugin instance.
@@ -85,7 +85,7 @@ class Plugin extends \craft\base\Plugin
      *
      * @return \craft\base\Model|null
      */
-    protected function createSettingsModel()
+    protected function createSettingsModel(): ?\craft\base\Model
     {
         return new Settings();
     }
@@ -96,7 +96,7 @@ class Plugin extends \craft\base\Plugin
      *
      * @return string The rendered settings HTML
      */
-    public function getSettingsResponse()
+    public function getSettingsResponse(): mixed
     {
         $url = UrlHelper::cpUrl('facebook/settings');
 
