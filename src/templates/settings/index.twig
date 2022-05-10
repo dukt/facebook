@@ -17,10 +17,10 @@
     {% if not error %}
         {% if account %}
 
-            <p>{{'You are authenticated to Facebook with the following account'|t('facebook') }} :</p>
+            <p>{{'You are authenticated to Facebook with the following account'|t('facebook') }}:</p>
 
             {% if account.pictureUrl %}
-                <img src="{{ account.pictureUrl }}" height="46" />
+                <img src="{{ account.pictureUrl }}" width="46" height="46" />
             {% endif %}
 
             <ul>
