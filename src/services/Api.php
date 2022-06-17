@@ -35,14 +35,14 @@ class Api extends Component
     /**
      * Performs an authenticated GET request on Facebook’s API
      *
-     * @param null $uri
-     * @param null $query
-     * @param null $headers
+     * @param string|null $uri
+     * @param array|null $query
+     * @param array|null $headers
      *
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function get($uri = null, $query = null, $headers = null)
+    public function get(string $uri = null, array $query = null, array $headers = null)
     {
         $options = [];
         try {
@@ -108,11 +108,11 @@ class Api extends Component
     /**
      * Return the authenticated Facebook OAuth client.
      *
-     * @param null $accessToken
+     * @param string|null $accessToken
      *
      * @return Client
      */
-    private function getClient($accessToken = null): Client
+    private function getClient(string $accessToken = null): Client
     {
         if(!$accessToken) {
             $token = Facebook::$plugin->getOauth()->getToken();

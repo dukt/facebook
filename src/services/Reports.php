@@ -9,6 +9,7 @@ namespace dukt\facebook\services;
 
 use Craft;
 use craft\base\Component;
+use craft\helpers\UrlHelper;
 use dukt\facebook\Plugin as Facebook;
 
 
@@ -88,7 +89,7 @@ class Reports extends Component
                     }
                 } else {
                     $supportedObject = false;
-                    $message = 'Insights only supports pages, please choose a different Facebook Page ID in <a href="'.UrlHelper::getUrl('facebook/settings').'">Facebook’s settings</a>.';
+                    $message = 'Insights only supports pages, please choose a different Facebook Page ID in <a href="'.UrlHelper::url('facebook/settings').'">Facebook’s settings</a>.';
                     Craft::info("Insights not available for object type `".$objectType."`, only pages are supported.", __METHOD__);
                 }
 
@@ -102,7 +103,7 @@ class Reports extends Component
 
                 Facebook::$plugin->getCache()->set(['insightsReport', $facebookInsightsObjectId], $report);
             } else {
-                throw new Exception("Not authenticated");
+                throw new \Exception("Not authenticated");
             }
         }
 

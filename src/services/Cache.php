@@ -11,6 +11,7 @@ use Craft;
 use yii\base\Component;
 use DateInterval;
 use dukt\facebook\Plugin as Facebook;
+use yii\caching\Dependency;
 
 
 /**
@@ -43,16 +44,16 @@ class Cache extends Component
     /**
      * Stores a value identified by a key into cache.
      *
-     * @param      $id
-     * @param      $value
-     * @param null $expire
-     * @param null $dependency
-     * @param null $enableCache
+     * @param array $id
+     * @param mixed $value
+     * @param int|null $expire
+     * @param Dependency|null $dependency
+     * @param bool|null $enableCache
      *
      * @return bool
      * @throws \Exception
      */
-    public function set($id, $value, $expire = null, $dependency = null, $enableCache = null)
+    public function set(array $id, mixed $value, int $expire = null, Dependency $dependency = null, bool $enableCache = null)
     {
         if (is_null($enableCache)) {
             $enableCache = Facebook::$plugin->getSettings()->enableCache;
@@ -68,6 +69,8 @@ class Cache extends Component
 
             return Craft::$app->cache->set($cacheKey, $value, $expire, $dependency);
         }
+
+        return false;
     }
 
     // Private Methods

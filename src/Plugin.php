@@ -21,6 +21,7 @@ use yii\base\Event;
 /**
  * Facebook plugin.
  *
+ * @method Settings getSettings()
  * @author Dukt <support@dukt.net>
  * @since  2.0
  */

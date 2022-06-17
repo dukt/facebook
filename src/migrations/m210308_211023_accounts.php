@@ -4,7 +4,7 @@ namespace dukt\facebook\migrations;
 
 use Craft;
 use craft\db\Migration;
-use craft\helpers\Json;
+use craft\db\TableSchema;
 use dukt\facebook\Plugin;
 
 /**
@@ -17,7 +17,10 @@ class m210308_211023_accounts extends Migration
      */
     public function safeUp()
     {
-        if (Craft::$app->db->schema->getTableSchema('{{%facebook_accounts}}') !== null) {
+        /** @var TableSchema|null $tableSchema */
+        $tableSchema = Craft::$app->db->schema->getTableSchema('{{%facebook_accounts}}');
+
+        if ($tableSchema !== null) {
             return null;
         }
 

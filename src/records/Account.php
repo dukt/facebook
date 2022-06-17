@@ -9,6 +9,12 @@ namespace dukt\facebook\records;
 
 use craft\db\ActiveRecord;
 
+/**
+ * Account record.
+ *
+ * @property int $id
+ * @property array $token
+ */
 class Account extends ActiveRecord
 {
     // Public Methods

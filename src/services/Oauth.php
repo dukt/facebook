@@ -22,14 +22,6 @@ use League\OAuth2\Client\Token\AccessToken;
  */
 class Oauth extends Component
 {
-    // Properties
-    // =========================================================================
-
-    /**
-     * @var
-     */
-    private $token;
-
     // Public Methods
     // =========================================================================
 
@@ -40,7 +32,10 @@ class Oauth extends Component
      */
     public function getOauthProvider()
     {
-        $options = [];
+        $options = [
+            'graphApiVersion' => Facebook::$plugin->getSettings()->apiVersion,
+            'redirectUri' => $this->getRedirectUri(),
+        ];
 
         $clientId = Facebook::$plugin->getClientId();
 
@@ -52,14 +47,6 @@ class Oauth extends Component
 
         if ($clientSecret) {
             $options['clientSecret'] = $clientSecret;
-        }
-
-        if (!isset($options['graphApiVersion'])) {
-            $options['graphApiVersion'] = Facebook::$plugin->getSettings()->apiVersion;
-        }
-
-        if (!isset($options['redirectUri'])) {
-            $options['redirectUri'] = $this->getRedirectUri();
         }
 
         return new FacebookProvider($options);
@@ -80,7 +67,7 @@ class Oauth extends Component
             'refreshToken' => $token->getRefreshToken(),
             'resourceOwnerId' => $token->getResourceOwnerId(),
             'values' => $token->getValues(),
-        ];;
+        ];
 
         return Facebook::$plugin->getAccounts()->saveAccount($account);
     }
@@ -92,17 +79,13 @@ class Oauth extends Component
      */
     public function getToken()
     {
-        if ($this->token) {
-            return $this->token;
-        }
-
         $account = Facebook::$plugin->getAccounts()->getAccount();
 
-        if (!$account || !$account->token) {
+        if (!$account->token) {
             return null;
         }
 
-        $accountToken = Json::decode($account->token);
+        $accountToken = $account->token;
 
         $token = new AccessToken([
             'access_token' => ($accountToken['accessToken'] ?? null),
@@ -115,6 +98,8 @@ class Oauth extends Component
         if ($token->getExpires() && $token->hasExpired()) {
             $provider = $this->getOauthProvider();
             $grant = new \League\OAuth2\Client\Grant\RefreshToken();
+
+            /** @var AccessToken $newToken */
             $newToken = $provider->getAccessToken($grant, ['refresh_token' => $token->getRefreshToken()]);
 
             $token = new AccessToken([
@@ -151,6 +136,7 @@ class Oauth extends Component
     public function getRedirectUri()
     {
         $url = UrlHelper::actionUrl('facebook/oauth/callback');
+        $url = UrlHelper::removeParam($url, 'site');
         $parsedUrl = parse_url($url);
 
         if (isset($parsedUrl['query'])) {
